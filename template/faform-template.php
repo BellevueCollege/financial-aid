@@ -301,8 +301,8 @@
 													 <?php echo $Email; ?> is the email address on file for you. Communications will be conducted using this address.
 												</footer>
 											</blockquote>
-											
-									
+										<input type='submit' value='Submit' class="btn btn-default">	
+										
 								</form>
 							</div>
 							<!--.content-padding-->
