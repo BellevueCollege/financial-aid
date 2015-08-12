@@ -319,11 +319,11 @@
 	</div>
 	<!-- #main-wrap -->
 
-	<?php include( $globals_path . 'h/bfoot.html' ); ?>
-	<?php include( $globals_path . 'h/legal.html' ); ?>
+	<?php include( $GLOBALS['GLOBALS_PATH']  . 'h/bfoot.html' ); ?>
+	<?php include( $GLOBALS['GLOBALS_PATH']  . 'h/legal.html' ); ?>
 
-	<script src="<?php echo $globals_url ?>j/bootstrap.min.js"></script>
-	<script src="<?php echo $globals_url ?>j/g.js"></script>
+	<script src="<?php echo $GLOBALS['GLOBALS_URL'] ?>j/bootstrap.min.js"></script>
+	<script src="<?php echo $GLOBALS['GLOBALS_URL'] ?>j/g.js"></script>
 
 	
 </body>

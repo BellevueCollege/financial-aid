@@ -51,8 +51,8 @@
 	</div>
 	<!-- #main-wrap -->
 
-	<?php include( $globals_path . 'h/bfoot.html' ); ?>
-	<?php include( $globals_path . 'h/legal.html' ); ?>
+	<?php include( $GLOBALS['GLOBALS_PATH'] . 'h/bfoot.html' ); ?>
+	<?php include( $GLOBALS['GLOBALS_PATH'] . 'h/legal.html' ); ?>
 
 
 </body>

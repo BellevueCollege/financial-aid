@@ -87,16 +87,4 @@ switch ($application_uri) {
 }
 
 
-
-/*
-Get Quarter information
-*/
-
-// $year_quarter = $default->get_academic_year_quarters();
-// $credit_options =  $default->get_credit_options();
-// $pos_options = $default->get_program_of_study_options();
-// $tod_options = $default->get_types_of_degree_options();
-// $tol_options = $default->get_types_of_loan_options();
-
-
 ?>
