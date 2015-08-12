@@ -68,7 +68,7 @@ switch ($application_uri) {
 		$model = new Faform_Model($template_uri,$form_post_url);
 		$controller = new Faform_Controller($model);
 		$view = new Faform_View($controller , $model);
-		echo $view->get_output();
+		echo $view->render();
 		break;
 	case 'application/save':
 		
@@ -82,7 +82,7 @@ switch ($application_uri) {
 
 		// View and controller actions.
 		header( $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found' );
-		echo $view->get_output();
+		echo $view->render();
 		break;
 }
 

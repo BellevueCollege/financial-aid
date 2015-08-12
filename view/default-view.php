@@ -14,7 +14,7 @@ class Default_View {
 	Set Template variables and get template HTML output
 */
 
-	public function get_output(){
+	public function render(){
 		$this->set_template_variables();
 		extract( $this->template_variables );
 		require( $template_uri );
