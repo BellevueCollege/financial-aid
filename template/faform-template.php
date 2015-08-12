@@ -53,7 +53,7 @@
 											foreach($year_quarter_information as $key=>$value)
 											{
 										?>
-											<span>Choose the Academic Year(s) you would like to apply for:</span>
+											<span> Choose the Academic Year(s) you would like to apply for: *</span>
 											<div class="radio">
 
 												<label>
@@ -64,7 +64,7 @@
 										<?php
 											}
 										?>
-											<span>Do you plan to attend during the summer?</span>
+											<span> Do you plan to attend during the summer? *</span>
 											<div class="radio">
 												<label>
 													<input type="radio" name="attend_summer" value="1" class="radio"  required/> 
@@ -79,7 +79,7 @@
 											</div>	
 										<!-- </fieldset> -->
 										<h4>Previous Schools</h4><br/>
-											<span>Have you previously attended college or university?</span>
+											<span>Have you previously attended college or university? *</span>
 											<div class="radio">
 												<label>
 													<input type="radio" name="attend_college" value="1" class="radio"  required/> 
@@ -105,7 +105,7 @@
 													<span>No</span>
 												</label>
 											</div>	
-											<span>If yes, what type of degree do you hold?</span>
+											<span>If yes, what type of degree do you hold? *</span>
 											
 												<?php
 													for($i=0;$i<count($types_of_degree);$i++)
@@ -139,7 +139,7 @@
 												<p>
 											</description>
 											<div class='form-group'>
-												<label for='program_of_study'>Your intended program of study:</label>
+												<label for='program_of_study'>Your intended program of study: *</label>
 												<select name='program_of_study' id='program_of_study' class='form-control'>
 													<option value='none'>Select</option>
 												<?php		
@@ -158,7 +158,7 @@
 											</div>
 
 										<h4>3rd Party Funding</h4><br/>
-											<span>Are you receiving scholarship/funding or using the state tuition waiver?</span>
+											<span>Are you receiving scholarship/funding or using the state tuition waiver? *</span>
 											<div class="radio">
 												<label>
 													<input type="radio" name="third_party_funding" value="1" class="radio"  required/> 
@@ -175,7 +175,7 @@
 											<textarea name='other_funding_source' id='other_funding_source' class="form-control" rows="3" > </textarea>
 
 										<h4>Loans (Federal Direct Stafford Loans)</h4><br/>
-											<span>Would you like to apply for financial aid loans?</span>
+											<span>Would you like to apply for financial aid loans? *</span>
 												<div class="radio">
 													<label>
 														<input type="radio" name="apply_for_fa" value="1" class="radio"  required/> 
@@ -237,7 +237,7 @@
 													?>
 											</div>
 											<div>
-												<span>Expected Graduation Date:</span>
+												<span>Expected Graduation Date: *</span>
 												<select id='expected_graduation_date' name='expected_graduation_date' class='form-control'>
 												<?php
 													
@@ -288,7 +288,13 @@
 											</div>
 										<h4>Sign & Finish</h4><br/>
 											<div class='form-group'>
-
+												I understand that if I do not follow the financial aid contract it may result in the loss of my financial aid: *
+											</div>
+											<div class="checkbox">
+											  <label>
+											    <input type="checkbox" value="1" name='fa_contract_agreement'>
+											    	I agree
+											  </label>
 											</div>
 											<div class='form-group'>
 												<label for='signature'>Name:</label>
