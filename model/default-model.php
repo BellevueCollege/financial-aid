@@ -12,11 +12,14 @@ protected $template_uri;
 
 public function __construct($template_uri) {
 
-	// $db_ob = new Database();
-	// $this->db_conn 	= 	$db_ob->connect_database();
-	$this->database_connection = new PDO( $GLOBALS['DATABASE_DSN'], $GLOBALS['DATABASE_USER'],$GLOBALS['DATABASE_PASSWORD'] );
-	if (!$this->database_connection) 
-    	die('Something went wrong while connecting to the database'); // exit out 
+	try{
+			$this->database_connection = new PDO( $GLOBALS['DATABASE_DSN'], $GLOBALS['DATABASE_USER'],$GLOBALS['DATABASE_PASSWORD'] );
+			if (!$this->database_connection) 
+	    		die('Something went wrong while connecting to the database'); // exit out 
+		} catch(PDOException $e)
+		{
+			echo 'ERROR: ' . $e->getMessage();
+		}
 	$this->template_uri = $template_uri;
 	}// end of constructor
 /*
@@ -41,24 +44,28 @@ public function __construct($template_uri) {
 			If month is July(7) query once for year quarter giving current Year as input to the query.
 			If month is Jan query twice, one with current year as input and another with previous year as input.
 		*/
-		if($current_month < 7) // For Month's from Jan to June
-		{
-			$previous_year = $current_year-1;
-			$q_sql = "EXEC dbo.usp_getAcademicYear @CurrentYear = :CurrentYear;"; // quarter(q) sql
-			$values = array(':CurrentYear' => $previous_year);
-			$query = $this->database_connection->prepare($q_sql); 
-			$query->execute($values);			
-			$quarter_data = $query->fetch(PDO::FETCH_ASSOC);
-			$quarter_information[] = $quarter_data['AcademicYearQuarter'];
-		}
-		// For months from July to Dec
-		$q_sql = "EXEC dbo.usp_getAcademicYear @CurrentYear = :CurrentYear;";  // quarter(q) sql
-		$values = array(':CurrentYear' => $current_year);
-		$query = $this->database_connection->prepare($q_sql); 
-		$query->execute($values);			
-		$quarter_data = $query->fetch(PDO::FETCH_ASSOC);
-		$quarter_information[] = $quarter_data['AcademicYearQuarter'];		
-		//var_dump($quarter_information);
+		try{
+				$q_sql = "EXEC dbo.usp_getAcademicYear @CurrentYear = :CurrentYear;"; // quarter(q) sql
+
+				if($current_month < 7) // For Month's from Jan to June
+				{
+					$previous_year = $current_year-1;					
+					$values = array(':CurrentYear' => $previous_year);					
+				}
+				else
+				{
+					// For months from July to Dec					
+					$values = array(':CurrentYear' => $current_year);
+				}
+				$query = $this->database_connection->prepare($q_sql); 
+				$query->execute($values);			
+				$quarter_data = $query->fetch(PDO::FETCH_ASSOC);
+				$quarter_information[] = $quarter_data['AcademicYearQuarter'];	
+			}catch(PDOException $e)
+			{
+				echo 'ERROR: ' . $e->getMessage();
+			}
+		
 
 		return $quarter_information;		
 		
@@ -71,14 +78,17 @@ public function __construct($template_uri) {
 	{
 		if(!empty($title))
 		{
-			$yqid_sql = "EXEC dbo.usp_getYearQuarterID @title= :Title;"; // year quarter id(yqid) sql
-			$values = array(':Title' => $title);
-			$query = $this->database_connection->prepare($yqid_sql); 
-			$query->execute($values);			
-			$year_quarter_id = $query->fetch(PDO::FETCH_ASSOC);
-
-		//var_dump($credits_options);
-			return $year_quarter_id;
+			try{
+					$yqid_sql = "EXEC dbo.usp_getYearQuarterID @title= :Title;"; // year quarter id(yqid) sql
+					$values = array(':Title' => $title);
+					$query = $this->database_connection->prepare($yqid_sql); 
+					$query->execute($values);			
+					$year_quarter_id = $query->fetch(PDO::FETCH_ASSOC);		
+					return $year_quarter_id;
+				}catch(PDOException $e)
+				{
+					echo 'ERROR: ' . $e->getMessage();
+				}
 		}
 		return null;
 	}
@@ -88,29 +98,38 @@ public function __construct($template_uri) {
 */
 	public function get_credit_options()
 	{
-		$cpq_sql = "EXEC dbo.usp_getCreditsPerQtr;"; // credit per quarter(cpq) sql
-		$query = $this->database_connection->prepare($cpq_sql); 
-		$query->execute();			
-		$credits_options = $query->fetchAll(PDO::FETCH_ASSOC);
-
-		//var_dump($credits_options);
-		return $credits_options;
+		try{
+			$cpq_sql = "EXEC dbo.usp_getCreditsPerQtr;"; // credit per quarter(cpq) sql
+			$query = $this->database_connection->prepare($cpq_sql); 
+			$query->execute();			
+			$credits_options = $query->fetchAll(PDO::FETCH_ASSOC);		
+			return $credits_options;
+		}catch(PDOException $e)
+		{
+			echo 'ERROR: ' . $e->getMessage();
+		}
+		return null;
 	}
 /*
 	Get Program of Study options (poso)
 */
 	public function get_program_of_study_options()
-	{		
-		$poso_sql = "EXEC dbo.usp_getProgramOfStudy;"; // program of study options (poso) sql
-		$query = $this->database_connection->prepare($poso_sql); 
-		//var_dump($query);
-		$query->execute();			
-		$pos_options = $query->fetchAll(PDO::FETCH_ASSOC); // program of study (pos)
+	{
 		$program_of_study_options = array();
-		for($i=0;$i<count($pos_options);$i++)
-		{
-			$program_of_study_options[] = $pos_options[$i]['ProgramofStudy'];
-		}
+		try{		
+				$poso_sql = "EXEC dbo.usp_getProgramOfStudy;"; // program of study options (poso) sql
+				$query = $this->database_connection->prepare($poso_sql);		
+				$query->execute();			
+				$pos_options = $query->fetchAll(PDO::FETCH_ASSOC); // program of study (pos)
+				
+				for($i=0;$i<count($pos_options);$i++)
+				{
+					$program_of_study_options[] = $pos_options[$i]['ProgramofStudy'];
+				}
+			}catch(PDOException $e)
+			{
+				echo 'ERROR: ' . $e->getMessage();
+			}
 		return $program_of_study_options;
 
 		
@@ -120,16 +139,19 @@ public function __construct($template_uri) {
 	Get types of degree options (todo)
 */
 	public function get_types_of_degree_options()
-	{
-		//echo "Types of Degree options";
-		$todo_sql = "EXEC dbo.usp_getTypeofDegree;"; // types of degree options (todo) sql
-		$query = $this->database_connection->prepare($todo_sql); 
-		//var_dump($query);
-		$query->execute();			
-		$tod_options = $query->fetchAll(PDO::FETCH_ASSOC); // types of degree (tod)
-
-		//var_dump($tod_options);
-		return $tod_options;
+	{	
+		try{	
+				$todo_sql = "EXEC dbo.usp_getTypeofDegree;"; // types of degree options (todo) sql
+				$query = $this->database_connection->prepare($todo_sql); 		
+				$query->execute();			
+				$tod_options = $query->fetchAll(PDO::FETCH_ASSOC); // types of degree (tod)
+				return $tod_options;
+			}catch(PDOException $e)
+			{
+				echo 'ERROR: ' . $e->getMessage();
+			}
+		
+		return null;
 	}
 
 /*
@@ -137,15 +159,18 @@ public function __construct($template_uri) {
 */
 	public function get_types_of_loan_options()
 	{
-		//echo "Types of Loan options";
-		$tolo_sql = "EXEC dbo.usp_getTypeofLoan;"; // types of loan options (tolo) sql
-		$query = $this->database_connection->prepare($tolo_sql); 
-		//var_dump($query);
-		$query->execute();			
-		$tol_options = $query->fetchAll(PDO::FETCH_ASSOC); // types of loans (tol)
+		try{
+				$tolo_sql = "EXEC dbo.usp_getTypeofLoan;"; // types of loan options (tolo) sql
+				$query = $this->database_connection->prepare($tolo_sql); 		
+				$query->execute();			
+				$tol_options = $query->fetchAll(PDO::FETCH_ASSOC); // types of loans (tol)
+				return $tol_options;
 
-		//var_dump($tol_options);
-		return $tol_options;
+			}catch(PDOException $e)
+			{
+				echo 'ERROR: ' . $e->getMessage();
+			}
+		return null;		
 	}
 
 public function get_current_url(){
@@ -165,17 +190,23 @@ public function get_student_information($username)
 		//echo $username;
 		if(!empty($username))
 		{
-			$st_sql = "EXEC dbo.usp_getStudentData @username = :username;"; //student (st) sql
-			$values = array(':username' => $username);			
-			
-			$query = $this->database_connection->prepare($st_sql); 
-			$query->execute($values);			
-			$user_data = $query->fetch(PDO::FETCH_ASSOC);
-			if(!empty($user_data))
+			try
 			{
-				$user_data["Username"] = $username;				
-				return $user_data;
-			}			
+				$st_sql = "EXEC dbo.usp_getStudentData @username = :username;"; //student (st) sql
+				$values = array(':username' => $username);			
+				
+				$query = $this->database_connection->prepare($st_sql); 
+				$query->execute($values);			
+				$user_data = $query->fetch(PDO::FETCH_ASSOC);
+				if(!empty($user_data))
+				{
+					$user_data["Username"] = $username;				
+					return $user_data;
+				}	
+			}catch(PDOException $e)
+			{
+				echo 'ERROR: ' . $e->getMessage();
+			}		
 		}
 		return null;
 	}

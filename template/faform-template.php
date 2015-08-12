@@ -113,7 +113,7 @@
 													?>
 													<div class="checkbox">
 														<label>
-															<input type='checkbox' name='type_of_degree' value='<?php echo $types_of_degree[$i]['DegreeID']; ?>'  />
+															<input type='checkbox' name='type_of_degree[]' value='<?php echo $types_of_degree[$i]['DegreeID']; ?>'  />
 															<span><?php echo $types_of_degree[$i]['Degree']; ?></span>
 														</label>
 													</div>
@@ -195,7 +195,7 @@
 														?>
 														<div class="checkbox">
 														<label>
-															<input type='checkbox' name='types_of_loan' value='<?php echo $types_of_loan[$i]['LoanTypeID']; ?>'  />
+															<input type='checkbox' name='types_of_loan[]' value='<?php echo $types_of_loan[$i]['LoanTypeID']; ?>'  />
 															<span><?php echo $types_of_loan[$i]['LoanType']; ?></span>
 														</label>
 														</div>
@@ -212,7 +212,7 @@
 														?>
 															<div class="checkbox">
 																<label>
-																	<input type='checkbox' name='require_loan_quarters' value='<?php echo $key; ?>'   />
+																	<input type='checkbox' name='require_loan_quarters[]' value='<?php echo $key; ?>'   />
 																	<?php echo $value; ?>
 																</label>
 															</div>
@@ -224,7 +224,7 @@
 																?>
 																<div class="radio">
 																	<label>
-																		<input type="radio" name="anticipated_credits_for_quarter" value="<?php echo $credit_options[$i]['CreditID'] ?>" class="radio"  required/> 
+																		<input type="radio" name="anticipated_credits_for_quarter_<?php echo $key; ?>" value="<?php echo $credit_options[$i]['CreditID'] ?>" class="radio"  required/> 
 																		<span><?php echo $credit_options[$i]['Credit'] ?></span>
 																	</label>												
 																</div>	
@@ -301,7 +301,7 @@
 													 <?php echo $Email; ?> is the email address on file for you. Communications will be conducted using this address.
 												</footer>
 											</blockquote>
-										<input type='submit' value='Submit' class="btn btn-default">	
+										<input type='submit' value='Submit' name='submit' />	
 										
 								</form>
 							</div>

@@ -71,7 +71,8 @@ switch ($application_uri) {
 		echo $view->render();
 		break;
 	case 'application/save':
-		
+		var_dump($_POST);
+		//var_dump($_POST['submit']);
 		break;
 	
 	default:
