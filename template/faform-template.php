@@ -13,20 +13,20 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="<?php echo $GLOBALS['GLOBALS_URL'] ?>c/g.css">
-	<link rel="stylesheet" media="print" href="<?php echo $GLOBALS['GLOBALS_URL']?>c/p.css">
+	<link rel="stylesheet" href="<?php echo $globals_url ?>c/g.css">
+	<link rel="stylesheet" media="print" href="<?php echo $globals_url?>c/p.css">
 	<style type="text/css">
 		
 	</style>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-	<script type="text/javascript" src="<?php echo $GLOBALS['GLOBALS_URL'] ?>j/ghead.js"></script>
+	<script type="text/javascript" src="<?php echo $globals_url ?>j/ghead.js"></script>
 	<!--[if lt IE 9]><script type="text/javascript" src="/<?php echo $globals_url ?>j/respond.js"></script><![endif]-->
 	<link rel='stylesheet' id='open-sans-css' href='//fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;ver=4.0.1' type='text/css' media='all' />
-	<?php include( $GLOBALS['GLOBALS_PATH'] . 'h/gabranded.html' ); ?>
+	<?php include( $globals_path . 'h/gabranded.html' ); ?>
 </head>
 <body class="nav-enrollment">
-	<?php require( $GLOBALS['GLOBALS_PATH'] . 'h/bhead.html' ); ?>
+	<?php require( $globals_path . 'h/bhead.html' ); ?>
 	<div id="main-wrap" class="globals-branded">
 		<div id="main" class="container no-padding">
 			<div class="row">
@@ -39,12 +39,12 @@
 								<hr />
 								
 								<form id="financial_aid_application" name="financial_aid_application" action="<?php echo $form_post_url ?>" method="post">
-									<input type="hidden" id="form_url" name="form_url" value="<?php echo $current_url  ?>" />
+									<!-- <input type="hidden" id="form_url" name="form_url" value="<?php echo $current_url  ?>" />
 									<input type="hidden" id="first_name" name="first_name" value="<?php echo $FirstName ?>" />
 									<input type="hidden" id="last_name" name="last_name" value="<?php echo $LastName ?>" />
 									<input type="hidden" id="email" name="email" value="<?php echo $Email ?>" />
 									<input type="hidden" id="phone" name="phone" value="<?php echo $Phone ?>" />
-									
+									 -->
 										<!-- <fieldset class='scheduler-border'>
 											<legend class='schedule-border'>Choose Academic Year</legend> -->
 										<h4>Choose Academic Year</h4><br/>
@@ -60,7 +60,7 @@
 													<input type="radio" name="academic_year" value="<?php echo $key ;?>" class="radio"  required/> 
 													<span><?php echo $value; ?></span>
 												</label>
-											</div>	
+											</div>
 										<?php
 											}
 										?>
@@ -158,7 +158,7 @@
 											</div>
 
 										<h4>3rd Party Funding</h4><br/>
-											<span>Are you receiving scholarship/funding or using the state tuition waiver? *</span>
+											<span>Are you receiving any outside assistance or third party funding including, but not limited to, scholarships, DVR or the state tuition waiver for state employees? *</span>
 											<div class="radio">
 												<label>
 													<input type="radio" name="third_party_funding" value="1" class="radio"  required/> 
@@ -169,9 +169,10 @@
 													<span>No</span>
 												</label>
 											</div>	
-											<label>Funding Amount: </label> <input type='text' name='funding_amount' id='funding_amount' class="form-control"/><br/>
+
+											<label>Funding Amount: </label> <input type='text' name='funding_amount' id='funding_amount' class="form-control" /><br/>
 											
-											<label>Other Funding source? Please explain</label>
+											<label>Funding source? Please explain</label>
 											<textarea name='other_funding_source' id='other_funding_source' class="form-control" rows="3" > </textarea>
 
 										<h4>Loans (Federal Direct Stafford Loans)</h4><br/>
@@ -278,12 +279,12 @@
 											</div>
 											<div class='form-group'>
 												<label for='auth_rep_name1'>Authorized Representative's Name:</label>
-												<input type="text" name='auth_rep_name1' id='auth_rep_name1' class='form-control'>
+												<input type="text" name='auth_rep_name1' id='auth_rep_name1' class='form-control' maxlength='50'/>
 												
 											</div>
 											<div class='form-group'>
 												<label for='auth_rep_name2'>Authorized Representative's Name:</label>
-												<input type="text" name='auth_rep_name2' id='auth_rep_name2' class='form-control'>
+												<input type="text" name='auth_rep_name2' id='auth_rep_name2' class='form-control' maxlength='50' />
 												
 											</div>
 										<h4>Sign & Finish</h4><br/>
@@ -298,7 +299,7 @@
 											</div>
 											<div class='form-group'>
 												<label for='signature'>Name:</label>
-												<input type="text" name='signature' id='signature' class='form-control'>
+												<input type="text" name='signature' id='signature' class='form-control' maxlength='100'>
 												<span id="helpBlock" class="help-block">Type your full name as your signature for this application.</span>
 											</div>
 											<blockquote>
@@ -325,11 +326,11 @@
 	</div>
 	<!-- #main-wrap -->
 
-	<?php include( $GLOBALS['GLOBALS_PATH']  . 'h/bfoot.html' ); ?>
-	<?php include( $GLOBALS['GLOBALS_PATH']  . 'h/legal.html' ); ?>
+	<?php include( $globals_path  . 'h/bfoot.html' ); ?>
+	<?php include( $globals_path  . 'h/legal.html' ); ?>
 
-	<script src="<?php echo $GLOBALS['GLOBALS_URL'] ?>j/bootstrap.min.js"></script>
-	<script src="<?php echo $GLOBALS['GLOBALS_URL'] ?>j/g.js"></script>
+	<script src="<?php echo $globals_url ?>j/bootstrap.min.js"></script>
+	<script src="<?php echo $globals_url ?>j/g.js"></script>
 
 	
 </body>
