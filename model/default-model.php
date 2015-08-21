@@ -11,17 +11,33 @@ protected  $database_connection;
 protected $template_uri;
 
 public function __construct($template_uri) {
+	if($this->check_database_config())
+	{
+		try{
 
-	try{
-			$this->database_connection = new PDO( $GLOBALS['DATABASE_DSN'], $GLOBALS['DATABASE_USER'],$GLOBALS['DATABASE_PASSWORD'] );
-			if (!$this->database_connection) 
-	    		die('Something went wrong while connecting to the database'); // exit out 
-		} catch(PDOException $e)
-		{
-			echo 'ERROR: ' . $e->getMessage();
-		}
+				$this->database_connection = new PDO( $GLOBALS['DATABASE_DSN'], $GLOBALS['DATABASE_USER'],$GLOBALS['DATABASE_PASSWORD'] );
+				if (!$this->database_connection) 
+		    		die('Something went wrong while connecting to the database'); // exit out 
+			} catch(PDOException $e)
+			{
+				echo 'ERROR: ' . $e->getMessage();
+			}
+	}
+	else
+		 die(' Database configuration not set'); // exit out 
 	$this->template_uri = $template_uri;
 	}// end of constructor
+
+/*
+	Check database configuration variables exists
+*/
+	function check_database_config()
+	{
+		if(isset($GLOBALS['DATABASE_DSN']) && !empty($GLOBALS['DATABASE_DSN']) && isset($GLOBALS['DATABASE_USER']) && !empty($GLOBALS['DATABASE_USER']) && isset($GLOBALS['DATABASE_PASSWORD']) && !empty($GLOBALS['DATABASE_PASSWORD'] ))
+			return 1;
+
+		return 0;
+	}
 /*
 	Set template URI
 */
@@ -85,6 +101,27 @@ public function __construct($template_uri) {
 					$query->execute($values);			
 					$year_quarter_id = $query->fetch(PDO::FETCH_ASSOC);		
 					return $year_quarter_id;
+				}catch(PDOException $e)
+				{
+					echo 'ERROR: ' . $e->getMessage();
+				}
+		}
+		return null;
+	}
+/*
+	Get Title for a given YearQuarterID
+*/
+	public function get_year_quarter_title($year_quarter_id)
+	{
+		if(!empty($year_quarter_id))
+		{
+			try{
+					$yqt_sql = "EXEC dbo.usp_getYearQuarterTitle @yearQuarterID= :YearQuarterID;"; // year quarter title(yqt) sql
+					$values = array(':YearQuarterID' => $year_quarter_id);
+					$query = $this->database_connection->prepare($yqt_sql); 
+					$query->execute($values);			
+					$year_quarter_title = $query->fetch(PDO::FETCH_ASSOC);		
+					return $year_quarter_title;
 				}catch(PDOException $e)
 				{
 					echo 'ERROR: ' . $e->getMessage();

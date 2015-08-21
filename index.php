@@ -4,6 +4,7 @@
 require_once('config.php');
 require_once('controller/cas-authentication-controller.php');
 require_once('model/faform-model.php');
+require_once('view/faform-view.php');
 require_once('controller/faform-controller.php');
 
 // Define application version nuuber
@@ -11,7 +12,7 @@ define( 'VERSION_NUMBER', '1.0' );
 
 // Initialize username
 $username = "";
-if($GLOBALS['AUTH_TYPE'] == "CAS")
+if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "CAS")
 {
 	/* Authenticate with CAS */
 
@@ -28,11 +29,13 @@ if($GLOBALS['AUTH_TYPE'] == "CAS")
 	$_SESSION["FA_USERNAME"] = $username;		
 		
 }
+else
+{
+	die('SSO configuration not valid');
+}
 /*
 Get User information
 */
-// $default = new Default_Model();
-// $get_student_information = $default->get_student_information($username);
 
 $request_host = $_SERVER['HTTP_HOST'];
 $request_uri = $_SERVER['REQUEST_URI'];
@@ -62,7 +65,7 @@ $application_uri = substr( $request_uri, strlen( $base_uri ) );
 
 switch ($application_uri) {
 	case 'application':
-		require_once('view/faform-view.php');
+		
 		$form_post_url = 'https://'. $request_host. $base_uri. 'application/save';
 		$template_uri = 'template/faform-template.php';
 		$model = new Faform_Model($template_uri,$form_post_url);
@@ -71,15 +74,22 @@ switch ($application_uri) {
 		echo $view->render();
 		break;
 	case 'application/save':
-		var_dump($_POST);
-		//var_dump($_POST['submit']);
+		require_once('model/form-post-model.php');
+		require_once('controller/form-post-controller.php');
+		require_once('view/form-post-view.php');
+		$form_post_url = 'https://'. $request_host. $base_uri. 'application/save';
+		$template_uri = 'template/after-submission-template.php';
+		$model = new Form_Post_Model($template_uri,$form_post_url);
+		$controller = new Form_Post_Controller($model);
+		$view = new Form_Post_View($controller , $model, $_POST );
+		echo $view->render();
 		break;
 	
 	default:
 		require_once('view/default-view.php');
 		$model = new Default_Model(
 			'template/error-404-template.php');
-		$view = new Default_View( NULL, $model );
+		$view = new Default_View( NULL, $model);
 
 		// View and controller actions.
 		header( $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found' );

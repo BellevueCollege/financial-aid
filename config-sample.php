@@ -27,5 +27,13 @@ $GLOBALS['BASE_URI'] = ''; // eg: /financial-aid
 $GLOBALS['GLOBALS_PATH'] = '';// File system path where the library globals can be found
 $GLOBALS['GLOBALS_URL'] = ''; // URL where the library globals can be referenced
 
+/* 
+	Financial Aid application configuration 
+	Replace the 0's with actual values
+*/
+$GLOBALS['FUNDING_AMOUNT_LENGTH'] = 0; 
+$GLOBALS['FUNDING_SOURCE_LENGTH'] = 0;
+$GLOBALS['AUTH_REP_NAME_LENGTH'] = 0; // Assuming Authorized Representative's Name both field's are of same length in the database. 
+$GLOBALS['SIGNATURE_LENGTH'] = 0; 
 
 ?>
