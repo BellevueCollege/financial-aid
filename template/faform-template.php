@@ -92,7 +92,6 @@
 										?>
 											<span> Choose the Academic Year(s) you would like to apply for: *</span>
 											<div class="radio">
-
 												<label>
 													<input type="radio" name="academic_year" value="<?php echo $key ;?>" class="radio" <?php  echo $checked;?>/> 
 													<span><?php echo $value; ?></span>
@@ -471,7 +470,7 @@
 											<blockquote>
 												<p>Communication</p>
 												<footer>
-													 <?php if(!empty($Email)) echo $Email; ?> is the email address on file for you. Communications will be conducted using this address.
+													 <?php if(!empty($email)) echo $email; ?> is the email address on file for you. Communications will be conducted using this address.
 												</footer>
 											</blockquote>
 										<input type='submit' value='Submit' name='submit' />	

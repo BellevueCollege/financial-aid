@@ -28,13 +28,14 @@
 	Validate form fields
 	Return error array's
 */
-		function validate_form($post)
+		function validate_form()
 		{
 			$errors = array();
 			
 			
 			//validate each field one by one
-			if(empty($post) || !isset($post['submit']))
+			//if(empty($post) || !isset($post['submit']))
+			if($this->model->get_submit_pv() === null)			
 			{
 				$errors['Submit'] = "Form did not get submit";
 				return $errors;
@@ -45,105 +46,105 @@
 					empty() does not generate a warning if the variable does not exist. That means empty() is essentially the concise equivalent to !isset($var) || $var == false.
 					Used is_null() for post variables having '0' as a valid value since empty() considers 0 as well.
 				*/
-				if(empty($post['academic_year'])) 
+				//if(empty($post['academic_year'])) 
+				if($this->model->get_academic_year_pv() === null)
 					$errors[] = self::ACADEMIC_YEAR;
 					
 
-				if(!isset($post['attend_summer']) || is_null($post['attend_summer']))
+				if($this->model->get_attend_summer_pv() === null)
 					$errors[] = self::ATTEND_SUMMER;
 					
 
-				if(!isset($post['attend_college']) || is_null($post['attend_college']))
-					$errors[] =  self::ATTEND_COLLEGE;
-					
-				if(isset($post['attend_college']) && $post['attend_college'] == '1')
+				if($this->model->get_attend_college_pv() === null)
+					$errors[] =  self::ATTEND_COLLEGE;					
+				else if($this->model->get_attend_college_pv() == '1')
 				{
-					if(!isset($post['hold_college_degree']) || is_null($post['hold_college_degree']))
+					if($this->model->get_hold_college_degree_pv() === null)
 						$errors[] =  self::HOLD_COLLEGE_DEGREE;
-					if(isset($post['hold_college_degree']) && $post['hold_college_degree'] == '1') 
+					else if($this->model->get_hold_college_degree_pv() == '1') 
 					{
-						if(empty($post['type_of_degree']))
+						if($this->model->get_type_of_degree_pv() === null)
 							$errors[] = self::TYPE_OF_DEGREE;
 					}
 				}
-
-				if(empty($post['program_of_study']))
+				//var_dump("program of study :".$this->model->get_program_of_study_pv());
+				if($this->model->get_program_of_study_pv() === null)
 					$errors[] = self::PROGRAM_OF_STUDY;
 
-				if(!isset($post['third_party_funding'])  || is_null($post['third_party_funding']))
+				if($this->model->get_third_party_funding_pv() === null)
 					$errors[] = self::THIRD_PARTY_FUNDING;
-				if(isset($post['third_party_funding']) && $post['third_party_funding'] == '1' )	
+				else if($this->model->get_third_party_funding_pv() == '1' )	
 				{
-					if(empty($post['funding_amount']))
+					if($this->model->get_funding_amount_pv() === null)
 						$errors[] = self::FUNDING_AMOUNT;
-					else if(isset($GLOBALS['FUNDING_AMOUNT_LENGTH']) && (floatval($post['funding_amount']) >= $GLOBALS['FUNDING_AMOUNT_LENGTH']))
+					else if(floatval($this->model->get_funding_amount_pv()) >= $GLOBALS['FUNDING_AMOUNT_LENGTH'])
 					{
 						$errors[] = 'Funding amount field value should be less than '. $GLOBALS['FUNDING_AMOUNT_LENGTH'];;
 					}
 
-
-					if(empty($post['funding_source']))
+					$funding_source_value = $this->model->get_funding_source_pv();
+					if($funding_source_value === null)
 						$errors[] = self::FUNDING_SOURCE;
-					else if(isset($GLOBALS['FUNDING_SOURCE_LENGTH']) && $post['funding_source'] >= $GLOBALS['FUNDING_SOURCE_LENGTH'])
+					else if(strlen($funding_source_value) >= $GLOBALS['FUNDING_SOURCE_LENGTH'])
 					{
 						$errors[] = 'The length of funding source field should be less than '. $GLOBALS['FUNDING_SOURCE_LENGTH'] .' characters.';;
 					}
 				}
 				
 
-				if(!isset($post['apply_for_fa']) || is_null($post['apply_for_fa']))
-					$errors[] = self::APPLY_FOR_FA;
-				
-				if(isset($post['apply_for_fa']) && $post['apply_for_fa'] == '1')
+				if($this->model->get_apply_for_fa_pv() === null)
+					$errors[] = self::APPLY_FOR_FA;				
+				else if($this->model->get_apply_for_fa_pv() == '1')
 				{
-					if(empty($post['types_of_loan'])) 
+					if($this->model->get_types_of_loan_pv() === null) 
 						$errors[] = self::TYPES_OF_LOAN;
-					if(empty($post['require_loan_quarters']))
+					if($this->model->get_require_loan_quarters_pv() === null)
 					{
 						$errors[] = self::REQUIRE_LOAN_QUARTERS;
-					}
-					
+					}					
 					else
 					{	
-						for($i=0;$i<count($post['require_loan_quarters']);$i++)
+						$loan_quarters = $this->model->get_require_loan_quarters_pv();
+						for($i=0;$i<count($loan_quarters);$i++)
 						{
-							$anticipated_credits_for_quarter = 'anticipated_credits_for_quarter_'.$post['require_loan_quarters'][$i];
-							if(!empty($post['require_loan_quarters'][$i]) && empty($post[$anticipated_credits_for_quarter]))
-							{
-								$quarter_title = $this->model->get_year_quarter_title($post['require_loan_quarters'][$i]);
-								$errors[] = $quarter_title.' field is required';
+							$anticipated_credits_for_quarter = $this->model->get_anticipated_credits_for_quarter_pv();
+							if(!empty($loan_quarters[$i]) && !array_key_exists($loan_quarters[$i],$anticipated_credits_for_quarter))
+							{									
+								$quarter_title = $this->model->get_year_quarter_title($loan_quarters[$i]);								
+								$errors[] = $quarter_title.' field is required';								
 							}
 						}
 						
 					} 
 				} 
 
-				if(empty($post['expected_graduation_date']))
+				if($this->model->get_expected_graduation_date_pv() === null)
 				{
 					$errors[] = self::EXPECTED_GRADUATION_DATE;
 				}
-
-				if(!empty($post['auth_rep_name1']) && isset($GLOBALS['AUTH_REP_NAME_LENGTH']) && strlen($post['auth_rep_name1']) > $GLOBALS['AUTH_REP_NAME_LENGTH'])
+				$auth_rep_name1_value = $this->model->get_auth_rep_name1_pv();
+				if(!empty($auth_rep_name1_value) && strlen($auth_rep_name1_value) > $GLOBALS['AUTH_REP_NAME_LENGTH'])
 				{
 
 					$errors[] = 'MaxLength allowed for Authorized Representative field is '.$GLOBALS['AUTH_REP_NAME_LENGTH'];
 				}
-				if(!empty($post['auth_rep_name2']) && isset($GLOBALS['AUTH_REP_NAME_LENGTH']) && strlen($post['auth_rep_name2']) > $GLOBALS['AUTH_REP_NAME_LENGTH'])
+				$auth_rep_name2_value = $this->model->get_auth_rep_name2_pv();
+				if(!empty($auth_rep_name2_value) && strlen($auth_rep_name2_value) > $GLOBALS['AUTH_REP_NAME_LENGTH'])
 				{
 
 					$errors[] = 'MaxLength allowed for Authorized Representative field is '.$GLOBALS['AUTH_REP_NAME_LENGTH'];
 				}				
 
-				if(empty($post['fa_contract_agreement']))
+				if($this->model->get_fa_contract_agreement_pv() === null)
 				{
 					$errors[] = self::FA_CONTRACT_AGREEMENT;
 				}
-
-				if(empty($post['signature']))
+				$signature_value = $this->model->get_signature_pv();
+				if($signature_value === null)
 				{
 					$errors[] = self::SIGNATURE ;
 				}
-				else if(isset($GLOBALS['SIGNATURE_LENGTH']) && (strlen($post['signature']) > $GLOBALS['SIGNATURE_LENGTH']))
+				else if((strlen($signature_value) > $GLOBALS['SIGNATURE_LENGTH']))
 				{
 					$errors[] = 'MaxLength for Name field is '.$GLOBALS['SIGNATURE_LENGTH']. ' characters.';;
 				}
@@ -152,9 +153,11 @@
 			}
 			return $errors;
 		} // end of validate_form()
+
 /*
 	Get the anticipated credits for selected quarter , key value pair
 */
+	/*
 		function get_anticipated_credits($post)
 		{
 			$get_anticipated_credits = array();
@@ -174,6 +177,7 @@
 			}
 			return $get_anticipated_credits;
 		}
+		*/
 
 /*
 	Get Academic Year for financial aid application (eg: 2015-2016) for the given summer quarter id 
@@ -185,10 +189,11 @@ function get_academic_year_range($summer_quarter_id)
 	if(!empty($summer_quarter_id))
 	{
 		$get_summer_quarter_title = $this->model->get_year_quarter_title($summer_quarter_id);
+
 		if(!empty($get_summer_quarter_title))
 		{
 			$string_split = explode(' ', $get_summer_quarter_title);
-			$year_value = $string_split[0];
+			$year_value = $string_split[1];			
 			$year_range = $year_value . '-'.($year_value+1);
 		}
 	}
@@ -197,22 +202,10 @@ function get_academic_year_range($summer_quarter_id)
 /*
 	Send a confirmation email to the student for submitting financial aid application
 */
-	function send_email_confimation($email,$year_range)
-	{
-		$subject = '**'.$year_range.' BC Financial Aid Application Submitted**';
-		$message = 'Thank you!   Your '.$year_range.' BC Financial Aid Application has been submitted to the Financial Aid office.';
-		$message .= ' Please retain a copy of this email for your records.';
-		$message .= ' If you have not done so already, please complete the 2015-16 Free Application for Federal Student Aid (FAFSA).';
-		$message .= ' If you have submitted all required documents to our office, you can expect to hear from our office between 30-90 days depending on the time of year you applied.';
-		$message .= ' sCheck your BC email account often for any important notifications from our office.';
-
-		$message .= 'Unsure if you submitted everything?';
-		$message .= ' Check your financial aid status on the FA portal (imbed the URL:  http://fa.bellevuecollege.edu/status here).';
-		$message .= 'If you missed the filing deadline (imbed the URL:  http://fa.bellevuecollege.edu/apply/deadlines here) for the quarter in which you wish to start receiving financial aid, you must pay your own tuition.
-
-Contact the Financial Aid office if you have any questions.
-'
-	}
+	// function send_email_confimation($email,$year_range)
+	// {
+	// 	$subject = '**'.$year_range.' BC Financial Aid Application Submitted**';		
+	// }
 
 	}
 ?>

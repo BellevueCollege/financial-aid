@@ -60,6 +60,7 @@ Class Faform_Controller extends Default_Controller {
 	public function get_all_quarter_options_available()
 	{
 		$quarter_options = $this->model->get_academic_year_quarters();
+
 		$quarters_options_available = array();
 
 		for($i=0;$i<count($quarter_options);$i++) 
@@ -79,6 +80,7 @@ Class Faform_Controller extends Default_Controller {
 				}
 			}
 		}
+		
 		return $quarters_options_available;
 	}
 /*

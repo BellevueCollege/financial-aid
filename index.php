@@ -9,6 +9,12 @@ require_once('controller/faform-controller.php');
 
 // Define application version nuuber
 define( 'VERSION_NUMBER', '1.0' );
+/*
+	Check if all config variables have values
+*/
+if(!Default_Model::check_configuration())
+	die("One or more of Config variables are not set");
+
 
 // Initialize username
 $username = "";
@@ -59,8 +65,10 @@ if ( ! isset( $_SERVER['HTTPS'] ) ) {
 	exit();
 }
 
-$application_uri = substr( $request_uri, strlen( $base_uri ) );
-//echo '\n'. $request_uri;
+
+
+$application_uri = rtrim(substr( $request_uri, strlen( $base_uri )) , '/' );
+//echo '\n'. $application_uri;
  
 
 switch ($application_uri) {
@@ -73,15 +81,15 @@ switch ($application_uri) {
 		$view = new Faform_View($controller , $model);
 		echo $view->render();
 		break;
-	case 'application/save':
+	case 'application/save':	
 		require_once('model/form-post-model.php');
 		require_once('controller/form-post-controller.php');
 		require_once('view/form-post-view.php');
 		$form_post_url = 'https://'. $request_host. $base_uri. 'application/save';
 		$template_uri = 'template/after-submission-template.php';
-		$model = new Form_Post_Model($template_uri,$form_post_url);
+		$model = new Form_Post_Model($template_uri,$form_post_url,$_POST);
 		$controller = new Form_Post_Controller($model);
-		$view = new Form_Post_View($controller , $model, $_POST );
+		$view = new Form_Post_View($controller , $model);
 		echo $view->render();
 		break;
 	

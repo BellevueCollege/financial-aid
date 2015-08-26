@@ -10,6 +10,22 @@ protected  $database_connection;
 // Path to a HTML template file to be used by a view.
 protected $template_uri;
 
+protected $first_name; // logged in user's first name
+
+protected $last_name; // logged in user's last name
+
+protected $dob; // logged in user's date of birth
+
+protected $phone; // logged in user's phone
+
+protected $ssn; // logged in user's ssn information
+
+protected $sid; // logged in user's sid
+
+protected $email; // logged in user's email id
+
+
+
 public function __construct($template_uri) {
 	if($this->check_database_config())
 	{
@@ -26,6 +42,18 @@ public function __construct($template_uri) {
 	else
 		 die(' Database configuration not set'); // exit out 
 	$this->template_uri = $template_uri;
+
+	// set user information
+	$username = $_SESSION['FA_USERNAME'];
+	$user_information = $this->get_student_information($username);
+	$this->first_name = isset($user_information['FirstName']) ? $user_information['FirstName'] : null;
+	$this->last_name = isset($user_information['LastName']) ? $user_information['LastName'] : null;
+	$this->dob = isset($user_information['DOB']) ? $user_information['DOB'] : null;
+	$this->phone = isset($user_information['Phone']) ? $user_information['Phone'] : null;
+	$this->ssn = isset($user_information['SSN']) ? $user_information['SSN'] : null;
+	$this->sid = isset($user_information['SID']) ? $user_information['SID'] : null;
+	$this->email = isset($user_information['Email']) ? $user_information['Email'] : null;
+
 	}// end of constructor
 
 /*
@@ -46,6 +74,73 @@ public function __construct($template_uri) {
 		//echo $template_uri;
 		$this->template_uri = $template_uri;
 	}
+
+
+/*
+	Get User first name
+*/
+	public function get_first_name()
+	{		
+		return $this->first_name;
+	}
+
+
+/*
+	Get User last name
+*/
+	public function get_last_name()
+	{		
+		return $this->last_name;
+	}
+
+/*
+	Get User date of birth
+*/
+	public function get_dob()
+	{		
+		return $this->dob;
+	}
+/*
+	Get User phone
+*/
+	public function get_phone()
+	{		
+		return $this->phone;
+	}
+/*
+	Get User ssn
+*/
+	public function get_ssn()
+	{		
+		return $this->ssn;
+	}
+/*
+	Get User sid
+*/
+	public function get_sid()
+	{		
+		return $this->sid;
+	}
+/*
+	Get User email
+*/
+	public function get_email()
+	{		
+		return $this->email;
+	}
+
+/*
+	check if the string only has spaces
+*/
+
+function check_only_spaces_string($input)
+{
+
+	if (strlen(trim($input)) == 0) {
+	    return false;// "String is empty.\n";
+	}
+	return true;
+}
 
 /*
 	Get Academic Year Quarters 
@@ -120,8 +215,29 @@ public function __construct($template_uri) {
 					$values = array(':YearQuarterID' => $year_quarter_id);
 					$query = $this->database_connection->prepare($yqt_sql); 
 					$query->execute($values);			
-					$year_quarter_title = $query->fetch(PDO::FETCH_ASSOC);		
-					return $year_quarter_title;
+					$year_quarter_title = $query->fetch(PDO::FETCH_ASSOC);	
+					if(!empty($year_quarter_title['Title']))
+					{
+						$title = $year_quarter_title['Title'];
+						// Convert 'Sum', 'Win', 'Spr' to 'Summer', 'Winter', 'Spring'
+						$explode_title = explode(' ',$title);
+						$quarter = '';
+						switch($explode_title[0])
+						{
+							case 'Spr':
+								$quarter = 'Spring';
+								break;
+							case 'Sum':
+								$quarter = 'Summer';
+								break;
+							case 'Win':
+								$quarter = 'Winter';
+								break;
+						}
+						$quarter_title = $quarter. ' '.$explode_title[1];
+						return $quarter_title;
+					}	
+						
 				}catch(PDOException $e)
 				{
 					echo 'ERROR: ' . $e->getMessage();
@@ -277,6 +393,29 @@ public function get_expected_graduation_year_array()
 	
 	return $extected_graduation_year_array;
 
+}
+
+/*
+	Check to make sure all configuation variables are not empty
+*/
+function check_configuration()
+{	
+	if(empty($GLOBALS['AUTH_TYPE']))
+		return false;
+	if(empty($GLOBALS['CAS_SERVER_HOSTNAME']) || empty($GLOBALS['CAS_SERVER_PORT']) || empty($GLOBALS['CAS_SERVER_PATH']) || empty($GLOBALS['CAS_VERSION']) || empty($GLOBALS['CAS_LIBRARY_PATH']))
+		return false;
+	if(empty($GLOBALS['DATABASE_DSN']) || empty($GLOBALS['DATABASE_USER']) || empty($GLOBALS['DATABASE_PASSWORD']))
+		return false;
+	if(empty($GLOBALS['BASE_URI']))
+		return false;
+	if(empty($GLOBALS['GLOBALS_PATH']) || empty($GLOBALS['GLOBALS_URL']))
+		return false;
+	if(empty($GLOBALS['FUNDING_AMOUNT_LENGTH']) || empty($GLOBALS['FUNDING_SOURCE_LENGTH']) || empty($GLOBALS['AUTH_REP_NAME_LENGTH']) || empty($GLOBALS['SIGNATURE_LENGTH']))
+		return false;
+	if(empty($GLOBALS['STATUS_URL']) || empty($GLOBALS['DEADLINES']))
+		return false;
+
+	return true;
 }
 
 
