@@ -33,10 +33,10 @@
 						<div class="row row-padding">
 							<p class='entry-title'>&nbsp;</p>
 							<div class="content-padding">
-								<h1>404 — Page not Found</h1>
+								<h1>404 — Page Not Found</h1>
 								<p class="lead">Below are a few things you can try to find it:</p>
 								<ol id="youcandoit" class="count">
-									<li class="one">If you typed the web address, double-check if you typed it correctly.</li>
+									<li class="one">If you typed the web address, double check if you typed it correctly.</li>
 									<li class="two">Try searching for it.
 										<form class="form-search" method="get" action="//www.bellevuecollege.edu/search/">
 											<fieldset>
@@ -73,10 +73,10 @@
 	<!-- #main-wrap -->
 
 	<?php include( $globals_path . 'h/bfoot.html' ); ?>
-	<?php include( $globals_path. 'h/legal.html' ); ?>
+	<?php include( $globals_path . 'h/legal.html' ); ?>
 
-	<script src="<?php echo $GLOBALS['GLOBALS_URL'] ?>j/bootstrap.min.js"></script>
-	<script src="<?php echo $GLOBALS['GLOBALS_URL'] ?>j/g.js"></script>
+	<script src="<?php echo $globals_url; ?>j/bootstrap.min.js"></script>
+	<script src="<?php echo $globals_url; ?>j/g.js"></script>
 </body>
 
 </html>
