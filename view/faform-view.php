@@ -8,14 +8,14 @@ Class Faform_View extends Default_View{
 		
 		parent::set_template_variables();
 		$this->template_variables['form_post_url'] = $this->model->get_form_post_url();
-		//user information
-		$username = $_SESSION['FA_USERNAME'];
-		$user_information = $this->model->get_student_information($username);
+		//user information		
+		$user_sid = $this->model->get_sid();
 		
-		if(!empty($user_information))
-		{
-				$this->template_variables = array_merge($this->template_variables, $user_information);	
+		if(!empty($user_sid))
+		{				
 				$year_quarter_information = $this->controller->get_academic_year_option_and_values();
+				$already_submitted_app_qtr_ids = $this->controller->already_submitted_application_year();
+				$this->template_variables["already_submitted_app_qtr_ids"] = $already_submitted_app_qtr_ids;
 				$this->template_variables["year_quarter_information"] = $year_quarter_information;
 				//Quarters
 				$quarters = $this->controller->get_all_quarter_options_available();

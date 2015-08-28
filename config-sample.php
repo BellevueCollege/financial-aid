@@ -31,11 +31,11 @@ $GLOBALS['GLOBALS_URL'] = ''; // URL where the library globals can be referenced
 	Financial Aid application configuration 
 	Replace the 0's with actual values
 */
-$GLOBALS['FUNDING_AMOUNT_LENGTH'] = 0; 
-$GLOBALS['FUNDING_SOURCE_LENGTH'] = 0;
+$GLOBALS['FUNDING_AMOUNT_LENGTH'] = 0; // Length of Funding amount field
+$GLOBALS['FUNDING_SOURCE_LENGTH'] = 0;// Length of Funding source field
 $GLOBALS['AUTH_REP_NAME_LENGTH'] = 0; // Assuming Authorized Representative's Name both field's are of same length in the database. 
-$GLOBALS['SIGNATURE_LENGTH'] = 0; 
-$GLOBALS['STATUS_URL'] = '';
-$GLOBALS['DEADLINES'] = '';
+$GLOBALS['SIGNATURE_LENGTH'] = 0; // Length of signature field
+$GLOBALS['STATUS_URL'] = ''; // URL to check the status of financial aid application
+$GLOBALS['DEADLINES'] = ''; // URL to check deadlines
 
 ?>

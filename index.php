@@ -2,7 +2,6 @@
 
 
 require_once('config.php');
-require_once('controller/cas-authentication-controller.php');
 require_once('model/faform-model.php');
 require_once('view/faform-view.php');
 require_once('controller/faform-controller.php');
@@ -13,13 +12,14 @@ define( 'VERSION_NUMBER', '1.0' );
 	Check if all config variables have values
 */
 if(!Default_Model::check_configuration())
-	die("One or more of Config variables are not set");
+	die("One or more of Config variables are not set.");
 
 
 // Initialize username
 $username = "";
 if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "CAS")
 {
+	require_once('controller/cas-authentication-controller.php');
 	/* Authenticate with CAS */
 
 	$cas_controller = new Cas_Authentication();
@@ -39,9 +39,6 @@ else
 {
 	die('SSO configuration not valid');
 }
-/*
-Get User information
-*/
 
 $request_host = $_SERVER['HTTP_HOST'];
 $request_uri = $_SERVER['REQUEST_URI'];
@@ -72,8 +69,7 @@ $application_uri = rtrim(substr( $request_uri, strlen( $base_uri )) , '/' );
  
 
 switch ($application_uri) {
-	case 'application':
-		
+	case 'application':		
 		$form_post_url = 'https://'. $request_host. $base_uri. 'application/save';
 		$template_uri = 'template/faform-template.php';
 		$model = new Faform_Model($template_uri,$form_post_url);

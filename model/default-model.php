@@ -418,6 +418,36 @@ function check_configuration()
 	return true;
 }
 
+/*
+	get financial aid application id for a given sid and academic yr chosen
+*/
+
+function get_faappid($year_quarter_id)
+{
+	$sid = $this->get_sid();
+	if(!empty($year_quarter_id) && !empty($sid))
+	{
+		try
+			{
+				$sql = "EXEC dbo.usp_GetAppIdForGivenSidAndAcademicYr @SID = :Sid, @AcademicYrChosen = :AcademicYrChosen;"; 
+				$values = array(':Sid' => $sid, ':AcademicYrChosen' => $year_quarter_id);			
+				
+				$query = $this->database_connection->prepare($sql); 
+				$query->execute($values);			
+				$result = $query->fetch(PDO::FETCH_ASSOC);				
+				if(!empty($result) && isset($result['FAAppID']))
+				{
+					$faappid = $result['FAAppID'];
+					return $faappid;
+				}	
+			}catch(PDOException $e)
+			{
+				echo 'ERROR: ' . $e->getMessage();
+			}	
+	}
+	return null;
+}
+
 
 }//End of Class Default_Model
 

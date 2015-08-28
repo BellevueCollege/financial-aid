@@ -144,6 +144,27 @@ Class Faform_Controller extends Default_Controller {
 		return null;
 	}
 
+/*
+	Check for what academic year students have already submitted application
+*/
+function already_submitted_application_year()
+{
+	$already_submitted_application_year = array();
+	$academic_years = $this->get_academic_year_option_and_values();
+	if(!empty($academic_years) && is_array($academic_years))
+	{
+		foreach($academic_years as $key=>$val) // key is the yearQuarterId
+		{
+			$faappid = $this->model->get_faappid($key);
+			if(!empty($faappid))
+				$already_submitted_application_year[$key] = true; 
+			else
+				$already_submitted_application_year[$key] = false; 
+		}
+	}	
+	return $already_submitted_application_year;
+}
+
 
 	}
 ?>
