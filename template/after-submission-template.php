@@ -36,10 +36,31 @@
 								<div style='padding-top:10px;'>
 									<p class="lead">
 										<?php
-											if(isset($after_submit_message))
-												echo $after_submit_message;
-											//else
-												//echo 'Error: Sorry something went wrong'; ?>
+											if(!empty($year_range) )
+											{?> 
+											<p>
+												<div style='color:green;'>** <?php echo $year_range; ?> BC Financial Aid Application Submitted**</div>
+												<div>	
+													<br/>Thank you! Your <?php echo $year_range; ?> BC Financial Aid Application has been submitted to the Financial Aid office.
+													<br/>If you have not done so already, please complete the <?php echo $year_range; ?> Free Application for Federal Student Aid (FAFSA).
+													If you have submitted all required documents to our office, you can expect to hear from our office between 30-90 days depending on the time of year you applied. 
+													 Check your BC email account often for any important notifications from our office. 
+													<br/>Unsure if you submitted everything?  
+													 Check your financial aid status on the FA portal (<a href='<?php echo $GLOBALS['STATUS_URL'] ?>' > Check Status </a>)
+													 If you missed the filing deadline (<a href='<?php echo $GLOBALS['DEADLINES'] ?>' > Deadlines </a>) for the quarter in which you wish to start receiving financial aid, you must pay your own tuition.
+													 <br/>Contact the Financial Aid office if you have any questions.
+												</div>
+											</p>
+										<?php
+											}
+											else if(!empty($after_submit_message))
+											{?>
+												<p>
+											<?php echo $after_submit_message; ?>
+												</p>
+										<?php
+											}
+										?>
 									</p>
 								</div>
 							</div>

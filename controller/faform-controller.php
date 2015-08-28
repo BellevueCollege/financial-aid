@@ -60,6 +60,7 @@ Class Faform_Controller extends Default_Controller {
 	public function get_all_quarter_options_available()
 	{
 		$quarter_options = $this->model->get_academic_year_quarters();
+
 		$quarters_options_available = array();
 
 		for($i=0;$i<count($quarter_options);$i++) 
@@ -79,6 +80,7 @@ Class Faform_Controller extends Default_Controller {
 				}
 			}
 		}
+		
 		return $quarters_options_available;
 	}
 /*
@@ -141,6 +143,27 @@ Class Faform_Controller extends Default_Controller {
 		}
 		return null;
 	}
+
+/*
+	Check for what academic year students have already submitted application
+*/
+function already_submitted_application_year()
+{
+	$already_submitted_application_year = array();
+	$academic_years = $this->get_academic_year_option_and_values();
+	if(!empty($academic_years) && is_array($academic_years))
+	{
+		foreach($academic_years as $key=>$val) // key is the yearQuarterId
+		{
+			$faappid = $this->model->get_faappid($key);
+			if(!empty($faappid))
+				$already_submitted_application_year[$key] = true; 
+			else
+				$already_submitted_application_year[$key] = false; 
+		}
+	}	
+	return $already_submitted_application_year;
+}
 
 
 	}
