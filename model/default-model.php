@@ -396,13 +396,13 @@ public function get_expected_graduation_year_array()
 }
 
 /*
-	Check to make sure all configuation variables are not empty
+	Check to make sure all configuration variables are not empty
 */
 function check_configuration()
 {	
 	if(empty($GLOBALS['AUTH_TYPE']))
 		return false;
-	if(empty($GLOBALS['CAS_SERVER_HOSTNAME']) || empty($GLOBALS['CAS_SERVER_PORT']) || empty($GLOBALS['CAS_SERVER_PATH']) || empty($GLOBALS['CAS_VERSION']) || empty($GLOBALS['CAS_LIBRARY_PATH']))
+	if((!empty($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == 'CAS') && (empty($GLOBALS['CAS_SERVER_HOSTNAME']) || empty($GLOBALS['CAS_SERVER_PORT']) || empty($GLOBALS['CAS_SERVER_PATH']) || empty($GLOBALS['CAS_VERSION']) || empty($GLOBALS['CAS_LIBRARY_PATH'])))
 		return false;
 	if(empty($GLOBALS['DATABASE_DSN']) || empty($GLOBALS['DATABASE_USER']) || empty($GLOBALS['DATABASE_PASSWORD']))
 		return false;
