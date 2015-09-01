@@ -645,56 +645,57 @@
 
 	<!-- jQuery Validate -->
 	<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-	<script>
+
+	<script type="text/javascript">
+		//Show/hide logic
 		$(document).ready(function () {
 			/******** Hide groups of elements as needed ********/
 			
 			//Check current or pre-selected states
-			if( !$('#attend_college_yes').is(':checked') || $('#attend_college_no').is(':checked') ) { 
-				$('#form_degree_info').addClass('hide');
+			if( !$("#attend_college_yes").is(":checked") || $("#attend_college_no").is(":checked") ) { 
+				$("#form_degree_info").addClass("hide");
 			}
-			if( !$('#third_party_funding_yes').is(':checked') || $('#third_party_funding_no').is(':checked') ) { 
-				$('#form_additional_funding_info').addClass('hide');
+			if( !$("#third_party_funding_yes").is(":checked") || $("#third_party_funding_no").is(":checked") ) { 
+				$("#form_additional_funding_info").addClass("hide");
 			}
-			if( !$('#apply_for_fa_yes').is(':checked') || $('#apply_for_fa_no').is(':checked') ) { 
-				$('#form_loan_info').addClass('hide'); 
+			if( !$("#apply_for_fa_yes").is(":checked") || $("#apply_for_fa_no").is(":checked") ) { 
+				$("#form_loan_info").addClass("hide"); 
 			}
 	
 			<?php 
 				foreach($quarters as $key=>$value) {
 			?>
-					if( !$('#require_loan_quarters_<?php echo $key; ?>').is(':checked') ) {
-						$('#anticipated_credits_<?php echo $key; ?>').addClass('hide'); 
+					if( !$("#require_loan_quarters_<?php echo $key; ?>").is(":checked") ) {
+						$("#anticipated_credits_<?php echo $key; ?>").addClass("hide"); 
 					}
-					$('#require_loan_quarters_<?php echo $key; ?>').click( function() {
-   						if($(this).is(':checked')) { $('#anticipated_credits_<?php echo $key; ?>').removeClass('hide'); }
-						if(!$(this).is(':checked')) { $('#anticipated_credits_<?php echo $key; ?>').removeClass('hide').addClass('hide'); } 
+					$("#require_loan_quarters_<?php echo $key; ?>").on("touchend click", function() {
+   						if($(this).is(":checked")) { $("#anticipated_credits_<?php echo $key; ?>").removeClass("hide"); }
+						if(!$(this).is(":checked")) { $("#anticipated_credits_<?php echo $key; ?>").removeClass("hide").addClass("hide"); } 
 					});
 			<?php
 				}
 			?>
 			
 			//check changing states
-			$('#attend_college_no').click(function() {
-   				if($(this).is(':checked')) { $('#form_degree_info').removeClass('hide').addClass('hide'); }
+			$("#attend_college_no").on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_degree_info").removeClass("hide").addClass("hide"); }
 			});
-			$('#third_party_funding_no').click(function() {
-   				if($(this).is(':checked')) { $('#form_additional_funding_info').removeClass('hide').addClass('hide'); }
+			$("#third_party_funding_no").on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_additional_funding_info").removeClass("hide").addClass("hide"); }
 			});
-			$('#apply_for_fa_no').click(function() {
-   				if($(this).is(':checked')) { $('#form_loan_info').removeClass('hide').addClass('hide'); }
+			$("#apply_for_fa_no").on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_loan_info").removeClass("hide").addClass("hide"); }
 			});
 
 			/******** Show groups of elements as needed ********/
-			//if($('#attend_college_yes').is(':checked')) { $('#form_degree_info').removeClass('hide'); }
-			$('#attend_college_yes').click(function() {
-   				if($(this).is(':checked')) { $('#form_degree_info').removeClass('hide'); }
+			$("#attend_college_yes").on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_degree_info").removeClass("hide"); }
 			});
-			$('#third_party_funding_yes').click(function() {
-   				if($(this).is(':checked')) { $('#form_additional_funding_info').removeClass('hide'); }
+			$('#third_party_funding_yes').on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_additional_funding_info").removeClass("hide"); }
 			});
-			$('#apply_for_fa_yes').click(function() {
-   				if($(this).is(':checked')) { $('#form_loan_info').removeClass('hide'); }
+			$("#apply_for_fa_yes").on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_loan_info").removeClass("hide"); }
 			});
 		});
 	</script>
