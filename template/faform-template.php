@@ -79,7 +79,7 @@
 								<p>&nbsp;</p>
 								<h1>Apply for Financial Aid</h1>
 
-								<?php
+								<?php								
 								if(!empty($validation_form_errors))
 								{
 								?>

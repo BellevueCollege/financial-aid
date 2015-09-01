@@ -15,12 +15,13 @@ Class Faform_Controller extends Default_Controller {
 		/*
 			$get_quarter_options will have values like 2015 - 2016 (Sum 2015,Fall 2015,Win 2016,Spr 2016)
 			We will get the yearQuarterID value for 2015
-		*/
+		*/			
 		for($i=0;$i<count($quarter_options);$i++) 
-		{
+		{			
 			$get_year = substr($quarter_options[$i],0,4);
-			$summer_quarter = 'sum '.$get_year;
+			$summer_quarter = 'sum '.$get_year;			
 			$yearQuarterID = $this->model->get_year_quarter_id($summer_quarter);
+
 			if(!empty($yearQuarterID) && isset($yearQuarterID['YearQuarterID']));
 			{	
 				/* 
@@ -28,28 +29,27 @@ Class Faform_Controller extends Default_Controller {
 					eg: Sum 2015,Fall 2015,Win 2016,Spr 2016 to Summer 2015,Fall 2015,Winter 2016,Spring 2016
 				*/
 
-				$seperate_year_quarters_array = $this->seperate_year_quarters($quarter_options[$i]); //eg: Sum 2015,Fall 2015,Win 2016,Spr 2016
+				 $seperate_year_quarters_array = $this->seperate_year_quarters($quarter_options[$i]); //eg: Sum 2015,Fall 2015,Win 2016,Spr 2016
+
 				if(isset($seperate_year_quarters_array[0]) && isset($seperate_year_quarters_array[1]))
 				{
-					$academic_year = $seperate_year_quarters_array[0];
-					$abbrviated_quarters_string = $seperate_year_quarters_array[1];					
-					$abbreviated_quarters_array = $this->get_quarters_array($abbrviated_quarters_string);
-					
-					$quarters_readable_array = array();
-					for($i=0;$i<count($abbreviated_quarters_array);$i++)
+					 $academic_year = $seperate_year_quarters_array[0];
+					 $abbreviated_quarters_string = $seperate_year_quarters_array[1];					
+					 $abbreviated_quarters_array = $this->get_quarters_array($abbreviated_quarters_string);					
+					 $quarters_readable_array = array();
+					for($j=0;$j<count($abbreviated_quarters_array);$j++)
 					{
-						$full_name_quarter = $this->make_quarter_readable($abbreviated_quarters_array[$i]);						
+						$full_name_quarter = $this->make_quarter_readable($abbreviated_quarters_array[$j]);						
 						$quarters_readable_array[] = $full_name_quarter;
-					}
-					
+					}					
 					$all_readable_quarters_string = implode(', ', $quarters_readable_array);
 					$year_quarter_string = $academic_year . ' ( '.$all_readable_quarters_string.' )';
 					$quarter_option_values_array[$yearQuarterID['YearQuarterID']] = $year_quarter_string;
+
 				}
 			}	
 
-		}
-
+		}		
 		return $quarter_option_values_array;
 	}
 /*

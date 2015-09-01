@@ -37,7 +37,7 @@
 			//if(empty($post) || !isset($post['submit']))
 			if($this->model->get_submit_pv() === null)			
 			{
-				$errors['Submit'] = "Form did not get submit";
+				$errors['submit'] = "Form did not get submit";
 				return $errors;
 			}
 			else
@@ -154,30 +154,6 @@
 			return $errors;
 		} // end of validate_form()
 
-/*
-	Get the anticipated credits for selected quarter , key value pair
-*/
-	/*
-		function get_anticipated_credits($post)
-		{
-			$get_anticipated_credits = array();
-			if(!empty($post['require_loan_quarters']))
-			{
-				for($i=0;$i<count($post['require_loan_quarters']);$i++)
-				{
-					if(!empty($post['require_loan_quarters'][$i]))
-					{
-						$anticipated_credits_for_quarter = 'anticipated_credits_for_quarter_'.$post['require_loan_quarters'][$i];
-						if(!empty($post[$anticipated_credits_for_quarter]))
-						{
-							$get_anticipated_credits[$post['require_loan_quarters'][$i]] = $post[$anticipated_credits_for_quarter];
-						}
-					}
-				}
-			}
-			return $get_anticipated_credits;
-		}
-		*/
 
 /*
 	Get Academic Year for financial aid application (eg: 2015-2016) for the given summer quarter id 
@@ -199,13 +175,6 @@ function get_academic_year_range($summer_quarter_id)
 	}
 	return $year_range;
 }
-/*
-	Send a confirmation email to the student for submitting financial aid application
-*/
-	// function send_email_confimation($email,$year_range)
-	// {
-	// 	$subject = '**'.$year_range.' BC Financial Aid Application Submitted**';		
-	// }
 
-	}
+}// end of class
 ?>

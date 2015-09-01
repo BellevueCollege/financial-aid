@@ -53,10 +53,10 @@
 											</p>
 										<?php
 											}
-											else if(!empty($after_submit_message))
+											else if(!empty($error_message))
 											{?>
 												<p>
-											<?php echo $after_submit_message; ?>
+											<?php echo $error_message; ?>
 												</p>
 										<?php
 											}
