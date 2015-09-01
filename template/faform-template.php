@@ -556,7 +556,7 @@
 														$checked = 'checked';
 											?>
 											  <label for="release_student_info_box2">
-											    <input type="checkbox" value="1" name="release_student_info_box2" <?php echo $checked; ?>>
+											    <input type="checkbox" value="1" id="release_student_info_box2" name="release_student_info_box2" <?php echo $checked; ?>>
 											    	I authorize the release of award letters or other documents to the individual(s) listed below. This permission does not include check pickup. Visit our office for an additional form to grant the release of checks.
 											  </label>
 											</div>
@@ -598,8 +598,8 @@
 														$checked = 'checked';
 											 ?>
 											<div class="checkbox">
-											  <label>
-											    <input type="checkbox" value="1" name="fa_contract_agreement" <?php echo $checked; ?> >
+											  <label for="fa_contract_agreement">
+											    <input type="checkbox" value="1" name="fa_contract_agreement" id="fa_contract_agreement" <?php echo $checked; ?> >
 											    I understand that if I do not follow the financial aid contract it may result in the loss of my financial aid. *
 											  </label>
 											</div>
