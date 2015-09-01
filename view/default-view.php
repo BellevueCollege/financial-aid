@@ -32,6 +32,29 @@ protected function set_template_variables(){
 		$this->template_variables['globals_url'] = $GLOBALS['GLOBALS_URL'];	
 	$this->template_variables['template_uri'] = $this->model->get_template_uri();
 	$this->template_variables['email'] = $this->model->get_email();
+	
+	$ssn = $this->model->get_ssn();
+	if(!empty($ssn))
+	{
+		$this->template_variables['ssn'] = true; 
+	}
+	else
+	{
+		$this->template_variables['ssn'] = false;
+	}
+
+	if(!empty($GLOBALS['FUNDING_AMOUNT_LENGTH']))
+		$this->template_variables['funding_amount_length'] = $GLOBALS['FUNDING_AMOUNT_LENGTH'];
+	if(!empty($GLOBALS['FUNDING_SOURCE_LENGTH']))
+		$this->template_variables['funding_source_length'] = $GLOBALS['FUNDING_SOURCE_LENGTH'];
+	if(!empty($GLOBALS['AUTH_REP_NAME_LENGTH']))
+		$this->template_variables['auth_rep_name_length'] = $GLOBALS['AUTH_REP_NAME_LENGTH'];
+	if(!empty($GLOBALS['SIGNATURE_LENGTH']))
+		$this->template_variables['signature_length'] = $GLOBALS['SIGNATURE_LENGTH'];
+	if(!empty($GLOBALS['STATUS_URL']))
+		$this->template_variables['status_url'] = $GLOBALS['STATUS_URL'];
+	if(!empty($GLOBALS['DEADLINES']))
+		$this->template_variables['deadlines'] = $GLOBALS['DEADLINES'];
 }
 
 }
