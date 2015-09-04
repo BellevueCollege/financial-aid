@@ -79,6 +79,7 @@
 								<p>&nbsp;</p>
 								<h1>Apply for Financial Aid</h1>
 
+								<div id="errors">
 								<?php
 								if(!empty($validation_form_errors))
 								{
@@ -97,12 +98,13 @@
 									</div>
 								<?php
 								}
-								?>								
+								?>	
+								</div>							
 								<form id="financial_aid_application" name="financial_aid_application" action="<?php if(!empty($form_post_url)) echo $form_post_url ; ?>" method="post">									
 
 									<fieldset>
 										<legend>Academic Year</legend>
-
+										
 										<label><strong>Choose the academic year(s) you would like to apply for: <span class="text-danger" title="Required field">*</span></strong></label>
 										<div class="form-group">
 										<?php 
@@ -137,7 +139,7 @@
 													$checked_zero = 'checked';
 											}
 										?>
-										<label><strong>Do you plan to attend during the summer? <span class="text-danger" title="Required field">*</span></strong></label>
+											<label><strong>Do you plan to attend during the summer? <span class="text-danger" title="Required field">*</span></strong></label>
 											<div class="form-group">
 												<div class="radio-inline">
 													<label for="attend_summer_yes">
@@ -152,38 +154,6 @@
 													</label>
 												</div>	
 											</div>
-											
-											<!--<label>Do you plan to attend during the summer? <span class="text-danger" title="Required field">*</span></label>
-											<div class="form-group">
-												<div class="radio">
-													<label>
-														<input type="radio" name="attend_summer" value="1" required /> 
-														Yes
-													</label>
-												</div>
-												<div class="radio">
-													<label>
-														<input type="radio" name="attend_summer" value="0" required /> 
-														No
-													</label>
-												</div>	
-											</div>
-											
-											<label>Do you plan to attend during the summer? <span class="text-danger" title="Required field">*</span></label>
-											<div class="form-group">
-												<div class="radio-inline">
-													<label>
-														<input type="radio" name="attend_summer" value="1" required /> 
-														Yes
-													</label>
-												</div>
-												<div class="radio-inline">
-													<label>
-														<input type="radio" name="attend_summer" value="0" required /> 
-														No
-													</label>
-												</div>	
-											</div>-->
 									</fieldset>
 									
 									<fieldset>
@@ -242,8 +212,8 @@
 												</div>
 											</div>
 											
-											<label><strong>If yes, what type(s) of degree do you hold? <span class="text-danger" title="Required field">*</span></strong></label>
-											<div class="form-group">	
+											<div class="form-group">
+												<label><strong>If yes, what type(s) of degree do you hold? <span class="text-danger" title="Required field">*</span></strong></label>	
 											<?php
 												if(!empty($types_of_degree))
 												{
@@ -295,7 +265,7 @@
 										<div class="row">
 											<div class="col-xs-12 col-md-6">
 												<div class="form-group">
-													<label for="program_of_study"><strong>Your intended program of study: <span class="text-danger" title="Required field">*</span></strong></label>
+													<label for="program_of_study"><strong>Your intended program of study <span class="text-danger" title="Required field">*</span></strong></label>
 													<select name="program_of_study" id="program_of_study" class="form-control" required>
 														<option value="">Select...</option>
 														<?php		
@@ -334,21 +304,19 @@
 													$checked_zero = 'checked';
 											}
 										?>
+										<label><strong>Are you receiving scholarship/funding from a third party or using the state tuition waiver? <span class="text-danger" title="Required field">*</span></strong></label>
 										<div class="form-group">
-											<label><strong>Are you receiving scholarship/funding from a third party or using the state tuition waiver? <span class="text-danger" title="Required field">*</span></strong></label>
-											<div class="form-group">
-												<div class="radio-inline">
-													<label for="third_party_funding_yes">
-														<input type="radio" name="third_party_funding" id="third_party_funding_yes" value="1" <?php echo $checked_one; ?> required/> 
-														Yes
-													</label>
-												</div>
-												<div class="radio-inline">
-													<label for="third_party_funding_no">
-														<input type="radio" name="third_party_funding" id="third_party_funding_no" value="0" <?php echo $checked_zero; ?> required/> 
-														No
-													</label>
-												</div>
+											<div class="radio-inline">
+												<label for="third_party_funding_yes">
+													<input type="radio" name="third_party_funding" id="third_party_funding_yes" value="1" <?php echo $checked_one; ?> required/> 
+													Yes
+												</label>
+											</div>
+											<div class="radio-inline">
+												<label for="third_party_funding_no">
+													<input type="radio" name="third_party_funding" id="third_party_funding_no" value="0" <?php echo $checked_zero; ?> required/> 
+													No
+												</label>
 											</div>
 										</div>	
 										<!-- Funding amount and funding amount are required fields if user answer yes to the above field -->
@@ -380,17 +348,17 @@
 													$checked_zero = 'checked';
 											}
 											?>
-										<label aria-describedby="apply_for_fa_help_block"><strong>Would you like to apply for financial aid loans? <span class="text-danger">*</span></strong></label>
+										<label><strong>Would you like to apply for financial aid loans? <span class="text-danger">*</span></strong></label>
 										<div class="form-group">
 											<div class="radio-inline">
 												<label for="apply_for_fa_yes">
-													<input type="radio" name="apply_for_fa" id="apply_for_fa_yes" value="1" <?php echo $checked_one; ?> required/>
+													<input type="radio" name="apply_for_fa" id="apply_for_fa_yes" value="1" aria-describedby="apply_for_fa_help_block" <?php echo $checked_one; ?> required/>
 													Yes
 												</label> 
 											</div>
 											<div class="radio-inline">
 												<label for="apply_for_fa_no">
-													<input type="radio" name="apply_for_fa" id="apply_for_fa_no" value="0" <?php echo $checked_zero; ?> required/> 
+													<input type="radio" name="apply_for_fa" id="apply_for_fa_no" value="0" aria-describedby="apply_for_fa_help_block" <?php echo $checked_zero; ?> required/> 
 													No
 												</label>
 											</div>
@@ -398,38 +366,40 @@
 										</div>
 										
 										<div id="form_loan_info">
-											<label><strong>Types of loans:</strong></label>
-											<?php
-												if(!empty($types_of_loan))
-												{
-													foreach ( $types_of_loan as $loan_type ) //$i=0;$i<count($types_of_loan);$i++)
+											<label><strong>Types of loans: <span class="text-danger">*</span></strong></label>
+											<div class="form-group">
+												<?php
+													if(!empty($types_of_loan))
 													{
-														$loan_type_id = $loan_type['LoanTypeID'];
-														$loan_type_name = $loan_type['LoanType'];
-														
-														if(!empty($loan_type_id) && !empty($loan_type_name))
+														foreach ( $types_of_loan as $loan_type ) //$i=0;$i<count($types_of_loan);$i++)
 														{
-															$checked = '';
-															if(!empty($selected_types_of_loan) && is_array($selected_types_of_loan))
+															$loan_type_id = $loan_type['LoanTypeID'];
+															$loan_type_name = $loan_type['LoanType'];
+															
+															if(!empty($loan_type_id) && !empty($loan_type_name))
 															{
-																if(in_array($loan_type_id, $selected_types_of_loan))
-																	$checked = 'checked';
+																$checked = '';
+																if(!empty($selected_types_of_loan) && is_array($selected_types_of_loan))
+																{
+																	if(in_array($loan_type_id, $selected_types_of_loan))
+																		$checked = 'checked';
+																}
+												?>
+																<div class="checkbox">
+																	<label for="type_of_loan_<?php echo $loan_type_id; ?>">
+																		<input type="checkbox" name="types_of_loan[]" id="type_of_loan_<?php echo $loan_type_id; ?>" value="<?php echo $loan_type_id; ?>" <?php echo $checked; ?> />
+																		<?php echo $loan_type_name; ?>
+																	</label>
+																</div>
+												<?php
 															}
-											?>
-															<div class="checkbox">
-																<label for="type_of_loan_<?php echo $loan_type_id; ?>">
-																	<input type="checkbox" name="types_of_loan[]" id="type_of_loan_<?php echo $loan_type_id; ?>" value="<?php echo $loan_type_id; ?>" <?php echo $checked; ?> />
-																	<?php echo $loan_type_name; ?>
-																</label>
-															</div>
-											<?php
 														}
 													}
-												}
-											?>
+												?>
+											</div>
 											<div id="form_require_loans">
-												<label><strong>Choose the quarters you will require loans for:</strong></label>
 												<!-- Show/Hide quarter depending on the Year selected -->
+												<label><strong>Choose the quarters you will require loans for: <span class="text-danger">*</span></strong></label>
 												<div class="form-group">
 												<?php
 													//var_dump($selected_anticipated_credits_for_quarter);
@@ -459,38 +429,31 @@
 																	if(!empty($credit_options))
 																	{
 																	?>
-																		<select name="anticipated_credits_for_quarter_<?php echo $key; ?>" id="anticipated_credits_for_quarter_<?php echo $key; ?>" class="form-control input-sm">
-																			<option value="">Select anticipated credits for quarter...</option>
-																		<?php
-																			for($i=0;$i<count($credit_options);$i++)
-																			{
-																				$credit_option_id = $credit_options[$i]['CreditID'];
-																				$credit_option_value = $credit_options[$i]['Credit']; 
-																				$checked = '';
-																				$selected = '';
-																				if(!empty($credit_options[$i]) && isset($credit_option_id) && isset($credit_option_value))
+																		<div class="form-group">
+																			<select name="anticipated_credits_for_quarter_<?php echo $key; ?>" id="anticipated_credits_for_quarter_<?php echo $key; ?>" class="form-control input-sm">
+																				<option value="">Select anticipated credits for quarter...</option>
+																			<?php
+																				for($i=0;$i<count($credit_options);$i++)
 																				{
-																					if(!empty($selected_anticipated_credits_for_quarter) && is_array($selected_anticipated_credits_for_quarter) && isset($selected_anticipated_credits_for_quarter[$key]))
+																					$credit_option_id = $credit_options[$i]['CreditID'];
+																					$credit_option_value = $credit_options[$i]['Credit']; 
+																					$selected = '';
+																					if(!empty($credit_options[$i]) && isset($credit_option_id) && isset($credit_option_value))
 																					{
-																						if($selected_anticipated_credits_for_quarter[$key] == $credit_option_id) {
-																							$checked = 'checked';
-																							$selected = 'selected';
+																						if(!empty($selected_anticipated_credits_for_quarter) && is_array($selected_anticipated_credits_for_quarter) && isset($selected_anticipated_credits_for_quarter[$key]))
+																						{
+																							if($selected_anticipated_credits_for_quarter[$key] == $credit_option_id) {
+																								$selected = 'selected';
+																							}
 																						}
+																			?>
+																					<option value="<?php echo $credit_option_id; ?>" <?php echo $selected; ?>><?php echo $credit_option_value; ?></option>
+																			<?php
 																					}
-																		?>
-																				<!--<div class="radio">
-																					<label for="anticipated_credits_for_quarter_<?php echo $key; ?>_<?php echo $credit_option_id; ?>">
-																						<input type="radio" id="anticipated_credits_for_quarter_<?php echo $key; ?>_<?php echo $credit_option_id; ?>" name="anticipated_credits_for_quarter_<?php echo $key; ?>" 
-																						value="<?php echo $credit_option_id; ?>" <?php echo $checked; ?>/> 
-																						<?php echo $credit_option_value; ?>
-																					</label>												
-																				</div>-->	
-																				<option value="<?php echo $credit_option_id; ?>" <?php echo $selected; ?>><?php echo $credit_option_value; ?></option>
-																		<?php
 																				}
-																			}
-																		?>
-																		</select>
+																			?>
+																			</select>
+																		</div>
 																	<?php
 																	}
 																	?>
@@ -506,9 +469,10 @@
 										</div>
 										<div class="row">
 											<div class="col-md-6 col-xs-12">
+												<label for="expected_graduation_date"><strong>Expected graduation date <span class="text-danger">*</span></strong></label>
 												<div class="form-group">
-													<label for="expected_graduation_date"><strong>Expected graduation date <span class="text-danger">*</span></strong></label>
 													<select id="expected_graduation_date" name="expected_graduation_date" class="form-control" aria-describedby="graddate_help_block">
+														<option value=""></option>
 													<?php
 													if(!empty($expected_graduation_year_array))
 													{	
@@ -538,27 +502,31 @@
 												would be a parent, guardian, or relative.
 											</div><!--End of Information Release description div -->
 											
-											<div class="checkbox">
-												<?php
-												$checked = '';
-												if(!empty($selected_release_student_info_box1) && $selected_release_student_info_box1 == '1')
-														$checked = 'checked';
-												?>
-											  <label for="release_student_info_box1">
-											    <input type="checkbox" value="1" id="release_student_info_box1" name="release_student_info_box1" <?php echo $checked; ?>>
-											    	I give the Bellevue College Financial Aid Office permission to discuss my financial aid application status, award, or eligibility with the following individual(s). I understand that this permission will remain in force from the date the office notes receipt of this form until the last day of Spring quarter of the academic year(s) you are applying for.
-											  </label>
+											<div class="form-group">
+												<div class="checkbox">
+													<?php
+													$checked = '';
+													if(!empty($selected_release_student_info_box1) && $selected_release_student_info_box1 == '1')
+															$checked = 'checked';
+													?>
+												<label for="release_student_info_box1">
+													<input type="checkbox" value="1" id="release_student_info_box1" name="release_student_info_box1" <?php echo $checked; ?>>
+														I give the Bellevue College Financial Aid Office permission to discuss my financial aid application status, award, or eligibility with the following individual(s). I understand that this permission will remain in force from the date the office notes receipt of this form until the last day of Spring quarter of the academic year(s) you are applying for.
+												</label>
+												</div>
 											</div>
-											<div class="checkbox">
-											<?php
-												$checked = '';
-												if(!empty($selected_release_student_info_box2) && $selected_release_student_info_box2 == '1')
-														$checked = 'checked';
-											?>
-											  <label for="release_student_info_box2">
-											    <input type="checkbox" value="1" id="release_student_info_box2" name="release_student_info_box2" <?php echo $checked; ?>>
-											    	I authorize the release of award letters or other documents to the individual(s) listed below. This permission does not include check pickup. Visit our office for an additional form to grant the release of checks.
-											  </label>
+											<div class="form-group">
+												<div class="checkbox">
+												<?php
+													$checked = '';
+													if(!empty($selected_release_student_info_box2) && $selected_release_student_info_box2 == '1')
+															$checked = 'checked';
+												?>
+												<label for="release_student_info_box2">
+													<input type="checkbox" value="1" id="release_student_info_box2" name="release_student_info_box2" <?php echo $checked; ?>>
+														I authorize the release of award letters or other documents to the individual(s) listed below. This permission does not include check pickup. Visit our office for an additional form to grant the release of checks.
+												</label>
+												</div>
 											</div>
 											<div>
 												<p class="small">The Bellevue College Financial Aid Office will release information from your record to the person(s) identified below as an authorized representative. We will not permit the authorized representative to pick up financial aid documents (award letters, etc.) from our office unless specify. Permission to release information is granted for one financial aid year (Summer through Spring quarter). You may cancel this permission at any time by submitting an additional written statement requesting cancellation. Please check appropriate permissions below.</p>
@@ -597,11 +565,13 @@
 												if(!empty($selected_fa_contract_agreement) && $selected_fa_contract_agreement == '1')
 														$checked = 'checked';
 											 ?>
-											<div class="checkbox">
-											  <label for="fa_contract_agreement">
-											    <input type="checkbox" value="1" name="fa_contract_agreement" id="fa_contract_agreement" <?php echo $checked; ?> >
-											    I understand that if I do not follow the financial aid contract it may result in the loss of my financial aid. *
-											  </label>
+											<div class="form-group">
+												<div class="checkbox">
+													<label for="fa_contract_agreement">
+														<input type="checkbox" value="1" name="fa_contract_agreement" id="fa_contract_agreement" <?php echo $checked; ?> >
+														I understand that if I do not follow the financial aid contract it may result in the loss of my financial aid. <strong><span class="text-danger">*</span></strong>
+													</label>
+												</div>
 											</div>
 											<div class="row">
 												<div class="col-xs-12 col-md-6">
@@ -618,7 +588,7 @@
 											<?php if(!empty($email)) echo $email; ?> is the email address on file for you. Communications will be conducted using this email.
 										</div>
 											
-										<input type="submit" value="Submit application" name="submit" class="btn btn-primary" />	
+										<input type="submit" value="Submit application" name="submit" id="submit" class="btn btn-primary" />	
 										
 								</form>
 								<div class="content-padding top-spacing30"></div>
@@ -645,15 +615,151 @@
 
 	<!-- jQuery Validate -->
 	<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-
 	<script type="text/javascript">
-		//Show/hide logic
+		//Required/validation logic
+		$("#financial_aid_application").validate({
+  			rules: {
+    			// simple rule, converted to {required:true}
+    			academic_year: "required",
+				attend_summer: "required",
+				attend_college: "required",
+				hold_college_degree: {
+					required: {
+        				depends: function(element) {
+          					return $("#attend_college_yes").is(":checked");
+        				}
+					}
+				},
+				"type_of_degree[]" : {
+					required: {
+						depends: function(element) {
+          					return $("#hold_college_degree_yes").is(":checked");
+        				}
+					}
+				},
+				program_of_study : "required",
+				third_party_funding : "required",
+				funding_amount : {
+					required: {
+						depends: function(element) {
+          					return $("#third_party_funding_yes").is(":checked");
+        				}
+					}
+				},
+				funding_source : {
+					required: {
+						depends: function(element) {
+          					return $("#third_party_funding_yes").is(":checked");
+        				}
+					}
+				},
+				apply_for_fa : "required",
+				"types_of_loan[]" : {
+					required: {
+						depends: function(element) {
+          					return $("#apply_for_fa_yes").is(":checked");
+        				}
+					}
+				},
+				"require_loan_quarters[]" : {
+					required: {
+						depends: function(element) {
+          					return $("#apply_for_fa_yes").is(":checked");
+        				}
+					}
+				},
+				<?php 
+				foreach($quarters as $key=>$value) {
+				?>
+					anticipated_credits_for_quarter_<?php echo $key; ?> : {
+						required: {
+							depends: function(element) {
+          						return $("#require_loan_quarters_<?php echo $key; ?>").is(":checked");
+        					}
+						}
+					},
+				<?php
+				}
+				?>
+				expected_graduation_date : "required",
+				fa_contract_agreement : "required",
+				signature : "required",
+  			},
+			messages: {
+				academic_year: "Select the academic year.",
+				attend_summer: "Choose if you will attend during the summer.",
+				attend_college: "Choose if you have previously attended college or university.",
+				hold_college_degree : "Choose whether you hold a college degree.",
+				"type_of_degree[]" : "Choose the type(s) of degree(s) you hold.",
+				program_of_study : "Select your intended program of study.",
+				third_party_funding : "Select whether you are receiving scholarship/funding from a third party.",
+				funding_amount : "Enter the funding amount.",
+				funding_source : "Enter additional information about the funding source.",
+				apply_for_fa : "Select if you would like to apply for financial aid loans.",
+				"types_of_loan[]" : "Choose the type(s) of loans you would like to apply for.",
+				"require_loan_quarters[]" : "Select the quarters for which you will require loans.",
+				<?php 
+				foreach($quarters as $key=>$value) {
+				?>
+					anticipated_credits_for_quarter_<?php echo $key; ?> : "Select your anticipated credits for this quarter.",
+				<?php
+				}
+				?>
+				expected_graduation_date : "Select your expected graduation date.",
+				fa_contract_agreement : "You must check that you understand that if you do not follow the financial aid contract it may result in the loss of financial aid.",
+				signature: "Enter your full name as your signature for this application."
+			},
+			highlight : function (element) {
+				$(element).closest('.form-group').addClass('has-error');
+			},
+			unhighlight : function (element) {
+				$(element).closest('.form-group').removeClass('has-error');
+			},
+			showErrors : function (errorMap, errorList) {
+
+        		// summary of number of errors on form
+        		var msg = "<div class='alert alert-danger' role='alert'>Your application form contains errors. See details below.<div>"
+
+				// loop through the errorMap to display the name of the field and the error
+				/*$.each(errorMap, function(key, value) {
+					msg += "<li>" + value + "</li>";
+				});*/
+				
+				$("#errors").html(msg);
+		
+				// also show default labels from errorPlacement callback
+				this.defaultShowErrors(); 
+		
+				// toggle the error summary box
+				if (this.numberOfInvalids() > 0) {
+					$("#errors").show();
+				} else {
+					$("#errors").hide();
+				}
+
+    		},
+			errorElement : 'span',
+			errorClass : 'help-block',
+			errorPlacement : function (error, element) {
+				if (element.parent('.input-group').length) {
+					error.insertAfter(element.parent());
+				} else if (element.parent('.radio') || element.parent('.radio-inline') || element.parent('.checkbox') ) {
+					error.appendTo(element.closest('.form-group')); 
+				} else {
+					error.insertAfter(element);
+				}
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		//Show/hide and dynamic required attribute logic
 		$(document).ready(function () {
 			/******** Hide groups of elements as needed ********/
 			
 			//Check current or pre-selected states
 			if( !$("#attend_college_yes").is(":checked") || $("#attend_college_no").is(":checked") ) { 
 				$("#form_degree_info").addClass("hide");
+				$("#hold_college_degree_yes").prop("required", false);
 			}
 			if( !$("#third_party_funding_yes").is(":checked") || $("#third_party_funding_no").is(":checked") ) { 
 				$("#form_additional_funding_info").addClass("hide");
