@@ -46,17 +46,17 @@
 													If you have submitted all required documents to our office, you can expect to hear from our office between 30-90 days depending on the time of year you applied. 
 													 Check your BC email account often for any important notifications from our office. 
 													<br/>Unsure if you submitted everything?  
-													 Check your financial aid status on the FA portal (<a href='<?php echo $GLOBALS['STATUS_URL'] ?>' > Check Status </a>)
-													 If you missed the filing deadline (<a href='<?php echo $GLOBALS['DEADLINES'] ?>' > Deadlines </a>) for the quarter in which you wish to start receiving financial aid, you must pay your own tuition.
+													 Check your financial aid status on the FA portal (<a href='<?php if(isset($status_url)) echo $status_url; ?>' > Check Status </a>)
+													 If you missed the filing deadline (<a href='<?php if(isset($deadlines)) echo $deadlines; ?>' > Deadlines </a>) for the quarter in which you wish to start receiving financial aid, you must pay your own tuition.
 													 <br/>Contact the Financial Aid office if you have any questions.
 												</div>
 											</p>
 										<?php
 											}
-											else if(!empty($after_submit_message))
+											else if(!empty($error_message))
 											{?>
 												<p>
-											<?php echo $after_submit_message; ?>
+											<?php echo $error_message; ?>
 												</p>
 										<?php
 											}

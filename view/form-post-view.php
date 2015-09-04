@@ -28,7 +28,7 @@ Class Form_Post_View extends Faform_View{
 			}
 			else
 			{
-				$this->template_variables['after_submit_message'] = "An unexpected error occured due to which for did not get saved.";
+				$this->template_variables['error_message'] = "An unexpected error occured due to which for did not get saved.";
 			}
 		}
 		else
@@ -36,7 +36,7 @@ Class Form_Post_View extends Faform_View{
 			if(!empty($validation_form_errors['submit']))
 			{
 				//Form did not get submitted via standard
-				$this->template_variables['after_submit_message'] = "Form did not get submitted.";
+				$this->template_variables['error_message'] = "Error : Form did not get submitted.";
 			}
 			else
 			{
