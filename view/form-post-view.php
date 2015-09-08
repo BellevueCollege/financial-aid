@@ -14,12 +14,12 @@ Class Form_Post_View extends Faform_View{
 		$validation_form_errors = $this->controller->validate_form();		
 		if(empty($validation_form_errors))
 		{
-			$save_form_return_value = $this->model->save_form();			
-			if($save_form_return_value == 'record exists')                            
+			$save_form_return_value = $this->model->save_form();	                        
+			if($save_form_return_value === 'record exists')                            
 			{
                             $this->template_variables['error_message'] = "We already have a record for the selected academic year. You can only submit one application for a particular year.";
                         }
-                        else if($save_form_return_value == true)
+                        else if($save_form_return_value === true)
                         {
 				$academic_year = $this->model->get_academic_year_pv();
 				
@@ -28,9 +28,9 @@ Class Form_Post_View extends Faform_View{
 					
 				 	$year_range = $this->controller->get_academic_year_range($academic_year);				 
 					$this->template_variables['year_range'] = $year_range;					
-				}
+				 }
 			}
-			else if($save_form_return_value == false)
+			else if($save_form_return_value === false)
 			{
 				$this->template_variables['error_message'] = "An unexpected error occured due to which form did not get saved.";
 			}

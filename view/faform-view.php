@@ -15,6 +15,7 @@ Class Faform_View extends Default_View{
 		{				
 				$year_quarter_information = $this->controller->get_academic_year_option_and_values();
 				$already_submitted_app_qtr_ids = $this->controller->already_submitted_application_year();
+                                //var_dump($already_submitted_app_qtr_ids);
 				$this->template_variables["already_submitted_app_qtr_ids"] = $already_submitted_app_qtr_ids;
 				$this->template_variables["year_quarter_information"] = $year_quarter_information;
 				//Quarters

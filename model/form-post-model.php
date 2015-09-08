@@ -218,8 +218,8 @@ function get_submit_pv()
                 $academic_yr = $this->get_academic_year_pv();                
                 // Check if a record already exists for given sid and academic year
                 $check = $this->get_faappid($academic_yr);
-                
-                if(!empty($check))
+                //var_dump($check);
+                if(empty($check))
                 {
 			
 		try{
@@ -319,7 +319,7 @@ function get_submit_pv()
 				echo 'ERROR: ' . $e->getMessage();
 			}
                         
-		return true;
+                    return true;
                 }
                 else
                 {

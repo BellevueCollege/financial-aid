@@ -60,27 +60,32 @@ Class Faform_Controller extends Default_Controller {
 	public function get_all_quarter_options_available()
 	{
 		$quarter_options = $this->model->get_academic_year_quarters();
-
+                //var_dump($quarter_options);
 		$quarters_options_available = array();
 
 		for($i=0;$i<count($quarter_options);$i++) 
 		{
 			$seperate_year_quarters_array = $this->seperate_year_quarters($quarter_options[$i]); //eg: Sum 2015,Fall 2015,Win 2016,Spr 2016
 			$abbreviated_quarters_array = $this->get_quarters_array($seperate_year_quarters_array[1]);
-			
-			for($i=0;$i<count($abbreviated_quarters_array);$i++)
+			$four_quarters = array();
+                        $key = '';
+			for($j=0;$j<count($abbreviated_quarters_array);$j++)
 			{
-
-				$yearQuarterID = $this->model->get_year_quarter_id($abbreviated_quarters_array[$i]);
+                            
+				$yearQuarterID = $this->model->get_year_quarter_id($abbreviated_quarters_array[$j]);
+                                 if(strpos($abbreviated_quarters_array[$j],'Sum')!== FALSE)
+                                         $key = $yearQuarterID['YearQuarterID'];
 				if(!empty($yearQuarterID) && isset($yearQuarterID['YearQuarterID']))
-				{
-					
-					$quarter_string = $this->make_quarter_readable($abbreviated_quarters_array[$i]);					
-					$quarters_options_available[$yearQuarterID['YearQuarterID']] = $quarter_string;
+				{					
+					$quarter_string = $this->make_quarter_readable($abbreviated_quarters_array[$j]);					
+					$four_quarters[$yearQuarterID['YearQuarterID']] = $quarter_string;
 				}
 			}
+                        //var_dump($key);
+                        if(!empty($key) && !empty($four_quarters))
+                                $quarters_options_available[$key] = $four_quarters;
 		}
-		
+		//var_dump($quarters_options_available);
 		return $quarters_options_available;
 	}
 /*
