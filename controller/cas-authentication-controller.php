@@ -63,7 +63,7 @@ class Cas_Authentication{
 	function get_authenticated_username()
 	{
 		if ( ! class_exists( 'phpCAS' ) ) 
-				$this->initialize_cas();
+			$this->initialize_cas();
 		return phpCAS::getUser( );
 	}
 
