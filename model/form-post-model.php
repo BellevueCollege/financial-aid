@@ -214,7 +214,13 @@ function get_submit_pv()
 	{	
 		//var_dump($post);
 		
-		$sid = $this->get_sid();		
+		$sid = $this->get_sid();
+                $academic_yr = $this->get_academic_year_pv();                
+                // Check if a record already exists for given sid and academic year
+                $check = $this->get_faappid($academic_yr);
+                
+                if(!empty($check))
+                {
 			
 		try{
 				$sql_stmt = $this->create_insert_form_data_sql();					
@@ -225,7 +231,8 @@ function get_submit_pv()
 				//var_dump($query);
 				$return_value = $query->fetch(PDO::FETCH_ASSOC);
 				$id = isset($return_value['FAAppID']) ? $return_value['FAAppID'] : null;
-				//var_dump($return_value);				
+				//var_dump($return_value);
+                                //exit();
 				if(!empty($id))
 				{
 
@@ -311,7 +318,14 @@ function get_submit_pv()
 			{
 				echo 'ERROR: ' . $e->getMessage();
 			}
+                        
 		return true;
+                }
+                else
+                {
+                    return 'record exists';
+                }
+                return false;
 	}
 /*
 	Create sql statement for inserting form data into database
@@ -342,9 +356,10 @@ function get_submit_pv()
 							 @AuthRepName2 = :AuthRepName2,
 							 @FAContractAgreement = :FAContractAgreement,
 							 @Signature = :Signature,
-							 @ExpectedGraduatedDate = :ExpectedGraduatedDate
+							 @ExpectedGraduatedDate = :ExpectedGraduatedDate,
+							 @DateSubmitted = :DateSubmitted
 							 ;"; 
-		error_log($sql_stmt);	
+		//error_log($sql_stmt);	
 		return $sql_stmt;
 	}
 /*
@@ -352,6 +367,7 @@ function get_submit_pv()
 */
 	function create_field_value_mapping()
 	{
+		$current_date_time = date('Y-m-d H:i:s');
 		$values = array(':AcademicYrChosen' 		=> $this->academic_year_pv,
 						':AttendedSummer'   		=> $this->attend_summer_pv,
 						':FirstName'				=> $this->first_name,
@@ -374,7 +390,8 @@ function get_submit_pv()
 						':AuthRepName2'				=> $this->auth_rep_name2_pv,
 						':FAContractAgreement'		=> $this->fa_contract_agreement_pv,
 						':Signature'				=> $this->signature_pv,
-						':ExpectedGraduatedDate'	=> $this->expected_graduation_date_pv
+						':ExpectedGraduatedDate'	=> $this->expected_graduation_date_pv,
+						':DateSubmitted'		=> $current_date_time
 					);
 		return $values;
 	}

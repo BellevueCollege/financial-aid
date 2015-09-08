@@ -24,7 +24,9 @@ protected $sid; // logged in user's sid
 
 protected $email; // logged in user's email id
 
+protected $form_url;
 
+const FORM_URI = 'application';
 
 public function __construct($template_uri) {
 	if($this->check_database_config())
@@ -53,7 +55,8 @@ public function __construct($template_uri) {
 	$this->ssn = isset($user_information['SSN']) ? $user_information['SSN'] : null;
 	$this->sid = isset($user_information['SID']) ? $user_information['SID'] : null;
 	$this->email = isset($user_information['Email']) ? $user_information['Email'] : null;
-
+        /* Set form url */
+        $this->set_form_url();
 	}// end of constructor
 
 /*
@@ -443,6 +446,29 @@ function get_faappid($year_quarter_id)
 			}	
 	}
 	return null;
+}
+
+/*
+ * Set form url
+ */
+
+function set_form_url()
+{
+   $request_host = $_SERVER['HTTP_HOST'];
+   $base_uri = $GLOBALS['BASE_URI']; 
+   error_log("host :".$request_host);
+   error_log("uri :".$base_uri);
+   if(!empty($request_host) && !empty($request_host))
+   {
+       $base_uri = trim($base_uri,'/');
+        $url = 'https://' . $request_host . '/'. $base_uri .'/'. self::FORM_URI;
+        $this->form_url = $url;
+   }
+}
+
+function get_form_url()
+{
+    return $this->form_url;
 }
 
 

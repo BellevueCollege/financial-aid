@@ -55,6 +55,9 @@ protected function set_template_variables(){
 		$this->template_variables['status_url'] = $GLOBALS['STATUS_URL'];
 	if(!empty($GLOBALS['DEADLINES']))
 		$this->template_variables['deadlines'] = $GLOBALS['DEADLINES'];
+        $form_url = $this->model->get_form_url();
+        if(!empty($form_url))
+                $this->template_variables['form_url'] = $form_url;
 }
 
 }

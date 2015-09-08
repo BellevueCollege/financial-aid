@@ -14,6 +14,28 @@ define( 'VERSION_NUMBER', '1.0' );
 if(!Default_Model::check_configuration())
 	die("One or more of Config variables are not set.");
 
+$request_host = $_SERVER['HTTP_HOST'];
+$request_uri = $_SERVER['REQUEST_URI'];
+$base_uri = rtrim( $GLOBALS['BASE_URI'] , '/' ) . '/';
+//echo "\n base uri :".$base_uri;
+
+// Check to make sure we are hosted out of the correct directory.
+if ( $base_uri !== substr( $request_uri, 0, strlen( $base_uri ) ) ) {
+	$error_message = 'The BASE_URI constant does not match the requested '
+		. 'URI. Please review the config.php file and set BASE_URI to '
+		. 'the appropriate path'
+	;
+	throw new Exception( $error_message );
+}
+
+// Redirect to HTTPS if the request is made over HTTP.
+if ( ! isset( $_SERVER['HTTPS'] ) ) {
+	$url = 'https://' . $request_host . $request_uri;
+	header( $_SERVER['SERVER_PROTOCOL'] . ' Moved Permanently' );
+	header( 'Location: ' . $url );
+	exit();
+}
+
 
 // Initialize username
 $username = "";
@@ -39,30 +61,6 @@ else
 {
 	die('SSO configuration not valid');
 }
-
-$request_host = $_SERVER['HTTP_HOST'];
-$request_uri = $_SERVER['REQUEST_URI'];
-$base_uri = rtrim( $GLOBALS['BASE_URI'] , '/' ) . '/';
-//echo "\n base uri :".$base_uri;
-
-// Check to make sure we are hosted out of the correct directory.
-if ( $base_uri !== substr( $request_uri, 0, strlen( $base_uri ) ) ) {
-	$error_message = 'The BASE_URI constant does not match the requested '
-		. 'URI. Please review the config.php file and set BASE_URI to '
-		. 'the appropriate path'
-	;
-	throw new Exception( $error_message );
-}
-
-// Redirect to HTTPS if the request is made over HTTP.
-if ( ! isset( $_SERVER['HTTPS'] ) ) {
-	$url = 'https://' . $request_host . $request_uri;
-	header( $_SERVER['SERVER_PROTOCOL'] . ' Moved Permanently' );
-	header( 'Location: ' . $url );
-	exit();
-}
-
-
 
 $application_uri = rtrim(substr( $request_uri, strlen( $base_uri )) , '/' );
 //echo '\n'. $application_uri;

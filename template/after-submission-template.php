@@ -58,6 +58,7 @@
 												<p>
 											<?php echo $error_message; ?>
 												</p>
+                                                                                                <p>Please submit your financial aid form <a href='<?php if(!empty($form_url)) echo $form_url; ?>'>here.</a></p>
 										<?php
 											}
 										?>

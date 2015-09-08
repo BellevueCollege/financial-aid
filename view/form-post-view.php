@@ -9,14 +9,18 @@ Class Form_Post_View extends Faform_View{
 
 
 
-	protected function set_template_variables() {
+	protected function set_template_variables() {                
 		Default_View::set_template_variables();		
 		$validation_form_errors = $this->controller->validate_form();		
 		if(empty($validation_form_errors))
 		{
 			$save_form_return_value = $this->model->save_form();			
-			if($save_form_return_value)
+			if($save_form_return_value == 'record exists')                            
 			{
+                            $this->template_variables['error_message'] = "We already have a record for the selected academic year. You can only submit one application for a particular year.";
+                        }
+                        else if($save_form_return_value == true)
+                        {
 				$academic_year = $this->model->get_academic_year_pv();
 				
 				 if(!empty($academic_year))
@@ -26,9 +30,9 @@ Class Form_Post_View extends Faform_View{
 					$this->template_variables['year_range'] = $year_range;					
 				}
 			}
-			else
+			else if($save_form_return_value == false)
 			{
-				$this->template_variables['error_message'] = "An unexpected error occured due to which for did not get saved.";
+				$this->template_variables['error_message'] = "An unexpected error occured due to which form did not get saved.";
 			}
 		}
 		else
@@ -36,7 +40,7 @@ Class Form_Post_View extends Faform_View{
 			if(!empty($validation_form_errors['submit']))
 			{
 				//Form did not get submitted via standard
-				$this->template_variables['error_message'] = "Error : Form did not get submitted.";
+				$this->template_variables['error_message'] = "This is an unexpected situation. Form did not get saved.";
 			}
 			else
 			{
