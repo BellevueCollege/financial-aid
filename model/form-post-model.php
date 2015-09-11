@@ -214,7 +214,7 @@ function get_submit_pv()
 	{	
 		//var_dump($post);
 		
-		$sid = $this->get_sid();
+		//$sid = $this->get_sid();
                 $academic_yr = $this->get_academic_year_pv();                
                 // Check if a record already exists for given sid and academic year
                 $check = $this->get_faappid($academic_yr);
@@ -248,16 +248,14 @@ function get_submit_pv()
 								$anticipated_credits_for_quarter = $this->anticipated_credits_for_quarter_pv[$this->require_loan_quarters_pv[$i]] ;
 							}
 							$sql_stmt = "EXEC dbo.usp_InsertQuartersRequiringLoan 
-											@FAAppID = :FAAppID,
-											@SID = :SID,
+											@FAAppID = :FAAppID,											
 											@YearQuarterID = :YearQuarterID,
 											@CreditID = :CreditID
 										";
-							$values = array(':FAAppID' 			=> $id,
-											':SID' 	   			=> $sid,
-											':YearQuarterID' 	=> $this->require_loan_quarters_pv[$i],
-											':CreditID'			=> $anticipated_credits_for_quarter
-										   );
+                                                    $values = array(':FAAppID' 		=> $id,											
+                                                                    ':YearQuarterID' 	=> $this->require_loan_quarters_pv[$i],
+                                                                    ':CreditID'		=> $anticipated_credits_for_quarter
+                                                                    );
 							$query = $this->database_connection->prepare($sql_stmt); 
 							//var_dump($values);
 							$query->execute($values);
@@ -272,14 +270,11 @@ function get_submit_pv()
 						for($i=0;$i<count($this->type_of_degree_pv);$i++)
 						{						
 							$sql_stmt = "EXEC dbo.usp_InsertTypeofDegreeHeld 
-											@FAAppID = :FAAppID,
-											@SID = :SID,
-											@TypeofDegree = :TypeofDegree
-											
+											@FAAppID = :FAAppID,											
+											@TypeofDegree = :TypeofDegree											
 										";
-							$values = array(':FAAppID' 			=> $id,
-											':SID' 	   			=> $sid,
-											':TypeofDegree' 	=> 	$this->type_of_degree_pv[$i]								
+							$values = array(':FAAppID' 		=> $id,											
+									':TypeofDegree' 	=> $this->type_of_degree_pv[$i]								
 										   );
 							$query = $this->database_connection->prepare($sql_stmt); 
 							//var_dump($values);
@@ -294,14 +289,13 @@ function get_submit_pv()
 						for($i=0;$i<count($this->types_of_loan_pv);$i++)
 						{						
 							$sql_stmt = "EXEC dbo.usp_InsertTypeofLoanRequested 
-											@FAAppID = :FAAppID,
-											@SID = :SID,
+											@FAAppID = :FAAppID,											
 											@TypeofLoan = :TypeofLoan
 											
 										";
-							$values = array(':FAAppID' 			=> $id,
-											':SID' 	   			=> $sid,
-											':TypeofLoan' 		=> $this->types_of_loan_pv[$i]								
+							$values = array(':FAAppID' 	=> $id,
+											
+									':TypeofLoan' 	=> $this->types_of_loan_pv[$i]								
 										   );
 							$query = $this->database_connection->prepare($sql_stmt); 
 							//var_dump($values);
