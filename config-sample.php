@@ -21,7 +21,7 @@ $GLOBALS['DATABASE_USER'] = ''; // Username to connect to data source
 $GLOBALS['DATABASE_PASSWORD'] = ''; // Password to connect to data source
 
 /**/
-$GLOBALS['BASE_URI'] = ''; // eg: /financial-aid
+$GLOBALS['BASE_URI'] = ''; // This is the directory in which all the application files are located, eg: /financial-aid
 
 /*Globals configuration*/
 $GLOBALS['GLOBALS_PATH'] = '';// File system path where the library globals can be found
