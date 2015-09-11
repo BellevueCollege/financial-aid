@@ -53,7 +53,12 @@ if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "CAS")
 		$cas_controller->authenticate();
 	}
 
-	$username = $cas_controller->get_authenticated_username();
+	$username = $cas_controller->get_authenticated_username();       
+        // logout if desired
+        if (isset($_REQUEST['logout'])) {
+               $cas_controller->logout();
+        }
+       
 	$_SESSION["FA_USERNAME"] = $username;		
 		
 }
@@ -101,3 +106,4 @@ switch ($application_uri) {
 
 
 ?>
+
