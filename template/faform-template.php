@@ -92,7 +92,22 @@
 								<?php
 								}
 								?>	
-								</div>							
+								</div>			
+								
+								<div class="col-md-4 col-xs-12 pull-right">
+									<div class="alert alert-info">
+										<h4>
+											<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $first_name." ".$last_name; ?>
+											&nbsp;&nbsp;<small>Not <?php echo $first_name; ?>? <a href="?logout=">Log out</a>.</small>
+										</h4>
+										<p>
+											<strong>Email:</strong> <?php if(!empty($email)) echo $email; ?>
+										</p>
+										<?php if (!$ssn) { ?>
+											<p><em>Note:</em> You do not have an SSN on record. Contact Admissions to provide them your SSN.</p>
+										<?php } ?>
+									</div>
+								</div>				
 								<form id="financial_aid_application" name="financial_aid_application" action="<?php if(!empty($form_post_url)) echo $form_post_url ; ?>" method="post">									
 
 									<?php //var_dump($already_submitted_app_qtr_ids); ?>
@@ -507,7 +522,7 @@
 										<fieldset>
 											<legend>Information Release</legend>
 											
-											<div class="alert alert-info"><!-- Information release description -->
+											<div class="alert alert-warning"><!-- Information release description -->
 												<strong>This section is optional.</strong> Only complete this section if you wish to 
 												allow an authorized representative to access your financial aid information. Commonly this 
 												would be a parent, guardian, or relative.
@@ -582,10 +597,6 @@
 												</div>
 											</div>
 										</fieldset>	
-										<div class="alert alert-info">
-											<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-											<?php if(!empty($email)) echo $email; ?> is the email address on file for you. Communications will be conducted using this email.
-										</div>
 											
 										<input type="submit" value="Submit application" name="submit" id="submit" class="btn btn-primary" />	
 									</div>	

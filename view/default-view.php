@@ -32,6 +32,8 @@ protected function set_template_variables(){
 		$this->template_variables['globals_url'] = $GLOBALS['GLOBALS_URL'];	
 	$this->template_variables['template_uri'] = $this->model->get_template_uri();
 	$this->template_variables['email'] = $this->model->get_email();
+	$this->template_variables['first_name'] = $this->model->get_first_name();
+	$this->template_variables['last_name'] = $this->model->get_last_name();
 	
 	$ssn = $this->model->get_ssn();
 	if(!empty($ssn))
