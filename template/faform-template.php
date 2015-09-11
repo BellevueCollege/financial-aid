@@ -38,13 +38,6 @@
 			margin-left: 1em;
 			margin-top: 0;
 		}
-		
-		.required {
-			
-		}
-		.show {
-			display: 
-		}
 		.hide {
 			display: none;
 		}
@@ -102,6 +95,7 @@
 								</div>							
 								<form id="financial_aid_application" name="financial_aid_application" action="<?php if(!empty($form_post_url)) echo $form_post_url ; ?>" method="post">									
 
+									<?php //var_dump($already_submitted_app_qtr_ids); ?>
 									<fieldset>
 										<legend>Academic Year</legend>
 										
@@ -112,6 +106,10 @@
 											{
 												foreach($year_quarter_information as $key=>$value)
 												{
+													$has_submitted = $already_submitted_app_qtr_ids[$key];
+													$disabled = '';
+													//if ( $has_submitted )
+														//$disabled = 'disabled';
 													$checked = '';
 													if(!empty($selected_academic_year) && $selected_academic_year == $key)				
 														$checked = 'checked';
@@ -119,7 +117,7 @@
 											?>
 													<div class="radio">
 														<label for="academic_year_<?php echo $key ;?>">
-															<input type="radio" name="academic_year" id="academic_year_<?php echo $key; ?>" value="<?php echo $key; ?>" <?php  echo $checked; ?> required /> 
+															<input type="radio" name="academic_year" id="academic_year_<?php echo $key; ?>" value="<?php echo $key; ?>" <?php  echo $checked; ?> <?php echo $disabled; ?> required /> 
 															<?php echo $value; ?>
 														</label>
 													</div>
@@ -128,7 +126,9 @@
 											}
 										?>
 										</div>	
-										
+									</fieldset>
+									<div id="form_remainder">	
+									<fieldset>
 										<?php
 											$checked_one = '' ; $checked_zero = '';
 											if(isset($selected_attend_summer) )
@@ -371,7 +371,7 @@
 												<?php
 													if(!empty($types_of_loan))
 													{
-														foreach ( $types_of_loan as $loan_type ) //$i=0;$i<count($types_of_loan);$i++)
+														foreach ( $types_of_loan as $loan_type ) 
 														{
 															$loan_type_id = $loan_type['LoanTypeID'];
 															$loan_type_name = $loan_type['LoanType'];
@@ -400,71 +400,82 @@
 											<div id="form_require_loans">
 												<!-- Show/Hide quarter depending on the Year selected -->
 												<label><strong>Choose the quarters you will require loans for: <span class="text-danger">*</span></strong></label>
-												<div class="form-group">
+												
 												<?php
 													//var_dump($selected_anticipated_credits_for_quarter);
+													//var_dump($quarters);
 													if(!empty($quarters))
 													{
-														foreach($quarters as $key=>$value)
+														foreach($quarters as $ac_year=>$acy_quarters)
 														{
-															$checked = '';
-															if(!empty($selected_require_loan_quarters) && is_array($selected_require_loan_quarters))
-															{
-																if(in_array($key, $selected_require_loan_quarters))
-																	$checked = 'checked';
-															}
-												?>
-															<div class="row">
-																<div class="col-md-2 col-xs-6">
-																	<div class="checkbox">
-																		<label for="require_loan_quarters_<?php echo $key; ?>">
-																			<input type="checkbox" id="require_loan_quarters_<?php echo $key; ?>" name="require_loan_quarters[]" value="<?php echo $key; ?>" <?php echo $checked; ?> />
-																			<?php echo $value; ?>
-																		</label>
-																	</div>
-																</div>
-																<div class="col-md-3 col-xs-6">
-																	<div id="anticipated_credits_<?php echo $key; ?>">
-																	<?php
-																	if(!empty($credit_options))
+														?>
+															<div id="form_quarters_<?php echo $ac_year; ?>" class="quarters-container">
+															<?php
+																foreach($acy_quarters as $key=>$value) {
+																	$checked = '';
+																	if(!empty($selected_require_loan_quarters) && is_array($selected_require_loan_quarters))
 																	{
-																	?>
-																		<div class="form-group">
-																			<select name="anticipated_credits_for_quarter_<?php echo $key; ?>" id="anticipated_credits_for_quarter_<?php echo $key; ?>" class="form-control input-sm">
-																				<option value="">Select anticipated credits for quarter...</option>
-																			<?php
-																				for($i=0;$i<count($credit_options);$i++)
-																				{
-																					$credit_option_id = $credit_options[$i]['CreditID'];
-																					$credit_option_value = $credit_options[$i]['Credit']; 
-																					$selected = '';
-																					if(!empty($credit_options[$i]) && isset($credit_option_id) && isset($credit_option_value))
-																					{
-																						if(!empty($selected_anticipated_credits_for_quarter) && is_array($selected_anticipated_credits_for_quarter) && isset($selected_anticipated_credits_for_quarter[$key]))
-																						{
-																							if($selected_anticipated_credits_for_quarter[$key] == $credit_option_id) {
-																								$selected = 'selected';
-																							}
-																						}
-																			?>
-																					<option value="<?php echo $credit_option_id; ?>" <?php echo $selected; ?>><?php echo $credit_option_value; ?></option>
-																			<?php
-																					}
-																				}
-																			?>
-																			</select>
-																		</div>
-																	<?php
+																		if(in_array($key, $selected_require_loan_quarters))
+																			$checked = 'checked';
 																	}
-																	?>
-																</div>
+															?>
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-md-2 col-xs-6">
+																				<div class="checkbox">
+																					<label for="require_loan_quarters_<?php echo $ac_year; ?>_<?php echo $key; ?>">
+																						<input type="checkbox" id="require_loan_quarters_<?php echo $ac_year; ?>_<?php echo $key; ?>" name="require_loan_quarters[]" value="<?php echo $key; ?>" <?php echo $checked; ?> />
+																						<?php echo $value; ?>
+																					</label>
+																				</div>
+																			</div>
+																			<div class="col-md-3 col-xs-6">
+																				<div id="anticipated_credits_<?php echo $ac_year; ?>_<?php echo $key; ?>">
+																					<?php
+																					//var_dump($credit_options);
+																					if(!empty($credit_options))
+																					{
+																					?>
+																						<div class="form-group">
+																							<select name="anticipated_credits_for_quarter_<?php echo $key; ?>" id="anticipated_credits_for_quarter_<?php echo $ac_year; ?>_<?php echo $key; ?>" class="form-control input-sm">
+																								<option value="">Select anticipated credits for quarter...</option>
+																							<?php
+																								for($i=0;$i<count($credit_options);$i++)
+																								{
+																									$credit_option_id = $credit_options[$i]['CreditID'];
+																									$credit_option_value = $credit_options[$i]['Credit']; 
+																									$selected = '';
+																									if(!empty($credit_options[$i]) && isset($credit_option_id) && isset($credit_option_value))
+																									{
+																										if(!empty($selected_anticipated_credits_for_quarter) && is_array($selected_anticipated_credits_for_quarter) && isset($selected_anticipated_credits_for_quarter[$key]))
+																										{
+																											if($selected_anticipated_credits_for_quarter[$key] == $credit_option_id) {
+																												$selected = 'selected';
+																											}
+																										}
+																							?>
+																									<option value="<?php echo $credit_option_id; ?>" <?php echo $selected; ?>><?php echo $credit_option_value; ?></option>
+																							<?php
+																									}
+																								}
+																							?>
+																							</select>
+																						</div>
+																					<?php
+																					}
+																					?>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																<?php 
+																}
+																?>
 															</div>
-														</div>
 												<?php
 														}
 													}
 												?>
-												</div>
 											</div>
 										</div>
 										<div class="row">
@@ -535,6 +546,8 @@
 												<div class="col-xs-12 col-md-6">
 													<div class="form-group">
 														<label for="auth_rep_name1"><strong>Authorized representative's name</strong></label>
+														<?php //echo "Rep name: " . $selected_auth_rep_name1; ?>
+														<?php //echo "<br />Rep name2: " . $selected_auth_rep_name2; ?>
 														<input type="text" name="auth_rep_name1" id="auth_rep_name1" class="form-control" maxlength="50" value="<?php if(isset($selected_auth_rep_name1)) echo $selected_auth_rep_name1; ?>">
 													</div>
 													<div class="form-group">
@@ -546,20 +559,6 @@
 										</fieldset>
 										<fieldset>
 											<legend>Sign and Finish</legend>
-											<!--<div class="form-group">
-												I understand that if I do not follow the financial aid contract it may result in the loss of my financial aid. *
-											</div>-->
-											
-											<?php 
-												/*$checked = '';
-												if(!empty($selected_fa_contract_agreement) && $selected_fa_contract_agreement == '1')
-														$checked = 'checked'; */
-											 ?>
-											<!--<div class="checkbox">
-											  <label>
-											    <input type="checkbox" value="1" name='fa_contract_agreement' <?php //echo $checked; ?>>
-											    	I agree
-											  </label>-->
 											<?php 
 												$checked = '';
 												if(!empty($selected_fa_contract_agreement) && $selected_fa_contract_agreement == '1')
@@ -589,7 +588,7 @@
 										</div>
 											
 										<input type="submit" value="Submit application" name="submit" id="submit" class="btn btn-primary" />	
-										
+									</div>	
 								</form>
 								<div class="content-padding top-spacing30"></div>
 							</div>
@@ -669,16 +668,18 @@
 					}
 				},
 				<?php 
-				foreach($quarters as $key=>$value) {
+				foreach( $quarters as $ac_year=>$acy_quarters) {
+					foreach($acy_quarters as $key=>$value) {
 				?>
-					anticipated_credits_for_quarter_<?php echo $key; ?> : {
-						required: {
-							depends: function(element) {
-          						return $("#require_loan_quarters_<?php echo $key; ?>").is(":checked");
-        					}
-						}
-					},
+						anticipated_credits_for_quarter_<?php echo $key; ?> : {
+							required: {
+								depends: function(element) {
+									return ( ($("input:radio[name='academic_year']:checked").val() === "<?php echo $ac_year; ?>") && $("#require_loan_quarters_<?php echo $ac_year; ?>_<?php echo $key; ?>").is(":checked") );
+								}
+							}
+						},
 				<?php
+					}
 				}
 				?>
 				expected_graduation_date : "required",
@@ -699,10 +700,12 @@
 				"types_of_loan[]" : "Choose the type(s) of loans you would like to apply for.",
 				"require_loan_quarters[]" : "Select the quarters for which you will require loans.",
 				<?php 
-				foreach($quarters as $key=>$value) {
+				foreach( $quarters as $ac_year=>$acy_quarters) {
+					foreach($acy_quarters as $key=>$value) {
 				?>
-					anticipated_credits_for_quarter_<?php echo $key; ?> : "Select your anticipated credits for this quarter.",
+						anticipated_credits_for_quarter_<?php echo $key; ?> : "Select your anticipated credits for <?php echo $value; ?>.",
 				<?php
+					}
 				}
 				?>
 				expected_graduation_date : "Select your expected graduation date.",
@@ -757,6 +760,9 @@
 			/******** Hide groups of elements as needed ********/
 			
 			//Check current or pre-selected states
+			if( !$("[name='academic_year']").is(":checked") ) {
+				$("#form_remainder").removeClass("hide").addClass("hide");
+			}
 			if( !$("#attend_college_yes").is(":checked") || $("#attend_college_no").is(":checked") ) { 
 				$("#form_degree_info").addClass("hide");
 				$("#hold_college_degree_yes").prop("required", false);
@@ -769,20 +775,50 @@
 			}
 	
 			<?php 
-				foreach($quarters as $key=>$value) {
+				foreach($quarters as $ac_year=>$acy_quarters) {
 			?>
-					if( !$("#require_loan_quarters_<?php echo $key; ?>").is(":checked") ) {
-						$("#anticipated_credits_<?php echo $key; ?>").addClass("hide"); 
+					if ( $("[name='academic_year']:checked").val() !== "<?php echo $ac_year; ?>") {
+						$("#form_quarters_<?php echo $ac_year; ?>").removeClass("hide").addClass("hide");
 					}
-					$("#require_loan_quarters_<?php echo $key; ?>").on("touchend click", function() {
-   						if($(this).is(":checked")) { $("#anticipated_credits_<?php echo $key; ?>").removeClass("hide"); }
-						if(!$(this).is(":checked")) { $("#anticipated_credits_<?php echo $key; ?>").removeClass("hide").addClass("hide"); } 
-					});
+			<?php 
+					foreach($acy_quarters as $key=>$value) {
+			?>
+						if( ($("[name='academic_year']:checked").val() !== "<?php echo $ac_year; ?>") || !$("#require_loan_quarters_<?php echo $ac_year; ?>_<?php echo $key; ?>").is(":checked") ) {
+							$("#anticipated_credits_<?php echo $ac_year; ?>_<?php echo $key; ?>").removeClass("hide").addClass("hide"); 
+						}
+						if( $("[name='academic_year']:checked").val() === "<?php echo $ac_year; ?>" && $("#require_loan_quarters_<?php echo $ac_year; ?>_<?php echo $key; ?>").is(":checked") ) {
+							$("#anticipated_credits_<?php echo $ac_year; ?>_<?php echo $key; ?>").removeClass("hide");
+						}
+						$("#require_loan_quarters_<?php echo $ac_year; ?>_<?php echo $key; ?>").on("touchend click", function() {
+							if($(this).is(":checked")) { $("#anticipated_credits_<?php echo $ac_year; ?>_<?php echo $key; ?>").removeClass("hide"); }
+							if(!$(this).is(":checked")) { $("#anticipated_credits_<?php echo $ac_year; ?>_<?php echo $key; ?>").removeClass("hide").addClass("hide"); } 
+						});
 			<?php
+					}
 				}
 			?>
 			
-			//check changing states
+			// check changing states
+			$("[name='academic_year']").on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_remainder").removeClass("hide"); }
+			});
+			$("[name='academic_year']").on("change", function() {
+				var year = $("[name='academic_year']:checked").val();
+				$(".quarters-container").removeClass("hide").addClass("hide");
+				$("#form_quarters_" + year).removeClass("hide");
+				<?php 
+					foreach($quarters as $ac_year=>$acy_quarters) {
+						foreach($acy_quarters as $key=>$value) {
+				?> 
+							if( year === "<?php echo $ac_year; ?>" && $("#require_loan_quarters_<?php echo $ac_year; ?>_<?php echo $key; ?>").is(":checked") ) {
+								$("#anticipated_credits_<?php echo $ac_year; ?>_<?php echo $key; ?>").removeClass("hide");
+							}
+				<?php
+						}
+					}
+				?>
+			});
+
 			$("#attend_college_no").on("touchend click", function() {
    				if($(this).is(":checked")) { $("#form_degree_info").removeClass("hide").addClass("hide"); }
 			});
@@ -793,7 +829,7 @@
    				if($(this).is(":checked")) { $("#form_loan_info").removeClass("hide").addClass("hide"); }
 			});
 
-			/******** Show groups of elements as needed ********/
+			// show groups of elements as needed
 			$("#attend_college_yes").on("touchend click", function() {
    				if($(this).is(":checked")) { $("#form_degree_info").removeClass("hide"); }
 			});
