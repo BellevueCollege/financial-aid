@@ -339,12 +339,15 @@
 											<div class="row">
 												<div class="col-xs-12 col-md-6">
 													<div class="form-group">
-														<label for="funding_amount"><strong>Funding amount</strong> <span class="text-danger">*</span></strong></label> 
-														<input type="text" name="funding_amount" id="funding_amount" class="form-control" value="<?php if(!empty($selected_funding_amount) ) echo $selected_funding_amount; ?>" />
+														<label for="funding_amount"><strong>Funding amount</strong> <span class="text-danger">*</span></strong></label>
+														<div class="input-group"> 
+															<span class="input-group-addon">$</span>
+															<input type="text" pattern="\d*" name="funding_amount" id="funding_amount" class="form-control" maxlength="<?php echo $funding_amount_length; ?>" value="<?php if(!empty($selected_funding_amount) ) echo $selected_funding_amount; ?>" />
+														</div>
 													</div>
 													<div class="form-group">
 														<label for="funding_source"><strong>Other funding source? Please explain. <span class="text-danger">*</span></strong></strong></label>
-														<textarea name="funding_source" id="funding_source" class="form-control" rows="3"><?php if(!empty($selected_funding_source)) echo $selected_funding_source; ?></textarea>
+														<textarea name="funding_source" id="funding_source" class="form-control" rows="3" maxlength="<?php echo $funding_source_length; ?>" placeholder="Maximum length of <?php echo $funding_source_length; ?> characters"><?php if(!empty($selected_funding_source)) echo $selected_funding_source; ?></textarea>
 													</div>
 												</div>
 											</div>
@@ -563,11 +566,11 @@
 														<label for="auth_rep_name1"><strong>Authorized representative's name</strong></label>
 														<?php //echo "Rep name: " . $selected_auth_rep_name1; ?>
 														<?php //echo "<br />Rep name2: " . $selected_auth_rep_name2; ?>
-														<input type="text" name="auth_rep_name1" id="auth_rep_name1" class="form-control" maxlength="50" value="<?php if(isset($selected_auth_rep_name1)) echo $selected_auth_rep_name1; ?>">
+														<input type="text" name="auth_rep_name1" id="auth_rep_name1" class="form-control" maxlength="<?php echo $auth_rep_name_length; ?>" value="<?php if(isset($selected_auth_rep_name1)) echo $selected_auth_rep_name1; ?>">
 													</div>
 													<div class="form-group">
 														<label for="auth_rep_name2"><strong>Authorized representative's name</strong></label>
-														<input type="text" name="auth_rep_name2" id="auth_rep_name2" class="form-control" maxlength="50" value="<?php if(isset($selected_auth_rep_name2)) echo $selected_auth_rep_name2; ?>">
+														<input type="text" name="auth_rep_name2" id="auth_rep_name2" class="form-control" maxlength="<?php echo $auth_rep_name_length; ?>" value="<?php if(isset($selected_auth_rep_name2)) echo $selected_auth_rep_name2; ?>">
 													</div>
 												</div>
 											</div>
@@ -591,7 +594,7 @@
 												<div class="col-xs-12 col-md-6">
 													<div class="form-group">
 														<label for="signature"><strong>Name <span class="text-danger" title="Required field">*</span></strong></label> 
-														<input type="text" name="signature" id="signature" class="form-control" maxlength="150" aria-describedby="sig_help_block" value="<?php if(isset($selected_signature)) echo $selected_signature; ?>">
+														<input type="text" name="signature" id="signature" class="form-control" maxlength="<?php echo $signature_length; ?>" aria-describedby="sig_help_block" value="<?php if(isset($selected_signature)) echo $selected_signature; ?>">
 														<span id="sig_help_block" class="help-block small">Type your full name as your signature for this application.</span>
 													</div>
 												</div>
@@ -654,7 +657,8 @@
 						depends: function(element) {
           					return $("#third_party_funding_yes").is(":checked");
         				}
-					}
+					},
+					number: true
 				},
 				funding_source : {
 					required: {
@@ -705,7 +709,10 @@
 				"type_of_degree[]" : "Choose the type(s) of degree(s) you hold.",
 				program_of_study : "Select your intended program of study.",
 				third_party_funding : "Select whether you are receiving scholarship/funding from a third party.",
-				funding_amount : "Enter the funding amount.",
+				funding_amount : {
+					required: "Enter the funding amount.",
+					number: "The funding amount must be a valid number."
+				},
 				funding_source : "Enter additional information about the funding source.",
 				apply_for_fa : "Select if you would like to apply for financial aid loans.",
 				"types_of_loan[]" : "Choose the type(s) of loans you would like to apply for.",
