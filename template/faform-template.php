@@ -30,11 +30,9 @@
 			margin-left: .6em;
 		}
 		ol {
-			/*border: 1px solid blue;*/
 			margin: 1em 0 1em 0;
 		}
 		ol ul {
-			/*border: 1px solid red;*/
 			margin-left: 1em;
 			margin-top: 0;
 		}
