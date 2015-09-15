@@ -93,7 +93,9 @@
 								}
 								?>	
 								</div>			
-								
+								<noscript>
+									<div class="alert alert-warning">This form works best if JavaScript is enabled. <a href="http://enable-javascript.com/">Learn how to enable JavaScript</a>.</div>
+								</noscript>
 								<div class="col-md-4 col-xs-12 pull-right">
 									<div class="alert alert-info">
 										<h4>
@@ -600,7 +602,7 @@
 												</div>
 											</div>
 										</fieldset>	
-											
+										<p></p>
 										<input type="submit" value="Submit application" name="submit" id="submit" class="btn btn-primary" />	
 									</div>	
 								</form>
@@ -632,7 +634,6 @@
 		//Required/validation logic
 		$("#financial_aid_application").validate({
   			rules: {
-    			// simple rule, converted to {required:true}
     			academic_year: "required",
 				attend_summer: "required",
 				attend_college: "required",
@@ -738,14 +739,8 @@
 			},
 			showErrors : function (errorMap, errorList) {
 
-        		// summary of number of errors on form
-        		var msg = "<div class='alert alert-danger' role='alert'>Your application form contains errors. See details below.<div>"
-
-				// loop through the errorMap to display the name of the field and the error
-				/*$.each(errorMap, function(key, value) {
-					msg += "<li>" + value + "</li>";
-				});*/
-				
+        		// output summary error message
+        		var msg = "<div class='alert alert-danger' role='alert'>Your application form contains errors. See details below.<div>"				
 				$("#errors").html(msg);
 		
 				// also show default labels from errorPlacement callback
@@ -846,8 +841,6 @@
 			$("#apply_for_fa_no").on("touchend click", function() {
    				if($(this).is(":checked")) { $("#form_loan_info").removeClass("hide").addClass("hide"); }
 			});
-
-			// show groups of elements as needed
 			$("#attend_college_yes").on("touchend click", function() {
    				if($(this).is(":checked")) { $("#form_degree_info").removeClass("hide"); }
 			});
