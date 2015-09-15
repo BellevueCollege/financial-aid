@@ -14,7 +14,8 @@ Class Form_Post_View extends Faform_View{
 		$validation_form_errors = $this->controller->validate_form();		
 		if(empty($validation_form_errors))
 		{
-			$save_form_return_value = $this->model->save_form();	                        
+			$save_form_return_value = $this->model->save_form();	
+                        //var_dump($save_form_return_value);
 			if($save_form_return_value === 'record exists')                            
 			{
                             $this->template_variables['error_message'] = "We already have a record for the selected academic year. You can only submit one application for a particular year.";

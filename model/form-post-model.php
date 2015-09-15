@@ -327,12 +327,7 @@ function get_submit_pv()
 	{
 		$sql_stmt = "EXEC dbo.usp_InsertFAFormData
 							 @AcademicYrChosen = :AcademicYrChosen,
-							 @AttendedSummer = :AttendedSummer,
-							 @FirstName = :FirstName,
-							 @LastName = :LastName,
-							 @DOB = :DOB,
-							 @Phone = :Phone,
-							 @SSN = :SSN,
+							 @AttendedSummer = :AttendedSummer,							 
 							 @SID = :SID,
 							 @Email = :Email,
 							 @AttendedCollege = :AttendedCollege,
@@ -356,17 +351,18 @@ function get_submit_pv()
 	}
 /*
 	Create a mapping of column field (in database) and its value to be stored
+ *      We are no longer saving FirstName, LastName, DOB, Phone, SSN information.
 */
 	function create_field_value_mapping()
 	{
 		$current_date_time = date('Y-m-d H:i:s');
 		$values = array(':AcademicYrChosen' 		=> $this->academic_year_pv,
 						':AttendedSummer'   		=> $this->attend_summer_pv,
-						':FirstName'				=> $this->first_name,
-						':LastName'					=> $this->last_name,
-						':DOB'						=> $this->dob,
-						':Phone'					=> $this->phone,
-						':SSN'						=> $this->ssn,
+//						':FirstName'				=> $this->first_name,
+//						':LastName'					=> $this->last_name,
+//						':DOB'						=> $this->dob,
+//						':Phone'					=> $this->phone,
+//						':SSN'						=> $this->ssn,
 						':SID'						=> $this->sid,
 						':Email'					=> $this->email,
 						':AttendedCollege'			=> $this->attend_college_pv,
