@@ -94,7 +94,11 @@ function set_post_variables($post)
 	}else{ $post['auth_rep_name2'] = null; }
 	
 	$this->fa_contract_agreement_pv = (isset($post['fa_contract_agreement'])  && !is_null($post['fa_contract_agreement'])) ? $post['fa_contract_agreement'] : null;
-	$this->signature_pv = (!empty($post['signature'])) ? $post['signature'] : null;
+        if(!empty($post['signature']) && $this->check_only_spaces_string($post['signature']))
+	{
+		$this->signature_pv = $post['signature'];
+	}else{ $post['signature'] = null; }
+	//$this->signature_pv = (!empty($post['signature'])) ? $post['signature'] : null;
 	$this->submit_pv = (isset($post['submit']) && !is_null($post['submit'])) ? $post['submit'] : null;
 
 }
