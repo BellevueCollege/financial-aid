@@ -119,12 +119,16 @@
 										<?php 
 											if(!empty($year_quarter_information))
 											{
+												$ac_submitted = array();
+												//var_dump($already_submitted_app_qtr_ids);
 												foreach($year_quarter_information as $key=>$value)
 												{
 													$has_submitted = $already_submitted_app_qtr_ids[$key];
-													$disabled = '';
-													//if ( $has_submitted )
-														//$disabled = 'disabled';
+													if ( isset($has_submitted) && $has_submitted ) {
+														$ac_submitted[] = $value; 
+														continue;
+													}
+													
 													$checked = '';
 													if(!empty($selected_academic_year) && $selected_academic_year == $key)				
 														$checked = 'checked';
@@ -132,12 +136,30 @@
 											?>
 													<div class="radio">
 														<label for="academic_year_<?php echo $key ;?>">
-															<input type="radio" name="academic_year" id="academic_year_<?php echo $key; ?>" value="<?php echo $key; ?>" <?php  echo $checked; ?> <?php echo $disabled; ?> required /> 
+															<input type="radio" name="academic_year" id="academic_year_<?php echo $key; ?>" value="<?php echo $key; ?>" <?php  echo $checked; ?> required /> 
 															<?php echo $value; ?>
 														</label>
 													</div>
 											<?php
 												}
+												
+												if ( !empty($ac_submitted) ) {
+												?>
+													<span id="academic_year_help_block" class="help-block small">
+														You have already submitted applications for the following academic year(s). 
+														If you have questions about a previous application, <a href="https://fa.bellevuecollege.edu/contact">contact the Financial Aid Office</a>.
+														<ul style="margin-top: 0; padding-left: .5em;">
+												<?php
+													foreach($ac_submitted as $ay ) {
+												?>
+															<li><?php echo $ay; ?></li>
+												<?php
+													}
+												?>
+														</ul>
+													</span>
+												<?php
+												}	
 											}
 										?>
 										</div>	
