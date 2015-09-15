@@ -83,12 +83,12 @@ function set_post_variables($post)
 	$this->expected_graduation_date_pv = (!empty($post['expected_graduation_date'])) ? $post['expected_graduation_date'] : null;
 	$this->release_student_info_box1_pv = (!empty($post['release_student_info_box1'])) ? $post['release_student_info_box1'] : null;
 	$this->release_student_info_box2_pv = (!empty($post['release_student_info_box2'])) ? $post['release_student_info_box2'] : null;
-	if(!empty($post['auth_rep_name1']) && !($this->check_only_spaces_string($post['auth_rep_name1'])))
+	if(!empty($post['auth_rep_name1']) && $this->check_only_spaces_string($post['auth_rep_name1']))
 	{
 		$this->auth_rep_name1_pv = $post['auth_rep_name1'];
 	}else{ $post['auth_rep_name1'] = null; }
 
-	if(!empty($post['auth_rep_name2']) && !($this->check_only_spaces_string($post['auth_rep_name2'])))
+	if(!empty($post['auth_rep_name2']) && $this->check_only_spaces_string($post['auth_rep_name2']))
 	{
 		$this->auth_rep_name2_pv = $post['auth_rep_name2'];
 	}else{ $post['auth_rep_name2'] = null; }
@@ -211,9 +211,7 @@ function get_submit_pv()
 	Save form to the database.
 */
 	function save_form()
-	{	
-		//var_dump($post);
-		
+	{			
 		//$sid = $this->get_sid();
                 $academic_yr = $this->get_academic_year_pv();                
                 // Check if a record already exists for given sid and academic year

@@ -138,7 +138,6 @@ public function __construct($template_uri) {
 
 function check_only_spaces_string($input)
 {
-
 	if (strlen(trim($input)) == 0) {
 	    return false;// "String is empty.\n";
 	}
