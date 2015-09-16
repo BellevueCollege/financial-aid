@@ -13,7 +13,6 @@ Financial-Aid application provides user to apply for financial aid by allowing t
 * You must have PHP version > 5.3
 * Make sure the application user account has access to the database, tables and stored procedure's.
 
-
 # Acceptance Criteria
 
 * User should be authenticated to submit the form.

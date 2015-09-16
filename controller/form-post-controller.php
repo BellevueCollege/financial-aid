@@ -75,13 +75,19 @@
 					$errors[] = self::THIRD_PARTY_FUNDING;
 				else if($this->model->get_third_party_funding_pv() == '1' )	
 				{
-					if($this->model->get_funding_amount_pv() === null)
+                                        $funding_amt = $this->model->get_funding_amount_pv();
+                                        $funding_amt = str_replace(',', '', $funding_amt);
+					if($funding_amt === null)
 						$errors[] = self::FUNDING_AMOUNT;
-					else if(floatval($this->model->get_funding_amount_pv()) >= $GLOBALS['FUNDING_AMOUNT_LENGTH'])
+					else if(floatval($funding_amt) >= $GLOBALS['FUNDING_AMOUNT_LENGTH'])
 					{
-						$errors[] = 'Funding amount field value should be less than '. $GLOBALS['FUNDING_AMOUNT_LENGTH'];;
+						$errors[] = 'Funding amount field value should be less than '. $GLOBALS['FUNDING_AMOUNT_LENGTH'];
 					}
-
+                                        else if(!is_numeric($funding_amt))
+                                        {
+                                            $errors[] = 'Funding amount field should be numeric';
+                                        }                                                                 
+                                        
 					$funding_source_value = $this->model->get_funding_source_pv();
 					if($funding_source_value === null)
 						$errors[] = self::FUNDING_SOURCE;
