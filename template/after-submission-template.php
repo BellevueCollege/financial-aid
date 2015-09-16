@@ -8,7 +8,7 @@
 <!--<![endif]-->
 
 <head>
-	<title>Financial Aid Application</title>
+	<title>Application Submitted :: Financial Aid</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,37 +33,38 @@
 					<div class="box-shadow" id="content">
 						<div class="row row-padding">
 							<div class="content-padding">
-								<div style='padding-top:10px;'>
-									<p class="lead">
-										<?php
-											if(!empty($year_range) )
-											{?> 
-											<p>
-												<div style='color:green;'>** <?php echo $year_range; ?> BC Financial Aid Application Submitted**</div>
-												<div>	
-													<br/>Thank you! Your <?php echo $year_range; ?> BC Financial Aid Application has been submitted to the Financial Aid office.
-													<br/>If you have not done so already, please complete the <?php echo $year_range; ?> Free Application for Federal Student Aid (FAFSA).
-													If you have submitted all required documents to our office, you can expect to hear from our office between 30-90 days depending on the time of year you applied. 
-													 Check your BC email account often for any important notifications from our office. 
-													<br/>Unsure if you submitted everything?  
-													 Check your financial aid status on the FA portal (<a href='<?php if(isset($status_url)) echo $status_url; ?>' > Check Status </a>)
-													 If you missed the filing deadline (<a href='<?php if(isset($deadlines)) echo $deadlines; ?>' > Deadlines </a>) for the quarter in which you wish to start receiving financial aid, you must pay your own tuition.
-													 <br/>Contact the Financial Aid office if you have any questions.
-												</div>
-											</p>
-										<?php
-											}
-											else if(!empty($error_message))
-											{?>
-												<p>
-											<?php echo $error_message; ?>
-												</p>
-                                                                                                <p>Please submit your financial aid form <a href='<?php if(!empty($form_url)) echo $form_url; ?>'>here.</a></p>
-										<?php
-											}
-										?>
-									</p>
-								</div>
+								<p></p>
+								<?php
+									if(!empty($year_range) ) {
+								?> 
+										<h2>Financial aid application submitted successfully for <?php echo $year_range; ?></h2>
+										<p>
+											Thank you! Your <?php echo $year_range; ?> Bellevue College financial aid application has been submitted to the Financial Aid Office.
+											If you have not done so already, complete the <a href="http://www.fafsa.ed.gov/"><?php echo $year_range; ?> Free Application for Federal Student Aid (FAFSA)</a>.
+										</p>
+										<p>	
+											If you have submitted all required documents to our office, you can expect to hear from us in 30-90 days depending on the time of year you applied. 
+											Check your Bellevue College email account often for any important notifications from our office.
+										</p>
+										
+										<h5 style="margin-top: 1em;">Unsure if you submitted everything?</h5>
+										<p>  
+											<a href="<?php if(isset($status_url)) echo $status_url; ?>">Check your financial aid status</a> on the Financial Aid portal.
+											If you missed the <a href="<?php if(isset($deadlines)) echo $deadlines; ?>">filing deadline</a> for the quarter in which 
+											you wish to start receiving financial aid, you must pay your own tuition.
+										</p>
+										<p><a href="https://fa.bellevuecollege.edu/contact">Contact the Financial Aid Office</a> if you have any questions.</p>
+										
+								<?php
+									} else if(!empty($error_message)) {
+								?>
+										<h2>Error submitting your financial aid application</h2>
+										<p><?php echo $error_message; ?></p>
+										<p><a href="<a href='<?php if(!empty($form_url)) echo $form_url; ?>'>">Try resubmitting your financial aid form</a>.</p>
+								<?php
+									}
+								?>
+								<p></p>
 							</div>
 							<!--.content-padding-->
 						</div>
