@@ -67,7 +67,7 @@ function set_post_variables($post)
 	
 	$this->apply_for_fa_pv = (isset($post['apply_for_fa']) && !is_null($post['apply_for_fa'])) ? $post['apply_for_fa'] : null;
 	$this->types_of_loan_pv = (!empty($post['types_of_loan'])) ? $post['types_of_loan'] : null;
-	$this->require_loan_quarters_pv = (!empty($post['require_loan_quarters'])) ? $post['require_loan_quarters'] : null;
+	$this->require_loan_quarters_pv = (!empty($post['require_loan_quarters_'.$this->academic_year_pv])) ? $post['require_loan_quarters_'.$this->academic_year_pv] : null;
 	$anticipated_credits = array();
 	if(!empty($this->require_loan_quarters_pv) && is_array($this->require_loan_quarters_pv))
 	{
