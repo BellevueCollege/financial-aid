@@ -567,7 +567,7 @@
 												</div>
 											</div>
 											<div>
-												<p class="small">The Bellevue College Financial Aid Office will release information from your record to the person(s) identified below as an authorized representative. We will not permit the authorized representative to pick up financial aid documents (award letters, etc.) from our office unless specify. Permission to release information is granted for one financial aid year (Summer through Spring quarter). You may cancel this permission at any time by submitting an additional written statement requesting cancellation. Please check appropriate permissions below.</p>
+												<p class="small">The Bellevue College Financial Aid Office will release information from your record to the person(s) identified below as an authorized representative. We will not permit the authorized representative to pick up financial aid documents (award letters, etc.) from our office unless specify. Permission to release information is granted for one financial aid year (Summer through Spring quarter). You may cancel this permission at any time by submitting an additional written statement requesting cancellation.</p>
 											</div>
 											<div class="row">
 												<div class="col-xs-12 col-md-6">
@@ -681,13 +681,6 @@
         				}
 					}
 				},
-				/*"require_loan_quarters[]" : {
-					required: {
-						depends: function(element) {
-          					return $("#apply_for_fa_yes").is(":checked");
-        				}
-					}
-				},*/
 				<?php 
 				foreach( $quarters as $ac_year=>$acy_quarters) {
 				?>
@@ -718,7 +711,7 @@
   			},
 			messages: {
 				academic_year: "Select the academic year.",
-				attend_summer: "Choose if you will attend during the summer.",
+				attend_summer: "Select whether you plan to attend during the summer.",
 				attend_college: "Choose if you have previously attended college or university.",
 				hold_college_degree : "Choose whether you hold a college degree.",
 				"type_of_degree[]" : "Choose the type(s) of degree(s) you hold.",

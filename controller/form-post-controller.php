@@ -3,21 +3,21 @@
 	//require_once('view/form-post-view.php');
 	Class Form_Post_Controller extends Faform_Controller{
 		protected $model; // model object
-		const ACADEMIC_YEAR = 'Choose the Academic Year(s) you would like to apply for field is required.';
-		const ATTEND_SUMMER = 'Do you plan to attend during the summer? field is required.';
-		const ATTEND_COLLEGE = 'Have you previously attended a college or university? field is required.';
-		const HOLD_COLLEGE_DEGREE = 'Do you hold a college degree, including degrees outside the US? field is required.';
-		const TYPE_OF_DEGREE = 'If yes, what type of degree do you hold? field is required.';
-		const PROGRAM_OF_STUDY = 'Your intended program of study field is required.';
-		const THIRD_PARTY_FUNDING = 'Are you receiving any outside assistance or third party funding including, but not limited to, scholarships, DVR or the state tuition waiver for state employees? field is required.';
-		const FUNDING_AMOUNT = 'Funding Amount field is required.';		
-		const FUNDING_SOURCE = 'Funding source field is required. ';		
-		const APPLY_FOR_FA = 'Would you like to apply for financial aid loans? field is required.';
-		const TYPES_OF_LOAN = 'Types of Loans field is required.';
-		const REQUIRE_LOAN_QUARTERS = 'Choose the Quarters you will require loans for? field is required.';
-		const EXPECTED_GRADUATION_DATE = 'Expected Graduation Date field is required.';		
-		const FA_CONTRACT_AGREEMENT = 'I understand that if I do not follow the financial aid contract it may result in the loss of my financial aid field is required.';
-		const SIGNATURE = 'Name field is required.';
+		const ACADEMIC_YEAR = "Select the academic year for which you'd like to apply for financial aid.";
+		const ATTEND_SUMMER = "Select whether you plan to attend during the summer.";
+		const ATTEND_COLLEGE = "Choose if you have previously attended college or university.";
+		const HOLD_COLLEGE_DEGREE = "Choose whether you hold a college degree.";
+		const TYPE_OF_DEGREE = "Choose the type(s) of degree(s) you hold.";
+		const PROGRAM_OF_STUDY = "Select your intended program of study.";
+		const THIRD_PARTY_FUNDING = "Select whether you are receiving scholarship/funding from a third party.";
+		const FUNDING_AMOUNT = "Enter the funding amount.";		
+		const FUNDING_SOURCE = "Enter additional information about the funding source.";		
+		const APPLY_FOR_FA = "Select if you would like to apply for financial aid loans.";
+		const TYPES_OF_LOAN = "Choose the type(s) of loans you would like to apply for.";
+		const REQUIRE_LOAN_QUARTERS = "Select the quarters for which you will require loans.";
+		const EXPECTED_GRADUATION_DATE = "Select your expected graduation date.";
+		const FA_CONTRACT_AGREEMENT = "You must check that you understand that if you do not follow the financial aid contract it may result in the loss of financial aid.";
+		const SIGNATURE = "Enter your full name as your signature for this application.";
 		
 
 		public function __construct( $model) {
@@ -37,7 +37,7 @@
 			//if(empty($post) || !isset($post['submit']))
 			if($this->model->get_submit_pv() === null)			
 			{
-				$errors['submit'] = "Form did not get submit";
+				$errors['submit'] = "The form was not submitted.";
 				return $errors;
 			}
 			else
@@ -75,25 +75,25 @@
 					$errors[] = self::THIRD_PARTY_FUNDING;
 				else if($this->model->get_third_party_funding_pv() == '1' )	
 				{
-                                        $funding_amt = $this->model->get_funding_amount_pv();
-                                        $funding_amt = str_replace(',', '', $funding_amt);
+                    $funding_amt = $this->model->get_funding_amount_pv();
+                    $funding_amt = str_replace(',', '', $funding_amt);
 					if($funding_amt === null)
 						$errors[] = self::FUNDING_AMOUNT;
 					else if(floatval($funding_amt) >= $GLOBALS['FUNDING_AMOUNT_LENGTH'])
 					{
-						$errors[] = 'Funding amount field value should be less than '. $GLOBALS['FUNDING_AMOUNT_LENGTH'];
+						$errors[] = "The funding amount should be less than ". $GLOBALS['FUNDING_AMOUNT_LENGTH'].".";
 					}
-                                        else if(!is_numeric($funding_amt))
-                                        {
-                                            $errors[] = 'Funding amount field should be numeric';
-                                        }                                                                 
+					else if(!is_numeric($funding_amt))
+					{
+						$errors[] = "The funding amount must be a valid number.";
+					}                                                     
                                         
 					$funding_source_value = $this->model->get_funding_source_pv();
 					if($funding_source_value === null)
 						$errors[] = self::FUNDING_SOURCE;
 					else if(strlen($funding_source_value) >= $GLOBALS['FUNDING_SOURCE_LENGTH'])
 					{
-						$errors[] = 'The length of funding source field should be less than '. $GLOBALS['FUNDING_SOURCE_LENGTH'] .' characters.';;
+						$errors[] = "The length of funding source field should be less than ". $GLOBALS['FUNDING_SOURCE_LENGTH'] ." characters.";
 					}
 				}
 				
@@ -117,7 +117,7 @@
 							if(!empty($loan_quarters[$i]) && !array_key_exists($loan_quarters[$i],$anticipated_credits_for_quarter))
 							{									
 								$quarter_title = $this->model->get_year_quarter_title($loan_quarters[$i]);								
-								$errors[] = $quarter_title.' field is required';								
+								$errors[] = "Select your anticipated credits for ".$quarter_title.".";								
 							}
 						}
 						
@@ -131,14 +131,12 @@
 				$auth_rep_name1_value = $this->model->get_auth_rep_name1_pv();
 				if(!empty($auth_rep_name1_value) && strlen($auth_rep_name1_value) > $GLOBALS['AUTH_REP_NAME_LENGTH'])
 				{
-
-					$errors[] = 'MaxLength allowed for Authorized Representative field is '.$GLOBALS['AUTH_REP_NAME_LENGTH'];
+					$errors[] = "The authorized representative field cannot be longer than ".$GLOBALS['AUTH_REP_NAME_LENGTH']." characters.";
 				}
 				$auth_rep_name2_value = $this->model->get_auth_rep_name2_pv();
 				if(!empty($auth_rep_name2_value) && strlen($auth_rep_name2_value) > $GLOBALS['AUTH_REP_NAME_LENGTH'])
 				{
-
-					$errors[] = 'MaxLength allowed for Authorized Representative field is '.$GLOBALS['AUTH_REP_NAME_LENGTH'];
+					$errors[] = "The authorized representative field cannot be longer than ".$GLOBALS['AUTH_REP_NAME_LENGTH']." characters.";
 				}				
 
 				if($this->model->get_fa_contract_agreement_pv() === null)
@@ -148,14 +146,12 @@
 				$signature_value = $this->model->get_signature_pv();
 				if($signature_value === null)
 				{
-					$errors[] = self::SIGNATURE ;
+					$errors[] = self::SIGNATURE;
 				}
 				else if((strlen($signature_value) > $GLOBALS['SIGNATURE_LENGTH']))
 				{
-					$errors[] = 'MaxLength for Name field is '.$GLOBALS['SIGNATURE_LENGTH']. ' characters.';;
+					$errors[] = "The name field cannot be longer than ".$GLOBALS['SIGNATURE_LENGTH']. " characters.";
 				}
-
-
 			}
 			return $errors;
 		} // end of validate_form()
