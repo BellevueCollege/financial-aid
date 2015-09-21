@@ -232,6 +232,9 @@ function check_only_spaces_string($input)
 							case 'Win':
 								$quarter = 'Winter';
 								break;
+                                                        case 'Fall':
+                                                                $quarter = 'Fall';
+								break;
 						}
 						$quarter_title = $quarter. ' '.$explode_title[1];
 						return $quarter_title;
