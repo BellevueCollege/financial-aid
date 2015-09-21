@@ -72,6 +72,9 @@ $application_uri = rtrim(substr( $request_uri, strlen( $base_uri )) , '/' );
  
 
 switch ($application_uri) {
+    /*
+     * Load the financial aid application form
+     */
 	case 'application':		
 		$form_post_url = 'https://'. $request_host. $base_uri. 'application/save';
 		$template_uri = 'template/faform-template.php';
@@ -80,6 +83,9 @@ switch ($application_uri) {
 		$view = new Faform_View($controller , $model);
 		echo $view->render();
 		break;
+    /*
+     * Save financial aid form
+     */
 	case 'application/save':	
 		require_once('model/form-post-model.php');
 		require_once('controller/form-post-controller.php');
@@ -91,7 +97,9 @@ switch ($application_uri) {
 		$view = new Form_Post_View($controller , $model);
 		echo $view->render();
 		break;
-	
+       /*
+        * Display error page in case default
+        */
 	default:
 		require_once('view/default-view.php');
 		$model = new Default_Model(
