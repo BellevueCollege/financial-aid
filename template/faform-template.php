@@ -510,7 +510,7 @@
 												<label for="expected_graduation_date"><strong>Expected graduation date <span class="text-danger">*</span></strong></label>
 												<div class="form-group">
 													<select id="expected_graduation_date" name="expected_graduation_date" class="form-control" aria-describedby="graddate_help_block">
-														<option value=""></option>
+														<option value="">Select...</option>
 													<?php
 													if(!empty($expected_graduation_year_array))
 													{	
