@@ -2,6 +2,7 @@
 
 
 require_once('config.php');
+
 require_once('model/faform-model.php');
 require_once('view/faform-view.php');
 require_once('controller/faform-controller.php');
@@ -38,12 +39,13 @@ if ( ! isset( $_SERVER['HTTPS'] ) ) {
 
 
 // Initialize username
-$username = "";
+//$username = "nicole.swan";
+$username = "richard.test";
+$_SESSION["FA_USERNAME"] = $username;
 if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "CAS")
 {
-	require_once('controller/cas-authentication-controller.php');
 	/* Authenticate with CAS */
-
+	require_once('controller/cas-authentication-controller.php');
 	$cas_controller = new Cas_Authentication();
 
 	/* Check if user is authenticated */
@@ -64,7 +66,7 @@ if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "CAS")
 }
 else
 {
-	die('SSO configuration not valid');
+	//die('SSO configuration not valid');
 }
 
 $application_uri = rtrim(substr( $request_uri, strlen( $base_uri )) , '/' );
@@ -72,9 +74,9 @@ $application_uri = rtrim(substr( $request_uri, strlen( $base_uri )) , '/' );
  
 
 switch ($application_uri) {
-    /*
-     * Load the financial aid application form
-     */
+	case 'test':
+		require_once('test.php');
+		break;
 	case 'application':		
 		$form_post_url = 'https://'. $request_host. $base_uri. 'application/save';
 		$template_uri = 'template/faform-template.php';
@@ -102,8 +104,10 @@ switch ($application_uri) {
         */
 	default:
 		require_once('view/default-view.php');
-		$model = new Default_Model(
-			'template/error-404-template.php');
+		//$model = new Default_Model(
+		//	'template/error-404-template.php');
+		$template_uri = 'template/after-submission-template.php';
+		$model = new Default_Model($template_uri);
 		$view = new Default_View( NULL, $model);
 
 		// View and controller actions.

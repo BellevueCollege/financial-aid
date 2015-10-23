@@ -464,6 +464,7 @@
 																				{
 																				?>
 																					<div class="form-group">
+																						<label for="anticipated_credits_for_quarter_<?php echo $ac_year; ?>_<?php echo $key; ?>" class="sr-only">Select anticipated credits for <?php echo $value; ?></label>
 																						<select name="anticipated_credits_for_quarter_<?php echo $key; ?>" id="anticipated_credits_for_quarter_<?php echo $ac_year; ?>_<?php echo $key; ?>" class="form-control input-sm">
 																							<option value="">Select anticipated credits for quarter...</option>
 																						<?php

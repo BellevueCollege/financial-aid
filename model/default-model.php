@@ -34,7 +34,7 @@ public function __construct($template_uri) {
 		try{
 
 				$this->database_connection = new PDO( $GLOBALS['DATABASE_DSN'], $GLOBALS['DATABASE_USER'],$GLOBALS['DATABASE_PASSWORD'] );
-				if (!$this->database_connection) 
+				if (!$this->database_connection)
 		    		die('Something went wrong while connecting to the database'); // exit out 
 			} catch(PDOException $e)
 			{
@@ -44,7 +44,7 @@ public function __construct($template_uri) {
 	else
 		 die(' Database configuration not set'); // exit out 
 	$this->template_uri = $template_uri;
-
+	//var_dump($this->database_connection);
 	// set user information
 	$username = $_SESSION['FA_USERNAME'];
 	$user_information = $this->get_student_information($username);
