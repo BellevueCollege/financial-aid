@@ -4,6 +4,7 @@
 * Meant to be reused in other templates as needed
 **/
 ?>
+<div style="margin-top: 1em;" class="visible-sm-block visible-xs-block"></div>
 <div class="col-md-4 col-xs-12 pull-right">
 	<div class="alert alert-info">
 		<h4>
@@ -18,3 +19,4 @@
 		<?php } ?>
 	</div>
 </div>
+<div class="clearfix visible-sm-block visible-xs-block"></div>
