@@ -53,14 +53,14 @@
 											If you missed the <a href="<?php if(isset($deadlines)) echo $deadlines; ?>">filing deadline</a> for the quarter in which 
 											you wish to start receiving financial aid, you must pay your own tuition.
 										</p>
-										<p><a href="https://fa.bellevuecollege.edu/contact">Contact the Financial Aid Office</a> if you have any questions.</p>
+										<p><a href="//fa.bellevuecollege.edu/contact">Contact the Financial Aid Office</a> if you have any questions.</p>
 										
 								<?php
 									} else if(!empty($error_message)) {
 								?>
 										<h2>Error submitting your financial aid application</h2>
 										<p><?php echo $error_message; ?></p>
-										<p><a href="<a href='<?php if(!empty($form_url)) echo $form_url; ?>'>">Try resubmitting your financial aid form</a>.</p>
+										<p><a href="<?php if(!empty($form_url)) echo $form_url; ?>">Try resubmitting your financial aid form</a>.</p>
 								<?php
 									}
 								?>
