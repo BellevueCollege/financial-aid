@@ -94,7 +94,7 @@
 								<noscript>
 									<div class="alert alert-warning">This form works best if JavaScript is enabled. <a href="http://enable-javascript.com/">Learn how to enable JavaScript</a>.</div>
 								</noscript>
-								<?php include("student-info-include-template.php"); ?>		
+								<?php include("student-info-include-template.php"); ?>
 								<form id="financial_aid_application" name="financial_aid_application" action="<?php if(!empty($form_post_url)) echo $form_post_url ; ?>" method="post">									
 
 									<?php //var_dump($already_submitted_app_qtr_ids); ?>
@@ -637,6 +637,10 @@
 	<!-- jQuery Validate -->
 	<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 	<script type="text/javascript">
+		//Add method to check min allowed value
+		$.validator.addMethod('minAllow', function (value, el, param) {
+    		return value > param;
+		});
 		//Required/validation logic
 		$("#financial_aid_application").validate({
   			rules: {
@@ -665,6 +669,7 @@
           					return $("#third_party_funding_yes").is(":checked");
         				}
 					},
+					minAllow: 0,
 					number: true
 				},
 				funding_source : {
@@ -720,7 +725,8 @@
 				third_party_funding : "Select whether you are receiving scholarship/funding from a third party.",
 				funding_amount : {
 					required: "Enter the funding amount.",
-					number: "The funding amount must be a valid number."
+					minAllow: "The funding amount must be a valid number greater than 0.",
+					number: "The funding amount must be a valid number greater than 0."
 				},
 				funding_source : "Enter additional information about the funding source.",
 				apply_for_fa : "Select if you would like to apply for financial aid loans.",
