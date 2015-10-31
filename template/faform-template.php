@@ -236,36 +236,38 @@
 												</div>
 											</div>
 											
-											<div class="form-group">
-												<label><strong>If yes, what type(s) of degree do you hold? <span class="text-danger" title="Required field">*</span></strong></label>	
-											<?php
-												if(!empty($types_of_degree))
-												{
-													foreach( $types_of_degree as $degree_type ) // $i=0;$i<count($types_of_degree);$i++)
+											<div id="form_degree_type">
+												<div class="form-group">
+													<label><strong>What type(s) of degree do you hold? <span class="text-danger" title="Required field">*</span></strong></label>	
+												<?php
+													if(!empty($types_of_degree))
 													{
-														$degree_type_id = $degree_type['DegreeID'];
-														$degree_type_name = $degree_type['Degree'];
-														
-														if(isset($degree_type_id))
+														foreach( $types_of_degree as $degree_type ) // $i=0;$i<count($types_of_degree);$i++)
 														{
-															$checked = '';
-															if(!empty($selected_type_of_degree) && is_array($selected_type_of_degree) )
+															$degree_type_id = $degree_type['DegreeID'];
+															$degree_type_name = $degree_type['Degree'];
+															
+															if(isset($degree_type_id))
 															{
-																if(in_array($degree_type_id, $selected_type_of_degree))
-																	$checked = 'checked';
+																$checked = '';
+																if(!empty($selected_type_of_degree) && is_array($selected_type_of_degree) )
+																{
+																	if(in_array($degree_type_id, $selected_type_of_degree))
+																		$checked = 'checked';
+																}
+																?>
+																<div class="checkbox">
+																	<label>
+																		<input type="checkbox" id="type_of_degree_<?php echo $degree_type_id; ?>" name="type_of_degree[]" value="<?php echo $degree_type_id; ?>" <?php echo $checked; ?> />
+																		<?php echo $degree_type_name; ?>
+																	</label>
+																</div>
+														<?php
 															}
-															?>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" id="type_of_degree_<?php echo $degree_type_id; ?>" name="type_of_degree[]" value="<?php echo $degree_type_id; ?>" <?php echo $checked; ?> />
-																	<?php echo $degree_type_name; ?>
-																</label>
-															</div>
-													<?php
 														}
 													}
-												}
-											?>
+												?>
+												</div>
 											</div>
 										</div>
 									</fieldset>
@@ -796,6 +798,9 @@
 				$("#form_degree_info").addClass("hide");
 				$("#hold_college_degree_yes").prop("required", false);
 			}
+			if( !$("#hold_college_degree_yes").is(":checked") || $("#hold_college_degree_no").is(":checked") ) { 
+				$("#form_degree_type").addClass("hide");
+			}
 			if( !$("#third_party_funding_yes").is(":checked") || $("#third_party_funding_no").is(":checked") ) { 
 				$("#form_additional_funding_info").addClass("hide");
 			}
@@ -859,6 +864,12 @@
 			});
 			$("#attend_college_yes").on("touchend click", function() {
    				if($(this).is(":checked")) { $("#form_degree_info").removeClass("hide"); }
+			});
+			$("#hold_college_degree_yes").on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_degree_type").removeClass("hide"); }
+			});
+			$("#hold_college_degree_no").on("touchend click", function() {
+   				if($(this).is(":checked")) { $("#form_degree_type").removeClass("hide").addClass("hide"); }
 			});
 			$('#third_party_funding_yes').on("touchend click", function() {
    				if($(this).is(":checked")) { $("#form_additional_funding_info").removeClass("hide"); }
