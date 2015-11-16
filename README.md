@@ -10,6 +10,8 @@ The financial aid application form allows students to apply for financial aid.
 * Set the config variables as explained below:
     * Copy config-sample.php file and rename the new file to config.php.
     * Follow the examples in config-sample comments to set the values of the config variables.
+    * For further reference, please refer config file located here:
+    https://github.com/BellevueCollege/docs/tree/master/financial-aid-form
 * You must have PHP version > 5.3.
 * Make sure the application user account has access to the database, tables, and stored procedures.
 
