@@ -1,6 +1,5 @@
 <?php
 
-
 require_once('config.php');
 
 require_once('model/faform-model.php');
@@ -14,7 +13,7 @@ define( 'VERSION_NUMBER', '1.0' );
 */
 if(!Default_Model::check_configuration())
 	die("One or more of Config variables are not set.");
-
+	
 $request_host = $_SERVER['HTTP_HOST'];
 $request_uri = $_SERVER['REQUEST_URI'];
 $base_uri = rtrim( $GLOBALS['BASE_URI'] , '/' ) . '/';
@@ -28,7 +27,6 @@ if ( $base_uri !== substr( $request_uri, 0, strlen( $base_uri ) ) ) {
 	;
 	throw new Exception( $error_message );
 }
-
 // Redirect to HTTPS if the request is made over HTTP.
 if ( ! isset( $_SERVER['HTTPS'] ) ) {
 	$url = 'https://' . $request_host . $request_uri;
@@ -37,24 +35,20 @@ if ( ! isset( $_SERVER['HTTPS'] ) ) {
 	exit();
 }
 
-
 // Initialize username
-//$username = "nicole.swan";
-$username = "richard.test";
-$_SESSION["FA_USERNAME"] = $username;
+$username = "";
 if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "CAS")
 {
-	/* Authenticate with CAS */
 	require_once('controller/cas-authentication-controller.php');
+	/* Authenticate with CAS */
 	$cas_controller = new Cas_Authentication();
-
+	
 	/* Check if user is authenticated */
-
 	if(!$cas_controller->is_authenticated())
 	{
 		$cas_controller->authenticate();
 	}
-
+	
 	$username = $cas_controller->get_authenticated_username();       
         // logout if desired
         if (isset($_REQUEST['logout'])) {
@@ -66,17 +60,16 @@ if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "CAS")
 }
 else
 {
-	//die('SSO configuration not valid');
+	die('SSO configuration not valid');
 }
 
 $application_uri = rtrim(substr( $request_uri, strlen( $base_uri )) , '/' );
 //echo '\n'. $application_uri;
  
-
 switch ($application_uri) {
-	case 'test':
-		require_once('test.php');
-		break;
+    /*
+     * Load the financial aid application form
+     */
 	case 'application':		
 		$form_post_url = 'https://'. $request_host. $base_uri. 'application/save';
 		$template_uri = 'template/faform-template.php';
@@ -104,18 +97,13 @@ switch ($application_uri) {
         */
 	default:
 		require_once('view/default-view.php');
-		//$model = new Default_Model(
-		//	'template/error-404-template.php');
-		$template_uri = 'template/after-submission-template.php';
-		$model = new Default_Model($template_uri);
+		$model = new Default_Model('template/error-404-template.php');
 		$view = new Default_View( NULL, $model);
-
+		
 		// View and controller actions.
 		header( $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found' );
 		echo $view->render();
 		break;
 }
 
-
 ?>
-
