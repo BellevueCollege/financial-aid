@@ -643,6 +643,9 @@
 		$.validator.addMethod('minAllow', function (value, el, param) {
     		return value > param;
 		});
+		$.validator.addMethod('maxAllow', function (value, el, param) {
+    		return value < param;
+		});
 		//Required/validation logic
 		$("#financial_aid_application").validate({
   			rules: {
@@ -672,6 +675,7 @@
         				}
 					},
 					minAllow: 0,
+					maxAllow: <?php echo($funding_amount_length); ?>,
 					number: true
 				},
 				funding_source : {
@@ -728,6 +732,7 @@
 				funding_amount : {
 					required: "Enter the funding amount.",
 					minAllow: "The funding amount must be a valid number greater than 0.",
+					maxAllow: "The funding amount must be less than <?php echo($funding_amount_length); ?>.",
 					number: "The funding amount must be a valid number greater than 0."
 				},
 				funding_source : "Enter additional information about the funding source.",
