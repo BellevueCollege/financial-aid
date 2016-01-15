@@ -44,7 +44,7 @@
 									<?php include("student-info-include-template.php"); ?>
 									
 									<p>You have submitted financial aid applications for all currently available academic years. 
-										<a href="//fa.bellevuecollege.edu/status">Visit the Financial Aid Portal</a> to check the status of your 
+										<a href="//www.bellevuecollege.edu/fa/status/">Visit the Financial Aid Portal</a> to check the status of your 
 										applications.
 									</p>
 									<p>You have already submitted applications for the following academic years:</p>

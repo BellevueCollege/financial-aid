@@ -134,7 +134,7 @@
 												?>
 													<span id="academic_year_help_block" class="help-block small">
 														You have already submitted applications for the following academic year(s). 
-														If you have questions about a previous application, <a href="https://fa.bellevuecollege.edu/contact">contact the Financial Aid Office</a>.
+														If you have questions about a previous application, <a href="https://www.bellevuecollege.edu/fa/contact">contact the Financial Aid Office</a>.
 														<ul style="margin-top: 0; padding-left: .5em;">
 												<?php
 													foreach($ac_submitted as $ay ) {
