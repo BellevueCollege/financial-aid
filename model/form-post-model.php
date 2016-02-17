@@ -98,9 +98,9 @@ function set_post_variables($post)
 	{
 		$this->signature_pv = $post['signature'];
 	}else{ $post['signature'] = null; }
-	//$this->signature_pv = (!empty($post['signature'])) ? $post['signature'] : null;
+	$this->signature_pv = (!empty($post['signature'])) ? $post['signature'] : null;
 	$this->submit_pv = (isset($post['submit']) && !is_null($post['submit'])) ? $post['submit'] : null;
-
+        //var_dump($this->submit_pv);
 }
 
 // Get academic year post value
@@ -350,6 +350,7 @@ function get_submit_pv()
 							 @ExpectedGraduatedDate = :ExpectedGraduatedDate,
 							 @DateSubmitted = :DateSubmitted
 							 ;"; 
+
 		//error_log($sql_stmt);	
 		return $sql_stmt;
 	}

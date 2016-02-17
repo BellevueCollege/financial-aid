@@ -139,20 +139,21 @@
 					$errors[] = "The authorized representative field cannot be longer than ".$GLOBALS['AUTH_REP_NAME_LENGTH']." characters.";
 				}				
 
-				if($this->model->get_fa_contract_agreement_pv() === null)
-				{
-					$errors[] = self::FA_CONTRACT_AGREEMENT;
-				}
-				$signature_value = $this->model->get_signature_pv();
-				if($signature_value === null)
-				{
-					$errors[] = self::SIGNATURE;
-				}
-				else if((strlen($signature_value) > $GLOBALS['SIGNATURE_LENGTH']))
-				{
-					$errors[] = "The name field cannot be longer than ".$GLOBALS['SIGNATURE_LENGTH']. " characters.";
-				}
+//				if($this->model->get_fa_contract_agreement_pv() === null)
+//				{
+//					$errors[] = self::FA_CONTRACT_AGREEMENT;
+//				}
+//				$signature_value = $this->model->get_signature_pv();
+//				if($signature_value === null)
+//				{
+//					$errors[] = self::SIGNATURE;
+//				}
+//				else if((strlen($signature_value) > $GLOBALS['SIGNATURE_LENGTH']))
+//				{
+//					$errors[] = "The name field cannot be longer than ".$GLOBALS['SIGNATURE_LENGTH']. " characters.";
+//				}
 			}
+                        //var_dump($errors);
 			return $errors;
 		} // end of validate_form()
 

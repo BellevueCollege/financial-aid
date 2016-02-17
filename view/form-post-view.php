@@ -11,7 +11,8 @@ Class Form_Post_View extends Faform_View{
 
 	protected function set_template_variables() {                
 		Default_View::set_template_variables();		
-		$validation_form_errors = $this->controller->validate_form();		
+		$validation_form_errors = $this->controller->validate_form();
+                //var_dump($validation_form_errors);
 		if(empty($validation_form_errors))
 		{
 			$save_form_return_value = $this->model->save_form();	
@@ -38,7 +39,7 @@ Class Form_Post_View extends Faform_View{
 		}
 		else
 		{
-			if(!empty($validation_form_errors['submit']))
+                        if(!empty($validation_form_errors['submit']))
 			{
 				//Form did not get submitted via standard
 				$this->template_variables['error_message'] = "This is an unexpected situation. Form did not get saved.";
@@ -64,12 +65,12 @@ Class Form_Post_View extends Faform_View{
 				$this->template_variables['selected_require_loan_quarters'] = $this->model->get_require_loan_quarters_pv();
 				$this->template_variables['selected_anticipated_credits_for_quarter'] = $this->model->get_anticipated_credits_for_quarter_pv();				
 				$this->template_variables['selected_expected_graduation_date'] = $this->model->get_expected_graduation_date_pv();
-				$this->template_variables['selected_release_student_info_box1'] = $this->model->get_release_student_info_box1_pv(); 
-				$this->template_variables['selected_release_student_info_box2'] = $this->model->get_release_student_info_box2_pv(); 
-				$this->template_variables['selected_auth_rep_name1'] = $this->model->get_auth_rep_name1_pv();
-				$this->template_variables['selected_auth_rep_name2'] = $this->model->get_auth_rep_name2_pv();  
-				$this->template_variables['selected_fa_contract_agreement'] = $this->model->get_fa_contract_agreement_pv(); 
-				$this->template_variables['selected_signature'] = $this->model->get_signature_pv(); 
+//				$this->template_variables['selected_release_student_info_box1'] = $this->model->get_release_student_info_box1_pv(); 
+//				$this->template_variables['selected_release_student_info_box2'] = $this->model->get_release_student_info_box2_pv(); 
+//				$this->template_variables['selected_auth_rep_name1'] = $this->model->get_auth_rep_name1_pv();
+//				$this->template_variables['selected_auth_rep_name2'] = $this->model->get_auth_rep_name2_pv();  
+//				$this->template_variables['selected_fa_contract_agreement'] = $this->model->get_fa_contract_agreement_pv(); 
+//				$this->template_variables['selected_signature'] = $this->model->get_signature_pv(); 
 
 			}
 		}

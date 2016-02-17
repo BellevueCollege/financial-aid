@@ -11,7 +11,7 @@ define( 'VERSION_NUMBER', '1.0' );
 /*
 	Check if all config variables have values
 */
-if(!Default_Model::check_configuration())
+if(!check_configuration())
 	die("One or more of Config variables are not set.");
 	
 $request_host = $_SERVER['HTTP_HOST'];
@@ -104,6 +104,29 @@ switch ($application_uri) {
 		header( $_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found' );
 		echo $view->render();
 		break;
+}
+
+/*
+	Check to make sure all configuration variables are not empty
+*/
+ function check_configuration()
+{	
+	if(empty($GLOBALS['AUTH_TYPE']))
+		return false;
+	if((!empty($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == 'CAS') && (empty($GLOBALS['CAS_SERVER_HOSTNAME']) || empty($GLOBALS['CAS_SERVER_PORT']) || empty($GLOBALS['CAS_SERVER_PATH']) || empty($GLOBALS['CAS_VERSION']) || empty($GLOBALS['CAS_LIBRARY_PATH'])))
+		return false;
+	if(empty($GLOBALS['DATABASE_DSN']) || empty($GLOBALS['DATABASE_USER']) || empty($GLOBALS['DATABASE_PASSWORD']))
+		return false;
+	if(empty($GLOBALS['BASE_URI']))
+		return false;
+	if(empty($GLOBALS['GLOBALS_PATH']) || empty($GLOBALS['GLOBALS_URL']))
+		return false;
+	if(empty($GLOBALS['FUNDING_AMOUNT_LENGTH']) || empty($GLOBALS['FUNDING_SOURCE_LENGTH']) || empty($GLOBALS['AUTH_REP_NAME_LENGTH']) || empty($GLOBALS['SIGNATURE_LENGTH']))
+		return false;
+	if(empty($GLOBALS['STATUS_URL']) || empty($GLOBALS['DEADLINES']) || empty($GLOBALS['CONDITIONAL_MONTH']))
+		return false;
+
+	return true;
 }
 
 ?>

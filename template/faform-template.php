@@ -276,18 +276,20 @@
 										<legend>Program of Study</legend>
 										
 										<p>
-											<em>Your intended program of study on record:</em> Your program of study is a critical component of your financial aid – failure to complete your classes successfully or complete your program in a timely manner may result in the loss of your aid.
+                                                                                    To receive financial aid you must declare a degree or certificate program and take classes only in that program. Financial aid can only pay for classes required for graduation. There are limits on the amount of aid you can receive. Taking classes outside your program may result in loss of financial aid eligibility, and/or running out of funds before you complete your program.
+<!--											<em>Your intended program of study on record:</em> Your program of study is a critical component of your financial aid – failure to complete your classes successfully or complete your program in a timely manner may result in the loss of your aid.-->
 										</p>
-										<ol>
-											<li>Financial aid will only fund classes that are required for your degree or certificate. We can only fund programs 24 credits or more in length.</li>
-											<li>The BC Financial Aid Office will use the program you indicate here to track your progress towards:</li>
+<!--										<ol>
+											<li>Financial aid will only fund classes that are required for your degree or certificate. We can only fund programs 24 credits or more in length.</li>-->
+
+                                                                                        <p>The BC Financial Aid Office will use the program you indicate her to track your progress towards: </p>
 												<ul>
 													<li>Completion of 67% of your classes (the completion ratio, i.e. completed classes divided by attempted)</li>
 													<li>Quarterly and cumulative grade point average</li>
 													<li>Maximum time frame (you may receive financial aid for up to 150% of your program’s length)</li>
 												</ul>
-											<li>Some forms of financial aid have lifetime maximums. You could exhaust your financial aid eligibility before completing your degree or certificate if you fail to complete your classes or change your program of study.</li>
-										</ol>
+<!--											<li>Some forms of financial aid have lifetime maximums. You could exhaust your financial aid eligibility before completing your degree or certificate if you fail to complete your classes or change your program of study.</li>-->
+<!--										</ol>-->
 										<div class="row">
 											<div class="col-xs-12 col-md-6">
 												<div class="form-group">
@@ -330,7 +332,8 @@
 													$checked_zero = 'checked';
 											}
 										?>
-										<label><strong>Are you receiving scholarship/funding from a third party or using the state tuition waiver? <span class="text-danger" title="Required field">*</span></strong></label>
+										<!--<label><strong>Are you receiving scholarship/funding from a third party or using the state tuition waiver? <span class="text-danger" title="Required field">*</span></strong></label>-->
+                                                                                <label><strong>Do you expect to receive another source (outside of financial aid) of funding to help you pay for school? This may include scholarships, tuition waivers for state employees, employer tuition payment or reimbursement, etc.  <span class="text-danger" title="Required field">*</span></strong></label>
 										<div class="form-group">
 											<div class="radio-inline">
 												<label for="third_party_funding_yes">
@@ -357,7 +360,8 @@
 														</div>
 													</div>
 													<div class="form-group">
-														<label for="funding_source"><strong>Other funding source? Please explain. <span class="text-danger">*</span></strong></strong></label>
+														<!--<label for="funding_source"><strong>Other funding source? Please explain. <span class="text-danger">*</span></strong></strong></label>-->
+                                                                                                                <label for="funding_source"><strong>State the source of your additional funding: <span class="text-danger">*</span></strong></strong></label>
 														<textarea name="funding_source" id="funding_source" class="form-control" rows="3" maxlength="<?php echo $funding_source_length; ?>" placeholder="Maximum length of <?php echo $funding_source_length; ?> characters"><?php if(!empty($selected_funding_source)) echo htmlspecialchars($selected_funding_source); ?></textarea>
 													</div>
 												</div>
@@ -367,6 +371,16 @@
 									
 									<fieldset>
 										<legend>Loans (Federal Direct Stafford Loans)</legend>
+                                                                                <p class="small">
+                                                                                    You are not required to apply for a student loan, and you may apply anytime within the school year. However, complete the information below now if you know you want one. This allows us to award you loan funds at the same time we consider you for other types of aid. 
+                                                                                    To learn about student loans, including the amount you can borrow, go to:
+                                                                                    <a> http://fa.bellevuecollege.edu/loans/stafford-details. </a> 
+                                                                                    <br/>Do you wish to receive a Federal Direct Student Loan?
+                                                                                    <br/>When do you expect to complete your degree or certificate and graduate from your program?
+                                                                                    <br/>How much would you like to borrow?
+                                                                                    <br/>There are additional online processes you must complete such as entrance loan counseling and a MPN before we can disburse loan funds to you. Check your BC email account, and the student financial aid portal for details.
+
+                                                                                </p>
 										<?php
 											$checked_one = '' ; $checked_zero = '';
 											if(isset($selected_apply_for_fa))
@@ -534,21 +548,29 @@
 											</div>
 										</div>
 									</fieldset>	
-										<fieldset>
+                                                                            
+                                                                        <fieldset>
+											<legend>Information Release Authorization (Optional)</legend> 
+                                                                                        <p>If you wish to allow another person to have access to your financial aid information, file and status. This may include a parent, guardian, spouse or partner, or any other person you designate, click <a href="http://s.bellevuecollege.edu/wp/sites/145/2015/11/Student-Information-Release-Authorization-form.docx"> here </a> to access the form. Submit the form to the Enrollment Services Office/Student Central for processing. </p>
+                                                                                        <br/>
+                                                                            
+                                                                        </fieldset>   
+                                                                            
+<!--										<fieldset>
 											<legend>Information Release</legend>
 											
-											<div class="alert alert-warning"><!-- Information release description -->
+											<div class="alert alert-warning"> Information release description 
 												<strong>This section is optional.</strong> Only complete this section if you wish to 
 												allow an authorized representative to access your financial aid information. Commonly this 
 												would be a parent, guardian, or relative.
-											</div><!--End of Information Release description div -->
+											</div>End of Information Release description div 
 											
 											<div class="form-group">
 												<div class="checkbox">
 													<?php
-													$checked = '';
-													if(!empty($selected_release_student_info_box1) && $selected_release_student_info_box1 == '1')
-															$checked = 'checked';
+//													$checked = '';
+//													if(!empty($selected_release_student_info_box1) && $selected_release_student_info_box1 == '1')
+//															$checked = 'checked';
 													?>
 												<label for="release_student_info_box1">
 													<input type="checkbox" value="1" id="release_student_info_box1" name="release_student_info_box1" <?php echo $checked; ?>>
@@ -559,9 +581,9 @@
 											<div class="form-group">
 												<div class="checkbox">
 												<?php
-													$checked = '';
-													if(!empty($selected_release_student_info_box2) && $selected_release_student_info_box2 == '1')
-															$checked = 'checked';
+//													$checked = '';
+//													if(!empty($selected_release_student_info_box2) && $selected_release_student_info_box2 == '1')
+//															$checked = 'checked';
 												?>
 												<label for="release_student_info_box2">
 													<input type="checkbox" value="1" id="release_student_info_box2" name="release_student_info_box2" <?php echo $checked; ?>>
@@ -588,14 +610,14 @@
 										<fieldset>
 											<legend>Sign and Finish</legend>
 											<?php 
-												$checked = '';
-												if(!empty($selected_fa_contract_agreement) && $selected_fa_contract_agreement == '1')
-														$checked = 'checked';
+//												$checked = '';
+//												if(!empty($selected_fa_contract_agreement) && $selected_fa_contract_agreement == '1')
+//														$checked = 'checked';
 											 ?>
 											<div class="form-group">
 												<div class="checkbox">
 													<label for="fa_contract_agreement">
-														<input type="checkbox" value="1" name="fa_contract_agreement" id="fa_contract_agreement" <?php echo $checked; ?> >
+														<input type="checkbox" value="1" name="fa_contract_agreement" id="fa_contract_agreement" <?php //echo $checked; ?> >
 														I understand that if I do not follow the financial aid contract it may result in the loss of my financial aid. <strong><span class="text-danger">*</span></strong>
 													</label>
 												</div>
@@ -604,12 +626,12 @@
 												<div class="col-xs-12 col-md-6">
 													<div class="form-group">
 														<label for="signature"><strong>Name <span class="text-danger" title="Required field">*</span></strong></label> 
-														<input type="text" name="signature" id="signature" class="form-control" maxlength="<?php echo $signature_length; ?>" aria-describedby="sig_help_block" value="<?php if(isset($selected_signature)) echo htmlspecialchars($selected_signature); ?>">
+														<input type="text" name="signature" id="signature" class="form-control" maxlength="<?php //echo $signature_length; ?>" aria-describedby="sig_help_block" value="<?php //if(isset($selected_signature)) echo htmlspecialchars($selected_signature); ?>">
 														<span id="sig_help_block" class="help-block small">Type your full name as your signature for this application.</span>
 													</div>
 												</div>
 											</div>
-										</fieldset>	
+										</fieldset>	-->
 										<p></p>
 										<input type="submit" value="Submit application" name="submit" id="submit" class="btn btn-primary" />	
 									</div>	
@@ -718,8 +740,8 @@
 				}
 				?>
 				expected_graduation_date : "required",
-				fa_contract_agreement : "required",
-				signature : "required",
+				//fa_contract_agreement : "required",
+				//signature : "required",
   			},
 			messages: {
 				academic_year: "Select the academic year.",
@@ -751,8 +773,8 @@
 				}
 				?>
 				expected_graduation_date : "Select your expected graduation date.",
-				fa_contract_agreement : "You must check that you understand that if you do not follow the financial aid contract it may result in the loss of financial aid.",
-				signature: "Enter your full name as your signature for this application."
+				//fa_contract_agreement : "You must check that you understand that if you do not follow the financial aid contract it may result in the loss of financial aid.",
+				//signature: "Enter your full name as your signature for this application."
 			},
 			highlight : function (element) {
 				$(element).closest('.form-group').addClass('has-error');
