@@ -57,3 +57,11 @@ The financial aid application form allows students to apply for financial aid.
     - Dependence: required for each selected loan quarter
 * **Expected graduation date:**
     - required
+
+
+### Release Notes
+* **Release to Test Version 1.1**
+- Update all the text changes mentioned in Changes_to_BC_App(004).docx file.
+- Added RELEASE_AUTHORIZATION_FORM_URL configuration.
+- Removed  Sign and Finish Section from the form.
+- Removed all the fields from Release Authorization form and updated as required. 
