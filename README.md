@@ -57,7 +57,3 @@ The financial aid application form allows students to apply for financial aid.
     - Dependence: required for each selected loan quarter
 * **Expected graduation date:**
     - required
-* **Confirmation of understanding of financial aid contract**
-    - required
-* **Application signature**
-    - required

@@ -123,7 +123,7 @@ switch ($application_uri) {
 		return false;
 	if(empty($GLOBALS['FUNDING_AMOUNT_LENGTH']) || empty($GLOBALS['FUNDING_SOURCE_LENGTH']) || empty($GLOBALS['AUTH_REP_NAME_LENGTH']) || empty($GLOBALS['SIGNATURE_LENGTH']))
 		return false;
-	if(empty($GLOBALS['STATUS_URL']) || empty($GLOBALS['DEADLINES']) || empty($GLOBALS['CONDITIONAL_MONTH']))
+	if(empty($GLOBALS['STATUS_URL']) || empty($GLOBALS['DEADLINES']) || empty($GLOBALS['CONDITIONAL_MONTH']) || empty($GLOBALS['RELEASE_AUTHORIZATION_FORM_URL']))
 		return false;
 
 	return true;
