@@ -37,6 +37,7 @@ $GLOBALS['AUTH_REP_NAME_LENGTH'] = 0; // Assuming Authorized Representative's Na
 $GLOBALS['SIGNATURE_LENGTH'] = 0; // Length of signature field
 $GLOBALS['STATUS_URL'] = ''; // URL to check the status of financial aid application
 $GLOBALS['DEADLINES'] = ''; // URL to check deadlines
+$GLOBALS['RELEASE_AUTHORIZATION_FORM_URL'] = ''; // URL to Release authorization form url
 /*
 	Conditional Month value is used to decide if 1 or 2 academic year needs to be displayed.
 	Provide the month as a number eg: For Jan- 1, Feb - 2, ....so on.
