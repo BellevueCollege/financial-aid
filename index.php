@@ -7,7 +7,7 @@ require_once('view/faform-view.php');
 require_once('controller/faform-controller.php');
 
 // Define application version nuuber
-define( 'VERSION_NUMBER', '1.1' );
+define( 'VERSION_NUMBER', '1.2' );
 /*
 	Check if all config variables have values
 */
