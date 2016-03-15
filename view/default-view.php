@@ -59,6 +59,8 @@ protected function set_template_variables(){
 		$this->template_variables['deadlines'] = $GLOBALS['DEADLINES'];
         if(!empty($GLOBALS['RELEASE_AUTHORIZATION_FORM_URL']))
 		$this->template_variables['release_authorization_form_url'] = $GLOBALS['RELEASE_AUTHORIZATION_FORM_URL'];
+        if(!empty($GLOBALS['LOAN_DETAILS']))
+		$this->template_variables['loan_details'] = $GLOBALS['LOAN_DETAILS'];
         $form_url = $this->model->get_form_url();
         if(!empty($form_url))
                 $this->template_variables['form_url'] = $form_url;

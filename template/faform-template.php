@@ -373,8 +373,7 @@
 										<legend>Loans (Federal Direct Stafford Loans)</legend>
                                                                                 <p class="small">
                                                                                     You are not required to apply for a student loan, and you may apply anytime within the school year. However, complete the information below now if you know you want one. This allows us to award you loan funds at the same time we consider you for other types of aid. 
-                                                                                    To learn about student loans, including the amount you can borrow, go to:
-                                                                                    <a> http://fa.bellevuecollege.edu/loans/stafford-details. </a> 
+                                                                                    To learn about student loans, including the amount you can borrow, please click <a href="<?php echo $loan_details; ?>">HERE</a>
                                                                                     <br/>Do you wish to receive a Federal Direct Student Loan?
                                                                                     <br/>When do you expect to complete your degree or certificate and graduate from your program?
                                                                                     <br/>How much would you like to borrow?
