@@ -151,7 +151,8 @@ function check_only_spaces_string($input)
 	{
 		$quarter_information = array();
 		$current_year = date("Y");
-		$current_month = date("m");		
+		$current_month = 10; //date("m");
+               // echo "current month:".$current_month;
 		/*
 			If currnet month is less than the conditional month query twice, else query once
 		*/
@@ -166,7 +167,18 @@ function check_only_spaces_string($input)
 					$query->execute($values);			
 					$quarter_data = $query->fetch(PDO::FETCH_ASSOC);
 					$quarter_information[] = $quarter_data['AcademicYearQuarter'];									
-				}									
+				}
+                                // If current month is october, Nov, Dec than display next year's YearQuarter
+                                if(isset($GLOBALS['CONDITION_TO_DISPLAY_NEXT_YRQ']) && $current_month > $GLOBALS['CONDITION_TO_DISPLAY_NEXT_YRQ'])
+                                {
+                                    $next_year = $current_year+1;
+                                    $values = array(':CurrentYear' => $next_year);	
+					$query = $this->database_connection->prepare($q_sql); 
+					$query->execute($values);			
+					$quarter_data = $query->fetch(PDO::FETCH_ASSOC);
+                                        //var_dump($quarter_data);
+					$quarter_information[] = $quarter_data['AcademicYearQuarter'];
+                                }
 				$values = array(':CurrentYear' => $current_year);				
 				$query = $this->database_connection->prepare($q_sql); 
 				$query->execute($values);			

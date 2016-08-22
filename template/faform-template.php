@@ -550,7 +550,7 @@
                                                                             
                                                                         <fieldset>
 											<legend>Information Release Authorization (Optional)</legend> 
-                                                                                        <p>If you wish to allow another person to have access to your financial aid information, file and status. This may include a parent, guardian, spouse or partner, or any other person you designate, click <a href="<?php echo $release_authorization_form_url; ?>"> here </a> to access the form. Submit the form to the Enrollment Services Office/Student Central for processing. </p>
+                                                                                        <p>If you wish to allow another person to have access to your financial aid information, file and status. This may include a parent, guardian, spouse or partner, or any other person you designate, click <a href="<?php echo $release_authorization_form_url; ?>"> HERE </a> to access the form. Submit the form to the Enrollment Services Office/Student Central for processing. </p>
                                                                                         <br/>
                                                                             
                                                                         </fieldset>   

@@ -44,5 +44,6 @@ $GLOBALS['LOAN_DETAILS'] = ""; // eg: http://fa.bellevuecollege.edu/fa/loans/sta
 	Provide the month as a number eg: For Jan- 1, Feb - 2, ....so on.
 */
 $GLOBALS['CONDITIONAL_MONTH'] = 7; 
-
+// Condition to display next Year's YRQ if current month is greater than Sept - 9
+$GLOBALS['CONDITION_TO_DISPLAY_NEXT_YRQ'] = 9;
 ?>
