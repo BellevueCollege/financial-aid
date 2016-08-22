@@ -20,6 +20,7 @@ The financial aid application form allows students to apply for financial aid.
 * User should be authenticated to submit the form.
 * User should not be able to submit more than 1 application for a academic year.
 * If current month is greater than 'Conditional_Month' configuration than form should display 2 academic years otherwise only one should be displayed.
+* If current month is greater than 'CONDITION_TO_DISPLAY_NEXT_YRQ' configuration than form should display next Year's YRQ.
 * If the config settings are missing values you should get an error.
 * If the URL path is not correct you should get a 404 error.
 * If the logged in user is not a student, he/she should not be able to submit the application.
