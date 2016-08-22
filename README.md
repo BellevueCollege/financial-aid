@@ -65,3 +65,6 @@ The financial aid application form allows students to apply for financial aid.
 - Added RELEASE_AUTHORIZATION_FORM_URL configuration.
 - Removed  Sign and Finish Section from the form.
 - Removed all the fields from Release Authorization form and updated as required. 
+
+* **Release to Test Version 1.2**
+- Added condition to display next year's YRQ for current year's month of Oct, Nov and Dec.
