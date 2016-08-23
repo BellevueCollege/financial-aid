@@ -151,7 +151,7 @@ function check_only_spaces_string($input)
 	{
 		$quarter_information = array();
 		$current_year = date("Y");
-		$current_month = 10; //date("m");
+		$current_month = date("m");
                // echo "current month:".$current_month;
 		/*
 			If currnet month is less than the conditional month query twice, else query once
