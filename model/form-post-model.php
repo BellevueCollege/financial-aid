@@ -239,7 +239,8 @@ function get_submit_pv()
 				{
 
 				// Save quarters requiring loan information
-				
+				if($this->apply_for_fa_pv == '1')
+                                {
 					if(is_array($this->require_loan_quarters_pv))
 					{
 						for($i=0;$i<count($this->require_loan_quarters_pv);$i++)
@@ -263,10 +264,30 @@ function get_submit_pv()
 							$query->execute($values);
 						}					
 					}
-				
+                                        // Save type of loan requested information
+			
+					if(is_array($this->types_of_loan_pv))
+					{
+						for($i=0;$i<count($this->types_of_loan_pv);$i++)
+						{						
+							$sql_stmt = "EXEC dbo.usp_InsertTypeofLoanRequested 
+											@FAAppID = :FAAppID,											
+											@TypeofLoan = :TypeofLoan
+											
+										";
+							$values = array(':FAAppID' 	=> $id,											
+									':TypeofLoan' 	=> $this->types_of_loan_pv[$i]								
+										   );
+							$query = $this->database_connection->prepare($sql_stmt); 
+							//var_dump($values);
+							$query->execute($values);
+						}					
+					}
+                                }
 
 					// Save type of degree information			
-					
+			if($this->attend_college_pv == '1' && $this->hold_college_degree_pv == '1')	
+                        {
 					if(is_array($this->type_of_degree_pv))
 					{
 						for($i=0;$i<count($this->type_of_degree_pv);$i++)
@@ -283,32 +304,15 @@ function get_submit_pv()
 							$query->execute($values);
 						}					
 					}
+                        }
 
-					// Save type of loan requested information
 					
-					if(is_array($this->types_of_loan_pv))
-					{
-						for($i=0;$i<count($this->types_of_loan_pv);$i++)
-						{						
-							$sql_stmt = "EXEC dbo.usp_InsertTypeofLoanRequested 
-											@FAAppID = :FAAppID,											
-											@TypeofLoan = :TypeofLoan
-											
-										";
-							$values = array(':FAAppID' 	=> $id,
-											
-									':TypeofLoan' 	=> $this->types_of_loan_pv[$i]								
-										   );
-							$query = $this->database_connection->prepare($sql_stmt); 
-							//var_dump($values);
-							$query->execute($values);
-						}					
-					}
 				} // end of if(!empty($id))
 				else
 				{
 					return false;
-				}		
+				}	
+                        
 					
 			}catch(PDOException $e)
 			{
