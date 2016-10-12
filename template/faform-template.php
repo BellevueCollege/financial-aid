@@ -282,7 +282,7 @@
 <!--										<ol>
 											<li>Financial aid will only fund classes that are required for your degree or certificate. We can only fund programs 24 credits or more in length.</li>-->
 
-                                                                                        <p>The BC Financial Aid Office will use the program you indicate her to track your progress towards: </p>
+                                                                                        <p>The BC Financial Aid Office will use the program you indicate here to track your progress towards: </p>
 												<ul>
 													<li>Completion of 67% of your classes (the completion ratio, i.e. completed classes divided by attempted)</li>
 													<li>Quarterly and cumulative grade point average</li>
