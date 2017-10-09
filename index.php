@@ -58,6 +58,22 @@ if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "CAS")
 	$_SESSION["FA_USERNAME"] = $username;		
 		
 }
+else if(isset($GLOBALS['AUTH_TYPE']) && $GLOBALS['AUTH_TYPE'] == "SAML")
+{
+	require_once('controller/saml-authentication-controller.php');
+	/* Authenticate with SAML */
+	$saml_controller = new Saml_Authentication();
+	
+	/* Check if user is authenticated */
+	 if(!$saml_controller->is_authenticated())
+	{
+		$saml_controller->authenticate();
+	}
+	
+	$username = $saml_controller->get_authenticated_username(); 
+	$_SESSION["FA_USERNAME"] = $username;	
+	 
+}
 else
 {
 	die('SSO configuration not valid');
