@@ -3,7 +3,7 @@
 /*
 	Currently application is using CAS for authentication. In future we may use SAML 	
 */
-$GLOBALS['AUTH_TYPE'] = ''; //eg: 'CAS'
+$GLOBALS['AUTH_TYPE'] = ' '; //eg: 'CAS'
 
 /* 
 	CAS Configuration
@@ -14,6 +14,10 @@ $GLOBALS['CAS_SERVER_PORT'] = ; // eg: 443
 $GLOBALS['CAS_SERVER_PATH'] = ''; // eg: /cas 
 $GLOBALS['CAS_VERSION'] = ''; //eg: 2.0
 $GLOBALS['CAS_LIBRARY_PATH'] = ''; // eg: library/phpCAS-1.3.2/CAS.php
+
+/* SAML Configuration */
+$GLOBALS['SAML_LIBRARY_PATH'] = '/var/simplesamlphp/lib/_autoload.php';
+$GLOBALS['AUTH_SOURCE'] = 'default-sp';
 
 /* Database Configuration */
 $GLOBALS['DATABASE_DSN'] = ''; // Data source name
