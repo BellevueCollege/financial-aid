@@ -1,7 +1,7 @@
 
 <?php 
     require_once('config.php'); 
-    define( 'VERSION_NUMBER', '1.3' );
+    define( 'VERSION_NUMBER', '1.4' );
 ?>
 <html lang="en-US">
 <!--<![endif]-->
