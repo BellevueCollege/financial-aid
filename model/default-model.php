@@ -447,8 +447,8 @@ function set_form_url()
 {
    $request_host = $_SERVER['HTTP_HOST'];
    $base_uri = $GLOBALS['BASE_URI']; 
-   error_log("host :".$request_host);
-   error_log("uri :".$base_uri);
+   // error_log("host :".$request_host);
+   // error_log("uri :".$base_uri);
    if(!empty($request_host) && !empty($request_host))
    {
        $base_uri = trim($base_uri,'/');
