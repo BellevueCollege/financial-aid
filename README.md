@@ -10,9 +10,9 @@ The financial aid application form allows students to apply for financial aid.
 * Set the config variables as explained below:
     * Copy config-sample.php file and rename the new file to config.php.
     * Follow the examples in config-sample comments to set the values of the config variables.
-    * For further reference, please refer config file located here:
-    https://github.com/BellevueCollege/docs/tree/master/financial-aid-form
+    * For further reference, please refer to completed config files in BC's password manager
 * You must have PHP version > 5.3.
+* You must have SimpleSAMLphp installed on the webserver (see [ADFS documentation](https://github.com/BellevueCollege/docs/blob/master/adfs-authentication/simplesaml.md))
 * Make sure the application user account has access to the database, tables, and stored procedures.
 
 ## Acceptance Criteria
@@ -61,11 +61,16 @@ The financial aid application form allows students to apply for financial aid.
 
 
 ### Release Notes
-* **Release to Test Version 1.1**
+* **Release Version 1.1**
 - Update all the text changes mentioned in Changes_to_BC_App(004).docx file.
 - Added RELEASE_AUTHORIZATION_FORM_URL configuration.
 - Removed  Sign and Finish Section from the form.
 - Removed all the fields from Release Authorization form and updated as required. 
 
-* **Release to Test Version 1.2**
+* **Release Version 1.2**
 - Added condition to display next year's YRQ for current year's month of Oct, Nov and Dec.
+
+* **Release Version 1.5**
+  * Remove docx and xlsx files in directory
+  * Improve documentation
+  * Support SAML logout
