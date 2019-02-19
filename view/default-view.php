@@ -34,6 +34,17 @@ protected function set_template_variables(){
 	$this->template_variables['email'] = $this->model->get_email();
 	$this->template_variables['first_name'] = $this->model->get_first_name();
 	$this->template_variables['last_name'] = $this->model->get_last_name();
+
+	/* Set logout URL based on auth method */
+	if(!empty($GLOBALS['AUTH_TYPE'])) {
+		if ( 'CAS' === $GLOBALS['AUTH_TYPE'] ) {
+			$this->template_variables['logout_url'] = '?logout=';
+		} elseif ( 'SAML' === $GLOBALS['AUTH_TYPE'] ) {
+			global $saml_controller;
+			$logout = $saml_controller->auth->getLogoutURL( $GLOBALS['FA_SITE_URL'] );
+			$this->template_variables['logout_url'] = htmlspecialchars($logout);
+		}
+	}
 	
 	$ssn = $this->model->get_ssn();
 	if(!empty($ssn))

@@ -9,7 +9,7 @@
 	<div class="alert alert-info">
 		<h4>
 			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;<?php echo $first_name." ".$last_name; ?>
-			&nbsp;&nbsp;<small>Not <em><?php echo $first_name; ?></em>? <a href="?logout=">Log out</a>.</small>
+			&nbsp;&nbsp;<small>Not <em><?php echo $first_name; ?></em>? <a href="<?php echo $logout_url; ?>">Log out</a>.</small>
 		</h4>
 		<p>
 			<strong>Email:</strong> <?php if(!empty($email)) echo $email; ?>

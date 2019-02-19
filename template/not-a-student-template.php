@@ -36,10 +36,10 @@
 					<div class="box-shadow" id="content">
 						<div class="row row-padding">
 							<div class="content-padding">
-								<div>
-									<p>&nbsp;</p>
+								<div class="alert alert-warning" style="margin: 1em;">
 									<h1>You Are Not a Student</h1>
 									<p>You are not a student in our database. Only students can submit a financial aid application.</p>
+									<p><a class="btn btn-warning" href="<?php echo $logout_url; ?>">Log Out</a></p>
 								</div>
 							</div>
 							<!--.content-padding-->
