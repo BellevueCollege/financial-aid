@@ -61,6 +61,14 @@ The financial aid application form allows students to apply for financial aid.
 
 
 ### Release Notes
+* **Release Version 1.5**
+    * Fix logout functionality when using ADFS
+    * Allow non-student users to log out
+    * Update readme and docs
+    * Update `config-sample.php` to add Azure DevOps support
+
+...
+
 * **Release Version 1.1**
 - Update all the text changes mentioned in Changes_to_BC_App(004).docx file.
 - Added RELEASE_AUTHORIZATION_FORM_URL configuration.
