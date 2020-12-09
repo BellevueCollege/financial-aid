@@ -55,4 +55,8 @@ $GLOBALS['LOAN_DETAILS'] = '#{leanDetails}#'; // eg: http://fa.bellevuecollege.e
 */
 $GLOBALS['CONDITIONAL_MONTH'] = 7; 
 // Condition to display next Year's YRQ if current month is greater than Sept - 9
-$GLOBALS['CONDITION_TO_DISPLAY_NEXT_YRQ'] = 9;
+$GLOBALS['CONDITION_TO_DISPLAY_NEXT_YRQ'] = 13; // Disable next YRQ switch
+
+// Set to false to use current date to determine quarters to show, or to an int year to over-ride and freeze to October of the year specified.
+$GLOBALS['DATE_OVERRIDE'] = 2020;
+
