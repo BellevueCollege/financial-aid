@@ -150,8 +150,14 @@ function check_only_spaces_string($input)
 	public function get_academic_year_quarters()
 	{
 		$quarter_information = array();
-		$current_year = date("Y");
-		$current_month = date("m");
+		if ( $GLOBALS['DATE_OVERRIDE'] === false ) {
+			$current_year = date("Y");
+			$current_month = date("m");
+		} else {
+			$current_year = date("Y", mktime(0, 0, 0, 10, 1, $GLOBALS['DATE_OVERRIDE']));
+			$current_month = date("m", mktime(0, 0, 0, 10, 1, $GLOBALS['DATE_OVERRIDE']));
+		}
+
                // echo "current month:".$current_month;
 		/*
 			If currnet month is less than the conditional month query twice, else query once
